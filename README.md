@@ -1,9 +1,9 @@
 # RMIT SEPT 2020 Major Project
 
-# Group 00
+# Group TUES-18.30-5
 
 ## Members
-* SURNAME, GivenName (sXXXX)
+* Koutsoukis, Caspar (s3287475)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
@@ -11,7 +11,7 @@
 
 ## Records
 
-* Github repository : https://github.com/RMIT-SEPT/MajorProject/Groupx
+* Github repository : https://github.com/RMIT-SEPT/majorproject-tues-18-30-5-tianchen-zhuang
 * ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
 
 
