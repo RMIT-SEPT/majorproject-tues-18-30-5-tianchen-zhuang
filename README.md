@@ -4,7 +4,7 @@
 
 ## Members
 * Koutsoukis, Caspar (s3287475)
-* SURNAME, GivenName (sXXXX)
+* Wasco, Christopher (s3780962)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
