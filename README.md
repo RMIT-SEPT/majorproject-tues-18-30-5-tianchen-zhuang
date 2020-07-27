@@ -5,7 +5,7 @@
 ## Members
 * Koutsoukis, Caspar (s3287475)
 * Wasco, Christopher (s3780962)
-* SURNAME, GivenName (sXXXX)
+* Chen, Wuchi        (s3716792)
 * SURNAME, GivenName (sXXXX)
 * SURNAME, GivenName (sXXXX)
 
