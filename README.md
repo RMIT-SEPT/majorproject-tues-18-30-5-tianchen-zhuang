@@ -12,7 +12,7 @@
 ## Records
 
 * Github repository : https://github.com/RMIT-SEPT/majorproject-tues-18-30-5-tianchen-zhuang
-* ClickUp Workspace : https://app.clickup.com/xxxx/yyyy
+* ClickUp Workspace : https://app.clickup.com/6915855/v/l/s/6938680
 
 
 ## Code documentation
