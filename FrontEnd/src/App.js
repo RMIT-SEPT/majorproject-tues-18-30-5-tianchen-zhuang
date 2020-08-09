@@ -1,18 +1,12 @@
-import React, { Component } from 'react';
-import Login from './component/login/login'
+import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-
-
-
-
+import UserComponent from './components/UserComponent';
 
 function App() {
   return (
     <div className="App">
-        <Login></Login>
-
+        <UserComponent />
     </div>
   );
 }
