@@ -1,4 +1,4 @@
-package com.web;
+package main.java.com.web;
 
 public class UserController {
 //Empty class to be developed
