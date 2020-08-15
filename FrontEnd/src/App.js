@@ -5,6 +5,7 @@ import './App.css';
 import UserComponent from './components/UserComponent';
 import Login from './components/login/login';
 import NavBar from './components/utils/navBar.jsx';
+import Register from './components/register/register';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import 'antd/dist/antd.css';
@@ -15,14 +16,14 @@ class App extends Component {
     return (
     <div className="App">
         <Router>
-
-        {/* <Login /> */}
+        
         <NavBar />
         <UserComponent />
         <div className="main">
+
           <Switch>
           <Route path="/login" component={Login} />
-
+          <Route path="/register" component={Register} />
             </Switch>
 
           </div>

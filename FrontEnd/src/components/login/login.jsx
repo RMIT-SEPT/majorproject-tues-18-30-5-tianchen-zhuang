@@ -10,7 +10,7 @@ class Login extends React.Component{
         <div className="login">
             <Card >
                 <Menu mode="horizontal">
-                    <Menu.Item>Login</Menu.Item>
+                    <Menu.Item><h3>Login</h3></Menu.Item>
                 </Menu>
                     {/*<ShowInvalidCredentials hasLoginFailed={this.state.hasLoginFailed}/>*/}
                     {/*<ShowLoginSuccessMessage showSuccessMessage={this.state.showSuccessMessage}/>*/}
