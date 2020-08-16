@@ -1,6 +1,10 @@
 package com.sept.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -9,10 +13,17 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userid;
+    @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
+    @NotBlank(message = "Username is required")
     private String username;
+    @Size(min = 6, message = "Enter a minimum of length 6")
+    @NotBlank(message = "Password is required")
     private String password;
+    @NotBlank(message = "Email is required")
     private String email;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date created;
+    @JsonFormat(pattern = "yyyy-mm-dd")
     private Date lastModified;
 
     public User() {
@@ -28,7 +39,7 @@ public class User {
         this.lastModified = lastModified;
     }
 
-    public long getId()
+    public long getUserid()
     {
         return userid;
     }
@@ -38,7 +49,7 @@ public class User {
         this.userid = userid;
     }
 
-    public String getFirstName()
+    public String getUsername()
     {
         return username;
     }
@@ -48,9 +59,9 @@ public class User {
         this.username = username;
     }
 
-    public String getUsername()
+    public String getPassword()
     {
-        return username;
+        return password;
     }
 
     public void setPassword(String password)
