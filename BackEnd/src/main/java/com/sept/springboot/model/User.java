@@ -1,11 +1,6 @@
 package com.sept.springboot.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
@@ -91,5 +86,17 @@ public class User {
     public void setLastModified(Date lastModified)
     {
         this.lastModified = lastModified;
+    }
+
+    @PrePersist
+    protected void onCreate()
+    {
+        this.created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate()
+    {
+        this.lastModified = new Date();
     }
 }
