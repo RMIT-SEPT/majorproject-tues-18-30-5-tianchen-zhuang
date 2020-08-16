@@ -9,15 +9,12 @@ import javax.persistence.Table;
 import java.util.Date;
 
 @Entity
-@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long userid;
-    @Column(name = "first_name")
     private String username;
-    @Column(name = "last_name")
     private String password;
     private String email;
     private Date created;
