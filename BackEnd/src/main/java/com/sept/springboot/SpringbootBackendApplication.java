@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.sept.springboot.model.User;
-import com.sept.springboot.repository.UserRepository;
+import com.sept.springboot.repositories.UserRepository;
 
 @SpringBootApplication
 public class SpringbootBackendApplication implements CommandLineRunner {
