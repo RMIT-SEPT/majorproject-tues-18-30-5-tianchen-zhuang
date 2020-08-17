@@ -1,27 +1,30 @@
 package com.sept.springboot.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Entity
-@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
-
-    @Column(name = "first_name")
-    private String firstName;
-
-    @Column(name = "last_name")
-    private String lastName;
-
+    private long userid;
+    @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
+    @NotBlank(message = "Username is required")
+    private String username;
+    @Size(min = 6, message = "Enter a minimum of length 6")
+    @NotBlank(message = "Password is required")
+    private String password;
+    @NotBlank(message = "Email is required")
     private String email;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date created;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date lastModified;
 
     public User() {
 
@@ -29,32 +32,82 @@ public class User {
 
     public User(String firstName, String lastName, String email) {
         super();
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.username = username;
+        this.password = password;
         this.email = email;
+        this.created = created;
+        this.lastModified = lastModified;
     }
-    public long getId() {
-        return id;
+
+    public long getUserid()
+    {
+        return userid;
     }
-    public void setId(long id) {
-        this.id = id;
+
+    public void setUserid(long userid)
+    {
+        this.userid = userid;
     }
-    public String getFirstName() {
-        return firstName;
+
+    public String getUsername()
+    {
+        return username;
     }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+
+    public void setUsername(String username)
+    {
+        this.username = username;
     }
-    public String getLastName() {
-        return lastName;
+
+    public String getPassword()
+    {
+        return password;
     }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+
+    public void setPassword(String password)
+    {
+        this.password = password;
     }
-    public String getEmail() {
+
+    public String getEmail()
+    {
         return email;
     }
-    public void setEmail(String email) {
+
+    public void setEmail(String email)
+    {
         this.email = email;
+    }
+
+    public Date getCreated()
+    {
+        return created;
+    }
+
+    public void setCreated(Date created)
+    {
+        this.created = created;
+    }
+
+    public Date getLastModified()
+    {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified)
+    {
+        this.lastModified = lastModified;
+    }
+
+    @PrePersist
+    protected void onCreate()
+    {
+        this.created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate()
+    {
+        this.lastModified = new Date();
     }
 }
