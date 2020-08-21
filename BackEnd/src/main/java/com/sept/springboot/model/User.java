@@ -21,6 +21,8 @@ public class User {
     private String password;
     @NotBlank(message = "Email is required")
     private String email;
+    @NotBlank(message = "Role is required")
+    private int roleID;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date created;
     @JsonFormat(pattern = "yyyy-mm-dd")
@@ -30,11 +32,12 @@ public class User {
 
     }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String username, String password, String email, int roleID) {
         super();
         this.username = username;
         this.password = password;
         this.email = email;
+        this.roleID = roleID;
         this.created = created;
         this.lastModified = lastModified;
     }
@@ -77,6 +80,16 @@ public class User {
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public int getRoleID()
+    {
+        return roleID;
+    }
+
+    public void setRoleID(int roleID)
+    {
+        this.roleID = roleID;
     }
 
     public Date getCreated()
