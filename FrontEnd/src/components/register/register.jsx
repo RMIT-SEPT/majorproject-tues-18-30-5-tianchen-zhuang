@@ -23,8 +23,12 @@ class Register extends React.Component{
                         <Input.Password placeholder="Enter your password " name="password" />
                     </div>
                     <div className="register-input-row">
+                    <label>First Name:</label>
+                        <Input placeholder="Enter your first name" name="fname" />
+                    </div>
+                    <div className="register-input-row">
                     <label>User name:</label>
-                        <Input placeholder="Enter your user name" name="username" />
+                        <Input placeholder="Enter your last name" name="lname" />
                     </div>
                     <div className = "register-select">
                     <label for="type">register as: </label>
