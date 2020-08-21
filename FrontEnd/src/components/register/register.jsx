@@ -4,9 +4,11 @@ import { Card } from 'antd';
 import './register.css'
 import { Input } from 'antd';
 
+
 class Register extends React.Component{
   render() {
     return (
+        
         <div className="register">
             <Card >
                 <Menu mode="horizontal">
@@ -20,7 +22,7 @@ class Register extends React.Component{
                     </div>
                     <div className="register-input-row">
                     <label>Password :</label>
-                        <Input.Password placeholder="Enter your password " name="password" />
+                        <Input placeholder="Enter your password " name="password" />
                     </div>
                     <div className="register-input-row">
                     <label>First Name:</label>
@@ -38,7 +40,7 @@ class Register extends React.Component{
                     </select>
                         </div> 
 
-                    <button className="btn btn-success" >Login</button>
+                    <button className="btn btn-success" >Register</button>
             </Card>
         </div>
 

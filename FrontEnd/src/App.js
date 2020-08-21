@@ -13,12 +13,13 @@ import 'antd/dist/antd.css';
 
 class App extends Component {
   render () {
+    
     return (
     <div className="App">
         <Router>
         
         <NavBar />
-        <UserComponent />
+        <Route path="/" component={UserComponent}/>
         <div className="main">
 
           <Switch>
