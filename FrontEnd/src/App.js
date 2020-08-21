@@ -1,14 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+
+import React, { Component } from 'react';
+// import logo from './logo.svg';
 import './App.css';
 import UserComponent from './components/UserComponent';
+import Login from './components/login/login';
+import NavBar from './components/utils/navBar.jsx';
+import Register from './components/register/register';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
-function App() {
-  return (
+import 'antd/dist/antd.css';
+
+
+class App extends Component {
+  render () {
+    return (
     <div className="App">
+        <Router>
+        
+        <NavBar />
         <UserComponent />
+        <div className="main">
+
+          <Switch>
+          <Route path="/login" component={Login} />
+          <Route path="/register" component={Register} />
+            </Switch>
+
+          </div>
+        </Router> 
+
     </div>
-  );
+  )
+  }
 }
+
 
 export default App;
