@@ -1,11 +1,8 @@
-package com.sept.springboot.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
-
-import com.sept.springboot.model.User;
-
-@Repository
-public interface UserRepository extends JpaRepository<User, Long>{
-
-}
+//package com.sept.springboot.repository;
+//
+//import com.sept.springboot.model.User;
+//
+//import org.springframework.data.jpa.repository.JpaRepository;
+//
+//public interface UserRepository extends JpaRepository<User, Integer> {
+//}
