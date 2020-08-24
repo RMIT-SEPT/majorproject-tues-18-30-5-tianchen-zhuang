@@ -3,8 +3,7 @@ package com.sept.springboot.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
@@ -20,7 +19,11 @@ public class User {
     @NotBlank(message = "Password is required")
     private String password;
     @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
     private String email;
+    @Max(value = 2, message = "RoleID is not valid")
+    @Min(value = 0, message = "RoleID is not valid")
+    private long roleID;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date created;
     @JsonFormat(pattern = "yyyy-mm-dd")
@@ -30,11 +33,12 @@ public class User {
 
     }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String username, String password, String email, long roleID) {
         super();
         this.username = username;
         this.password = password;
         this.email = email;
+        this.roleID = roleID;
         this.created = created;
         this.lastModified = lastModified;
     }
@@ -77,6 +81,16 @@ public class User {
     public void setEmail(String email)
     {
         this.email = email;
+    }
+
+    public long getRoleID()
+    {
+        return roleID;
+    }
+
+    public void setRoleID(long roleID)
+    {
+        this.roleID = roleID;
     }
 
     public Date getCreated()

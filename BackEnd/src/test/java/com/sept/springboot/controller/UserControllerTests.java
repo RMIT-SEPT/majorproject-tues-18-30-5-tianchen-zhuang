@@ -2,7 +2,7 @@ package com.sept.springboot.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sept.springboot.services.UserService;
-import main.java.com.sept.springboot.controller.UserController;
+//import main.java.com.sept.springboot.controller.UserController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
