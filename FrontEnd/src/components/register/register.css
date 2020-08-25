@@ -1,21 +1,21 @@
 .register {
-    display: flex;
-    width: 30%;
-    height: 40%;
-    flex-direction: column;
-    margin: 0 auto;
-    margin-top: 100px;
-  }
-  
-  .register-input-row {
-    margin-bottom: 10px;
-  }
+  display: flex;
+  width: 30%;
+  height: 40%;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: 100px;
+}
 
-  .register-select{
+.register-input-row {
+  margin-bottom: 10px;
+}
 
-    margin-bottom: 40px;
+.register-select{
 
-  }
-  .register-type{
-      margin-left: 30px;
-  }
+  margin-bottom: 40px;
+
+}
+.register-type{
+    margin-left: 30px;
+}
