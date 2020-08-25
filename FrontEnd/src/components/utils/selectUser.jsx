@@ -1,9 +1,4 @@
 import React from 'react';
-import { Link  } from 'react-router-dom';
-import { withRouter } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { Redirect } from 'react-router';
-import history from '../tools/history';
 import './style.css'
 
 class SelectUser extends React.Component{
