@@ -1,24 +1,21 @@
 package com.sept.springboot.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sept.springboot.services.UserService;
-//import main.java.com.sept.springboot.controller.UserController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+//import main.java.com.sept.springboot.controller.UserController;
 
 
 @SpringBootTest
@@ -30,12 +27,6 @@ public class UserControllerTests {
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
-
-    ObjectMapper om=new ObjectMapper();
-
-    @MockBean
-    private UserService userService;
-    private UserController userController;
 
 
     @Before
@@ -49,7 +40,7 @@ public class UserControllerTests {
     @Test
     public void addNewUserSuccess() throws Exception {
 
-    MvcResult result=mockMvc.perform(
+        mockMvc.perform(
             post("/api/user")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content("{\"password\":\"testpassword\",\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
@@ -60,8 +51,7 @@ public class UserControllerTests {
 
     @Test
     public void addNewUserInvalidUsernameLengthTooShort() throws Exception {
-
-        MvcResult result=mockMvc.perform(
+        mockMvc.perform(
                 post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"username\":\"te\",\"email\":\"test@test.com\"}"))
@@ -73,7 +63,7 @@ public class UserControllerTests {
     @Test
     public void addNewUserInvalidUsernameLengthTooLong() throws Exception {
 
-        MvcResult result=mockMvc.perform(
+        mockMvc.perform(
                 post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"username\":\"testusertestusertestu\",\"email\":\"test@test.com\"}"))
@@ -84,7 +74,7 @@ public class UserControllerTests {
     @Test
     public void addNewUserInvalidUsernameNotInRequest() throws Exception {
 
-        MvcResult result=mockMvc.perform(
+        mockMvc.perform(
                 post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"email\":\"test@test.com\"}"))
@@ -95,7 +85,7 @@ public class UserControllerTests {
     @Test
     public void addNewUserInvalidPasswordLengthTooShort() throws Exception {
 
-        MvcResult result=mockMvc.perform(
+        mockMvc.perform(
                 post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testp\",\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
@@ -107,7 +97,7 @@ public class UserControllerTests {
     @Test
     public void addNewUserInvalidPasswordNotInRequest() throws Exception {
 
-        MvcResult result=mockMvc.perform(
+        mockMvc.perform(
                 post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
@@ -119,7 +109,7 @@ public class UserControllerTests {
     @Test
     public void addNewUserInvalidEmailNotInRequest() throws Exception {
 
-        MvcResult result=mockMvc.perform(
+        mockMvc.perform(
                 post("/api/user")
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"username\":\"testusername\"}"))
