@@ -1,12 +1,11 @@
 import React from 'react';
 import { Menu } from 'antd';
 import { Card } from 'antd';
-import './login.css'
+import './register.css'
 import { Input } from 'antd';
 
 
-class Login extends React.Component{
-
+class RegisterB extends React.Component{
     constructor() {
         super();
         this.state = {
@@ -36,9 +35,12 @@ class Login extends React.Component{
             let input = {};
             input["password"] = "";
             input["email"] = "";
+            input["bName"] = "";
+            input["address"] = "";
+            input["cPassword"] = "";
             this.setState({input:input});
       
-            alert('Thank you for login');
+            alert('Thank you for register');
         }
       }
       
@@ -74,6 +76,22 @@ class Login extends React.Component{
               errors["password"] = "Please enter password more than 8 characters";
             }
           }
+          if (!input["bName"]) {
+            isValid = false;
+            errors["bName"] = "Please enter your uername.";
+          }
+          if (!input["address"]) {
+            isValid = false;
+            errors["address"] = "Please enter your address.";
+          }
+          if (!input["cPassword"]) {
+            isValid = false;
+            errors["cPassword"] = "Please enter confirm your password.";
+          }
+          if (input["cPassword"]!=input["password"]) {
+            isValid = false;
+            errors["password"] = "password and confirm password doesnt match";
+          }
       
           this.setState({
             errors: errors
@@ -81,12 +99,11 @@ class Login extends React.Component{
       
           return isValid;
       }
-
   render() {
     return (
-
+        
         <div>
-        <h2>Login User</h2>
+        <h2>Register as business</h2>
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -98,7 +115,27 @@ class Login extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.email}</div>
-        <label htmlFor="email">Password</label>
+        <label htmlFor="email">business Name</label>
+        <input
+          name="bName"
+          type="text"
+          id ="bName"
+          placeholder="Enter your business name"
+          value={this.state.input.username}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.username}</div>
+        <label htmlFor="email">business address</label>
+        <input
+          name="address"
+          type="text"
+          id ="address"
+          placeholder="Enter your business address"
+          value={this.state.input.address}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.address}</div>
+        <label htmlFor="password">Password</label>
         <input
           name="password"
           type="password"
@@ -108,15 +145,26 @@ class Login extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.password}</div>
-        <button className= "login_but"type="submit">Login</button>
-        <button className="login_but" type="button" onClick= {event =>  window.location.href='/login'} >Back </button>
+        <label htmlFor="email">confirm password</label>
+        <input
+          name="cPassword"
+          type="password"
+          id ="cPassword"
+          placeholder="Please confirm your password"
+          value={this.state.input.cPassword}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.cPassword}</div>
+        <button className= "reg_but"type="submit">Register</button>
+        <button className="reg_but" type="button" onClick= {event =>  window.location.href='/register'} >Back </button>
         
       </form>
       </div>
-    );
+
+
+    )
+}
 }
 
-}
-
-export default Login
+export default RegisterB
 

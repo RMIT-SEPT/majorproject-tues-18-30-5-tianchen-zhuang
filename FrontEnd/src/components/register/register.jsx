@@ -98,7 +98,7 @@ class Register extends React.Component{
     return (
         
         <div>
-        <h2>Please register</h2>
+        <h2>Register as user</h2>
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -140,7 +140,8 @@ class Register extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.cPassword}</div>
-        <button type="submit">Login</button>
+        <button className= "reg_but"type="submit">Register</button>
+        <button className="reg_but" type="button" onClick= {event =>  window.location.href='/register'} >Back </button>
         
       </form>
       </div>

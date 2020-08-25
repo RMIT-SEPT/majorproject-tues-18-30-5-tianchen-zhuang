@@ -5,7 +5,7 @@ import './login.css'
 import { Input } from 'antd';
 
 
-class Login extends React.Component{
+class LoginB extends React.Component{
 
     constructor() {
         super();
@@ -86,7 +86,7 @@ class Login extends React.Component{
     return (
 
         <div>
-        <h2>Login User</h2>
+        <h2>Login as business</h2>
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -108,9 +108,9 @@ class Login extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.password}</div>
-        <button className= "login_but"type="submit">Login</button>
+        <button className="login_but"type="submit">Login</button>
         <button className="login_but" type="button" onClick= {event =>  window.location.href='/login'} >Back </button>
-        
+
       </form>
       </div>
     );
@@ -118,5 +118,5 @@ class Login extends React.Component{
 
 }
 
-export default Login
+export default LoginB
 
