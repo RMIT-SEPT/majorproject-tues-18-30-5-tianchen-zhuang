@@ -68,10 +68,10 @@ class LoginB extends React.Component{
           }
           if (typeof input["password"] !== "undefined") {
               
-            var pattern = new RegExp(/^[a-zA-Z0-9]{8,}$/i);
+            var pattern = new RegExp(/^[a-zA-Z0-9]{6,}$/i);
             if (!pattern.test(input["password"])) {
               isValid = false;
-              errors["password"] = "Please enter password more than 8 characters";
+              errors["password"] = "Please enter password more than 6 characters";
             }
           }
       
