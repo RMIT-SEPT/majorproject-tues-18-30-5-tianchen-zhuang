@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import { Card } from 'antd';
 import './login.css'
 import { Input } from 'antd';
+import authenticate from '../authenticate/authenticate';
 
 
 class Login extends React.Component{
@@ -32,13 +33,15 @@ class Login extends React.Component{
       
         if(this.validate()){
             console.log(this.state);
-      
+            // alert(this.state.input['email']);
             let input = {};
             input["password"] = "";
             input["email"] = "";
             this.setState({input:input});
-      
-            alert('Thank you for login');
+            
+            alert(authenticate.checkPwd(this.state.input['email'],this.state.input['password']));
+          
+
         }
       }
       
