@@ -1,0 +1,31 @@
+.reg_but{
+  background-color: rgb(133, 209, 226);
+  color: white;
+  padding: 10px 15px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+border: 1px solid rgb(82, 179, 201);
+}
+
+button:hover {
+  cursor: pointer;
+  background-color: white;
+  color: rgb(82, 179, 201);
+}
+
+.register-input-row {
+  margin-bottom: 10px;
+}
+
+.register-select{
+
+  margin-bottom: 40px;
+
+}
+.register-type{
+    margin-left: 30px;
+}
