@@ -1,7 +1,7 @@
 package com.sept.springboot.services;
 
 import com.sept.springboot.model.Business;
-import com.sept.springboot.repositories.BusinessRepository;
+import com.sept.springboot.dao.BusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

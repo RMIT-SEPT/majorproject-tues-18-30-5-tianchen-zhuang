@@ -1,4 +1,4 @@
-package com.sept.springboot.repositories;
+package com.sept.springboot.dao;
 
 import com.sept.springboot.model.User;
 import org.springframework.data.repository.CrudRepository;

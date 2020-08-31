@@ -1,12 +1,7 @@
 package com.sept.springboot;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import com.sept.springboot.model.User;
-import com.sept.springboot.repositories.UserRepository;
 
 @SpringBootApplication
 public class SpringbootBackendApplication /*implements CommandLineRunner*/ {
