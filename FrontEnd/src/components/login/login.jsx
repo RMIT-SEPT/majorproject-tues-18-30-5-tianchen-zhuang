@@ -1,15 +1,14 @@
 import React from 'react';
-import { Menu } from 'antd';
-import { Card } from 'antd';
+import { withRouter } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 import './login.css'
-import { Input } from 'antd';
 import authenticate from '../authenticate/authenticate';
 
 
 class Login extends React.Component{
-
-    constructor() {
-        super();
+    constructor(probs) {
+        super(probs);
         this.state = {
           input: {},
           errors: {}
@@ -29,19 +28,25 @@ class Login extends React.Component{
       }
         
       handleSubmit(event) {
+        // let history = useHistory();
+      
         event.preventDefault();
       
         if(this.validate()){
+          
             console.log(this.state);
-            // alert(this.state.input['email']);
             let input = {};
             input["password"] = "";
             input["email"] = "";
             this.setState({input:input});
+            if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])){
+              localStorage.setItem('userInfo', this.state.input['email']);
+              this.props.history.push('/booking');
+            }else{
+              alert('login fail check password or email');
+            }
             
-            alert(authenticate.checkPwd(this.state.input['email'],this.state.input['password']));
           
-
         }
       }
       
