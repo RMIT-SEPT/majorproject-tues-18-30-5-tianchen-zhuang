@@ -1,3 +1,75 @@
-.datetime{
-    position: relative;
+.classList {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    padding: 50px;
+    flex-wrap: wrap;
+    padding-bottom: 150px;
+}
+
+.classCard {
+    margin: 10px;
+}
+
+.detail-head {
+    display: flex;
+    padding-top: 50px;
+    padding-left: 50px;
+}
+
+.detail-img {
+    width: 160px;
+    height: 200px;
+}
+
+.detail-title {
+    margin-left: 40px;
+    margin-top: 20px;
+}
+
+.detail-main {
+    width: 80%;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.detail {
+    width: 60%;
+    height: 100%;
+    margin: 0 auto;
+}
+
+.group-list {
+    padding-bottom: 100px;
+}
+
+.group-list h4 {
+    text-align: left;
+    padding-left: 60px;
+}
+
+.group-list h4+div {
+    text-align: left;
+    padding-left: 60px;
+}
+
+.group-info {
+    padding-top: 20px;
+}
+
+.infoItem {
+    display: flex;
+    margin-left: 60px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    width: 100%;
+}
+
+.info-text {
+    width: 60%;
+    text-align: left;
+}
+
+.info-button {
+    margin-right: 10px;
 }

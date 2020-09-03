@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Card } from 'antd';
 const { Meta } = Card;
 
+
 export default class ClassCard extends Component {
     constructor(props){
         super(props);

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ClassCard from './ClassCard'
 // import {_getClassList} from '../../api/class'
 
-// import './class.css'
+import './booking.css'
 
 export default class businessList extends Component {
     constructor(props) {
@@ -34,7 +34,7 @@ export default class businessList extends Component {
     render() {
         let classList = [];
         for (let i = 0; i < 3; i++) {
-            classList.push(<ClassCard showDetail={this.showDetail.bind(this, 'id=1' )} title="res" id='1' description="desc"  />)
+            classList.push(<ClassCard showDetail={this.showDetail.bind(this, i )} title="res" id='1' description="desc"  />)
         }
         return (
             <div>
