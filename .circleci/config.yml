@@ -1,19 +1,35 @@
-version: 2.1
-
+version: 2
 jobs:
   build:
     working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
     docker:
       - image: circleci/openjdk:8-jdk-stretch
-
-    environment:
-      MAVEN_OPTS: -Xmx3200m
+      - image: circleci/postgres:9.6.3-alpine
+        environment:
+          POSTGRES_USER: root
+          POSTGRES_DB: circle_test
 
     steps:
+
       - checkout
+
+      - restore_cache:
+          key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "pom.xml" }}
+
       - run: mvn dependency:go-offline
+
+      - save_cache:
+          paths:
+            - ~/.m2
+          key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "pom.xml" }}
+
       - run: mvn package
+
       - store_test_results:
           path: target/surefire-reports
+
       - store_artifacts:
           path: target/majorproject-tues-18-30-5-tianchen-zhuang-0.0.1-SNAPSHOT.jar
+
+
+
