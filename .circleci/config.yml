@@ -28,7 +28,7 @@ jobs:
                 paths:
                   - ~/.m2
                 key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "pom.xml" }}
-            - run: mvn ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd/src/test
+            - run: mvn package
             - store_test_results:
                 path: target/surefire-reports
             - store_artifacts:
