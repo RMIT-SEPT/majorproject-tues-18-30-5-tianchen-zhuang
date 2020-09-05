@@ -20,7 +20,7 @@ public class UserService
         }
         catch (Exception e)
         {
-            throw new UserNotFoundException("User ID '" + user.getUserid() + "' already exists");
+            throw new UserNotFoundException("User ID '" + user.getUserId() + "' already exists");
         }
     }
 

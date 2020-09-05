@@ -43,12 +43,12 @@ public class User {
         this.lastModified = lastModified;
     }
 
-    public long getUserid()
+    public long getUserId()
     {
         return userId;
     }
 
-    public void setUserid(long userId)
+    public void setUserId(long userId)
     {
         this.userId = userId;
     }
