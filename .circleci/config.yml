@@ -1,4 +1,5 @@
 version: 2.1
+#https://circleci.com/docs/2.0/language-java-maven/
 
 jobs:
   build:
@@ -27,7 +28,7 @@ jobs:
                 paths:
                   - ~/.m2
                 key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "pom.xml" }}
-            - run: mvn package
+            - run: mvn ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd/src/test
             - store_test_results:
                 path: target/surefire-reports
             - store_artifacts:
