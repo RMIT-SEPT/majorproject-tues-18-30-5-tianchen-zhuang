@@ -18,6 +18,7 @@ jobs:
       - restore_cache:
           key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "~/pom-checksum" }}
 
+      - run: mvn dependency:go-offline
 
           steps:
             - checkout
@@ -29,8 +30,15 @@ jobs:
                   - ~/.m2
                 key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "pom.xml" }}
             - run: mvn package
-            - store_test_results:
-                path: target/surefire-reports
-            - store_artifacts:
-                path: target/majorproject-tues-18-30-5-tianchen-zhuang-0.0.1-SNAPSHOT.jar
+
+    - run:
+        name: Save test results
+        command: |
+          mkdir -p ~/test-results/junit/
+          find . -type f -regex ".*/target/surefire-reports/.*xml" -exec cp {} ~/test-results/junit/ \;
+        when: always
+    - store_test_results:
+        path: ~/test-results
+    - store_artifacts:
+        path: ~/test-results/junit
 
