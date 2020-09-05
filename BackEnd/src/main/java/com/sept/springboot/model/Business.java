@@ -8,12 +8,12 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@SecondaryTable(name = "address", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessid"))
+@SecondaryTable(name = "address", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
 public class Business {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long businessid;
+    private long businessId;
     @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
     @NotBlank(message = "Username is required")
     private String username;
@@ -60,14 +60,14 @@ public class Business {
 
     public void setBusinessName(String businessName) { this.businessName = businessName; }
 
-    public long getBusinessid()
+    public long getBusinessId()
     {
-        return businessid;
+        return businessId;
     }
 
-    public void setBusinessid(long businessid)
+    public void setBusinessId(long businessId)
     {
-        this.businessid = businessid;
+        this.businessId = businessId;
     }
 
     public String getUsername()

@@ -11,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userid;
+    private long userId;
     @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
     @NotBlank(message = "Username is required")
     private String username;
@@ -45,12 +45,12 @@ public class User {
 
     public long getUserid()
     {
-        return userid;
+        return userId;
     }
 
-    public void setUserid(long userid)
+    public void setUserid(long userId)
     {
-        this.userid = userid;
+        this.userId = userId;
     }
 
     public String getUsername()
