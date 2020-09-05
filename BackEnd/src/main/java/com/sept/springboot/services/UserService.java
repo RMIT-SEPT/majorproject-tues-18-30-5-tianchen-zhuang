@@ -44,7 +44,7 @@ public class UserService
         User user = userRepository.findByUserId(id);
 
         if(user == null)
-            throw new UserNotFoundException("Cannot user with ID '" + id + "'. This person does not exist");
+            throw new UserNotFoundException("Cannot delete user with ID '" + id + "'. This person does not exist");
 
         userRepository.delete(user);
     }
