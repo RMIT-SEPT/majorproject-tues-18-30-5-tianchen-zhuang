@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~\majorproject-tues-18-30-5-tianchen-zhuang\BackEnd
+    working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/postgres:9.6.3-alpine
@@ -11,17 +11,18 @@ jobs:
 
     steps:
 
-      - checkout
+      - checkout:
+          path: ~/majorproject-tues-18-30-5-tianchen-zhuang
 
       - restore_cache:
-          key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "pom.xml" }}
+          key: BackEnd-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: majorproject-tues-18-30-5-tianchen-zhuang-{{ checksum "pom.xml" }}
+          key: BackEnd-{{ checksum "pom.xml" }}
 
       - run: mvn package
 
