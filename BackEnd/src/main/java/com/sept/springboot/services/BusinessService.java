@@ -44,7 +44,7 @@ public class BusinessService {
         Business business = businessRepository.findByBusinessId(id);
 
         if(business == null)
-            throw new UserNotFoundException("Cannot delete business with ID '" + id + "'. This person does not exist");
+            throw new UserNotFoundException("Cannot delete business with ID '" + id + "'. This business does not exist");
 
         businessRepository.delete(business);
     }
