@@ -8,11 +8,9 @@ jobs:
 
     steps:
       - checkout
-
-      - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
-
-
+      - 
       - restore_cache:
+          - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
           key: BackEnd-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
