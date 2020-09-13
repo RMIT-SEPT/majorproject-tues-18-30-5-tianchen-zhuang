@@ -1,7 +1,6 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/node:8.9.1
@@ -12,7 +11,7 @@ jobs:
     steps:
 
       - checkout:
-          path: ~/BackEnd
+          path: ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
 
       - restore_cache:
           key: BackEnd-{{ checksum "pom.xml" }}
@@ -33,7 +32,7 @@ jobs:
           path: target/springboot-backend-0.0.1-SNAPSHOT.jar
 
       - checkout:
-          path: ~/FrontEnd
+          path: ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
 
       - restore_cache:
           keys:
