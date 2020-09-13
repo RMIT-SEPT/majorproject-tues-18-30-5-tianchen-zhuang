@@ -1,6 +1,7 @@
 version: 2
 jobs:
   build:
+    working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/node:8.9.1
