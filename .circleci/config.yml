@@ -9,7 +9,6 @@ jobs:
     steps:
       - checkout
       - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
-      - checkout
       - run: mvn dependency:go-offline
       - run: mvn package
 
