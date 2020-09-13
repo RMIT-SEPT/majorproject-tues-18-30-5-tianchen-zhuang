@@ -1,13 +1,12 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang
     docker:
       - image: circleci/openjdk:8-jdk-stretch
       - image: circleci/node:8.9.1
 
     steps:
-      - run: cd ./BackEnd/
+      - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
 
       - checkout
 
@@ -29,7 +28,7 @@ jobs:
       - store_artifacts:
           path: target/springboot-backend-0.0.1-SNAPSHOT.jar
 
-      - run: cd ./FrontEnd/
+      - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
 
       - checkout
 
