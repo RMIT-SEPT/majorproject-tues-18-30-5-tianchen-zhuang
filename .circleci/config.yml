@@ -10,9 +10,9 @@ jobs:
       - checkout
       - run:
           command: |
-          cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
-          mvn dependency:go-offline
-          mvn package
+            cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
+            mvn dependency:go-offline
+            mvn package
 
       - store_test_results:
           path: target/surefire-reports
