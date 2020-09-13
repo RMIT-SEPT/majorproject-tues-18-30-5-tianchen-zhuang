@@ -8,18 +8,20 @@ jobs:
 
     steps:
       - checkout
-      - 
+      -
       - restore_cache:
-          - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
+          paths:
+            - ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
           key: BackEnd-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
-
+        -
       - save_cache:
           paths:
             - ~/.m2
           key: BackEnd-{{ checksum "pom.xml" }}
-
+      - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
+        -
       - run: mvn package
 
       - store_test_results:
@@ -29,18 +31,15 @@ jobs:
           path: target/springboot-backend-0.0.1-SNAPSHOT.jar
 
 
-
       - checkout
       - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
-
-
 
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
-            -
+            - 
       - run: npm install
       - run:
           name: Run tests
