@@ -8,7 +8,6 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo apt-get install npm
       - run:
           command: |
             cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
@@ -26,6 +25,7 @@ jobs:
       - run:
           command: |
             cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
+            sudo apt-get install npm
             npm install
             npm test
 
