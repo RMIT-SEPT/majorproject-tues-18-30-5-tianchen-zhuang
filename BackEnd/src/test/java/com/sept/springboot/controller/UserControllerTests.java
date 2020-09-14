@@ -56,7 +56,7 @@ public class UserControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"username\":\"te\",\"email\":\"test@test.com\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Enter 3 to 20 characters\"}]"))
+                .andExpect(content().json("{\"username\": \"Enter 3 to 20 characters\"}"))
                 .andReturn();
     }
 
@@ -68,7 +68,7 @@ public class UserControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"username\":\"testusertestusertestu\",\"email\":\"test@test.com\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Enter 3 to 20 characters\"}]"))
+                .andExpect(content().json("{\"username\": \"Enter 3 to 20 characters\"}"))
                 .andReturn();
     }
     @Test
@@ -79,7 +79,7 @@ public class UserControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"email\":\"test@test.com\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Username is required\"}]"))
+                .andExpect(content().json("{\"username\": \"Username is required\"}"))
                 .andReturn();
     }
     @Test
@@ -90,7 +90,7 @@ public class UserControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testp\",\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Enter a minimum of length 6\"}]"))
+                .andExpect(content().json("{\"password\": \"Enter a minimum of length 6\"}"))
                 .andReturn();
     }
 
@@ -102,7 +102,7 @@ public class UserControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Password is required\"}]"))
+                .andExpect(content().json("{\"password\": \"Password is required\"}"))
                 .andReturn();
     }
 
@@ -114,7 +114,7 @@ public class UserControllerTests {
                         .contentType(MediaType.APPLICATION_JSON_VALUE)
                         .content("{\"password\":\"testpassword\",\"username\":\"testusername\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Email is required\"}]"))
+                .andExpect(content().json("{\"email\": \"Email is required\"}"))
                 .andReturn();
     }
 
