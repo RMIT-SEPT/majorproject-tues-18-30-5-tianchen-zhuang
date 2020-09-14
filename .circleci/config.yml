@@ -20,14 +20,13 @@ jobs:
       - store_artifacts:
           path: target/springboot-backend-0.0.1-SNAPSHOT.jar
 
-
-
-      - run: cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
       - checkout
-      - run: npm install
+
       - run:
-          name: Run tests
-          command: npm test
+          command: |
+            cd cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
+            npm install
+            npm test
 
       - persist_to_workspace:
           root: ~/majorproject-tues-18-30-5-tianchen-zhuang
