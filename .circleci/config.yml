@@ -24,7 +24,7 @@ jobs:
 
       - run:
           command: |
-            cd cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
+            cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
             npm install
             npm test
 
