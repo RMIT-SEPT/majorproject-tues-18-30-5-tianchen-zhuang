@@ -4,7 +4,6 @@ jobs:
     working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang
     docker:
       - image: circleci/openjdk:8-jdk-stretch
-      - image: circleci/node:8.9.1
 
     steps:
       - checkout
@@ -15,10 +14,10 @@ jobs:
             mvn package
 
       - store_test_results:
-          path: target/surefire-reports
+          path: target/Backend/surefire-reports
 
       - store_artifacts:
-          path: target/springboot-backend-0.0.1-SNAPSHOT.jar
+          path: target/Backend/springboot-backend-0.0.1-SNAPSHOT.jar
 
       - checkout
 
