@@ -11,6 +11,7 @@ export default class ClassCard extends Component {
     render() {
         return (
             <div className="classCard">
+               
                 <Card
                     hoverable
                     style={{ width: 240, height: 400, overflow: "hidden" }}
