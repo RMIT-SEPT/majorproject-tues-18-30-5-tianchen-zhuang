@@ -1,5 +1,6 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.services.BusinessService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,7 +12,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -25,7 +26,6 @@ public class BusinessControllerTests {
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
-
 
     @Before
     public void setUp() {
@@ -211,4 +211,47 @@ public class BusinessControllerTests {
                 .andExpect(content().json("{\"street\": \"Street Field Required\"}"))
                 .andReturn();
     }
+
+    @Test
+    public void getAllBusinesses() throws Exception {
+
+        mockMvc.perform(get("/api/business/all"))
+                .andExpect(status().is(200))
+                .andReturn();
+    }
+
+    @Test
+    public void getBusinessbyID() throws Exception {
+
+        mockMvc.perform(
+                post("/api/business")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("{\"password\":\"testpassword\",\"username\":\"testusername\"" +
+                                ",\"email\":\"test@test.com\",\"businessName\":\"testbusiness\"" +
+                                ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
+                                ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
+                .andReturn();
+
+        mockMvc.perform(get("/api/business/1"))
+                .andExpect(status().is(200))
+                .andReturn();
+
+    }
+
+    @Test
+    public void deleteBusinessbyIDInvalidID() throws Exception {
+
+        mockMvc.perform(delete("/api/business/20"))
+                .andExpect(status().is(400))
+                .andExpect(content().string("Cannot delete business with ID '20'. This business does not exist"));
+    }
+
+    @Test
+    public void getBusinessbyIDInvalidID() throws Exception {
+
+        mockMvc.perform(get("/api/business/100"))
+                .andExpect(status().is(400))
+                .andExpect(content().string("Business ID '100' does not exist"));
+    }
+
 }
