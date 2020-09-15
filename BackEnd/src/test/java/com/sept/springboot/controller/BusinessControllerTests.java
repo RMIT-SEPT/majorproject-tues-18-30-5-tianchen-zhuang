@@ -58,7 +58,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
                                 ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Enter 3 to 20 characters\"}]"))
+                .andExpect(content().json("{\"username\": \"Enter 3 to 20 characters\"}"))
                 .andReturn();
     }
 
@@ -73,7 +73,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
                                 ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Enter 3 to 20 characters\"}]"))
+                .andExpect(content().json("{\"username\": \"Enter 3 to 20 characters\"}"))
                 .andReturn();
     }
 
@@ -88,7 +88,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
                                 ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Username is required\"}]"))
+                .andExpect(content().json("{\"username\": \"Username is required\"}"))
                 .andReturn();
     }
 
@@ -103,7 +103,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
                                 ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Enter a minimum of length 6\"}]"))
+                .andExpect(content().json("{\"password\": \"Enter a minimum of length 6\"}"))
                 .andReturn();
     }
 
@@ -118,7 +118,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
                                 ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Password is required\"}]"))
+                .andExpect(content().json("{\"password\": \"Password is required\"}"))
                 .andReturn();
     }
 
@@ -133,7 +133,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"," +
                                 "\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Business Email is required\"}]"))
+                .andExpect(content().json("{\"email\": \"Business Email is required\"}"))
                 .andReturn();
     }
 
@@ -148,7 +148,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"," +
                                 "\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Business Name is required\"}]"))
+                .andExpect(content().json("{\"businessName\": \"Business Name is required\"}"))
                 .andReturn();
     }
 
@@ -163,7 +163,7 @@ public class BusinessControllerTests {
                                 ",\"city\":\"testcity\"" +
                                 ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Country Field Required\"}]"))
+                .andExpect(content().json("{\"country\": \"Country Field Required\"}"))
                 .andReturn();
     }
 
@@ -178,7 +178,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\"" +
                                 ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"City Field Required\"}]"))
+                .andExpect(content().json("{\"city\": \"City Field Required\"}"))
                 .andReturn();
     }
 
@@ -193,7 +193,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
                                 ",\"street\":\"teststreet\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Postal Code Required\"}]"))
+                .andExpect(content().json("{\"postCode\": \"Postal Code Required\"}"))
                 .andReturn();
     }
 
@@ -208,7 +208,7 @@ public class BusinessControllerTests {
                                 ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
                                 ",\"postCode\":\"testPostcode\"}"))
                 .andExpect(status().is(400))
-                .andExpect(content().json("[{\"defaultMessage\": \"Street Field Required\"}]"))
+                .andExpect(content().json("{\"street\": \"Street Field Required\"}"))
                 .andReturn();
     }
 }

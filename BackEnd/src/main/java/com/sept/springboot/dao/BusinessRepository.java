@@ -1,10 +1,14 @@
-package com.sept.springboot.repositories;
+package com.sept.springboot.dao;
 
 import com.sept.springboot.model.Business;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface BusinessRepository extends CrudRepository<Business, Long>
 {
+    Business findByBusinessId(long businessId);
+
     @Override
-    Iterable<Business> findAllById(Iterable<Long> iterable);
+    Iterable<Business> findAll();
 }
