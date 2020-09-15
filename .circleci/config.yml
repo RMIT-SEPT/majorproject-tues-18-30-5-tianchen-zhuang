@@ -1,0 +1,36 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang
+    docker:
+      - image: circleci/openjdk:8-jdk-stretch
+
+    steps:
+      - checkout
+      - run:
+          command: |
+            cd ~/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd
+            mvn dependency:go-offline
+            mvn package
+
+      - store_test_results:
+          path: target/Backend/surefire-reports
+
+      - store_artifacts:
+          path: target/Backend/springboot-backend-0.0.1-SNAPSHOT.jar
+
+      - checkout
+
+      - run:
+          command: |
+            cd ~/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd
+            sudo apt install curl
+            curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
+            sudo apt-get install -y nodejs
+            sudo apt-get install -y npm
+            npm install
+            npm test
+
+      - persist_to_workspace:
+          root: ~/majorproject-tues-18-30-5-tianchen-zhuang
+          paths: .
