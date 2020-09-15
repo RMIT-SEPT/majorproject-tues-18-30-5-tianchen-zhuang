@@ -1,21 +1,17 @@
 package com.sept.springboot.controller;
 
-import com.sept.springboot.model.Business;
 import com.sept.springboot.services.BusinessService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
-import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,10 +26,6 @@ public class BusinessControllerTests {
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
-
-    @MockBean
-    private BusinessService businessService;
-
 
     @Before
     public void setUp() {
@@ -231,40 +223,27 @@ public class BusinessControllerTests {
     @Test
     public void getBusinessbyID() throws Exception {
 
-        Business testBusiness = new Business();
-
-        testBusiness.setBusinessId(1);
-        testBusiness.setBusinessName("testbusiness");
-        testBusiness.setUsername("testusername");
-        testBusiness.setPassword("testpassword");
-        testBusiness.setEmail("test@test.com");
-        testBusiness.setCountry("testcountry");
-        testBusiness.setPostCode("testpostcode");
-        testBusiness.setCity("testcity");
-        testBusiness.setStreet("teststreet");
-
-        when(businessService.findByBusinessId(1)).thenReturn(testBusiness);
+        mockMvc.perform(
+                post("/api/business")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("{\"password\":\"testpassword\",\"username\":\"testusername\"" +
+                                ",\"email\":\"test@test.com\",\"businessName\":\"testbusiness\"" +
+                                ",\"country\":\"testcountry\",\"city\":\"testcity\"" +
+                                ",\"postCode\":\"testPostcode\",\"street\":\"teststreet\"}"))
+                .andReturn();
 
         mockMvc.perform(get("/api/business/1"))
                 .andExpect(status().is(200))
-                .andExpect(MockMvcResultMatchers.jsonPath("businessName").value("testbusiness"))
-                .andExpect(MockMvcResultMatchers.jsonPath("username").value("testusername"))
-                .andExpect(MockMvcResultMatchers.jsonPath("password").value("testpassword"))
-                .andExpect(MockMvcResultMatchers.jsonPath("country").value("testcountry"))
-                .andExpect(MockMvcResultMatchers.jsonPath("city").value("testcity"))
-                .andExpect(MockMvcResultMatchers.jsonPath("street").value("teststreet"))
-                .andExpect(MockMvcResultMatchers.jsonPath("postCode").value("testpostcode"))
                 .andReturn();
-    }
 
+    }
 
     @Test
     public void deleteBusinessbyIDInvalidID() throws Exception {
 
         mockMvc.perform(delete("/api/business/20"))
                 .andExpect(status().is(400))
-                .andExpect(content().string("Cannot delete business with ID '20'. This business does not exist"))
-                .andReturn();
+                .andExpect(content().string("Cannot delete business with ID '20'. This business does not exist"));
     }
 
     @Test
@@ -272,10 +251,7 @@ public class BusinessControllerTests {
 
         mockMvc.perform(get("/api/business/100"))
                 .andExpect(status().is(400))
-                .andExpect(content().string("Business ID '100' does not exist"))
-                .andReturn();
+                .andExpect(content().string("Business ID '100' does not exist"));
     }
-
-
 
 }
