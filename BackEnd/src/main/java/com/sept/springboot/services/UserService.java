@@ -34,6 +34,16 @@ public class UserService
         return user;
     }
 
+    public User findByEmail(String email)
+    {
+        User user = userRepository.findByEmail(email);
+
+        if(user == null)
+            throw new UserNotFoundException("Email '" + email + "' does not exist");
+
+        return user;
+    }
+
     public Iterable<User> findAllUsers()
     {
         return userRepository.findAll();
