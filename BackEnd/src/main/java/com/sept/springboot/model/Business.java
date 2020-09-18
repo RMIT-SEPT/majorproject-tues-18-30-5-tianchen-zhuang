@@ -44,16 +44,14 @@ public class Business {
     private String street;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(table = "BUSINESSBOKING")
+    @Column(table = "BUSINESSBOOKING")
     private long businessBookingId;
-    @Column(table = "BUSINESSBOKING")
+    @Column(table = "BUSINESSBOOKING")
     private String bookingName;
-    @Column(table = "BUSINESSBOKING")
+    @Column(table = "BUSINESSBOOKING")
     private String bookingDesc;
-    @Column(table = "BUSINESSBOKING")
+    @Column(table = "BUSINESSBOOKING")
     private Date bookingDate;
-    @Column(table = "BUSINESSBOKING")
-    private Date bookingTime;
 
     public Business() {
 
@@ -178,14 +176,6 @@ public class Business {
 
     public void setBookingDate(Date bookingDate) {
         this.bookingDate = bookingDate;
-    }
-
-    public Date getBookingTime() {
-        return bookingTime;
-    }
-
-    public void setBookingTime(Date bookingTime) {
-        this.bookingTime = bookingTime;
     }
 
     @PrePersist
