@@ -47,6 +47,23 @@ public class BusinessController {
         return new ResponseEntity<Business>(business, HttpStatus.OK);
     }
 
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getBusinessEmail(@PathVariable String email)
+    {
+        Business business = businessService.findByEmail(email);
+
+        return new ResponseEntity<>(business, HttpStatus.OK);
+    }
+
+    // Temporary solution to login
+    @GetMapping("/login/{email}")
+    public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
+    {
+        Business business = businessService.findByEmail(email);
+
+        return new ResponseEntity<>(business.getPassword(), HttpStatus.OK);
+    }
+
     @GetMapping("/all")
     public Iterable<Business> getAllBusinesses()
     {
