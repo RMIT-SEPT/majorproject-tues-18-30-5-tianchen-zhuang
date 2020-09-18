@@ -124,6 +124,7 @@ public class UserControllerTests {
                 .andReturn();
     }
 
+    // Lockie's Test
     @Test
     public void getUserById() throws Exception
     {
@@ -148,6 +149,7 @@ public class UserControllerTests {
             "\"lastModified\": null}"));
     }
 
+    // Lockie's Test
     @Test
     public void getUserByIdNotInDB() throws Exception
     {
@@ -156,6 +158,7 @@ public class UserControllerTests {
                 .andExpect(content().string("User ID '1' does not exist"));
     }
 
+    // Lockie's Test
     @Test
     public void getUserByIDInDBWrongID() throws Exception
     {
@@ -171,6 +174,7 @@ public class UserControllerTests {
                 .andExpect(content().string("User ID '2' does not exist"));
     }
 
+    // Lockie's Test
     @Test
     public void getAllUsersNoneInDB() throws Exception
     {
@@ -180,6 +184,7 @@ public class UserControllerTests {
                 .andReturn();
     }
 
+    // Lockie's Test
     @Test
     public void getAllUsers() throws Exception
     {
