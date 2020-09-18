@@ -7,6 +7,7 @@ import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
+@Table(name="USER")
 public class User {
 
     @Id

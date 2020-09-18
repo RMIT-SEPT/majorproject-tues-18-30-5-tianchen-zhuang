@@ -8,7 +8,8 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@SecondaryTable(name = "address", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
+@Table(name = "BUSINESS")
+@SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
 public class Business {
 
     @Id
