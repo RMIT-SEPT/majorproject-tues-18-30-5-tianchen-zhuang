@@ -10,7 +10,7 @@ import java.util.Date;
 @Entity
 @Table(name = "BUSINESS")
 @SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
-@SecondaryTable(name = "BUSINESSBOKING", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
+@SecondaryTable(name = "BUSINESSBOOKING", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
 public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
