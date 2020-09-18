@@ -50,6 +50,15 @@ public class UserController
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
+    // Temporary solution to login
+    @GetMapping("/login/{email}")
+    public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
+    {
+        User user = userService.findByEmail(email);
+
+        return new ResponseEntity<>(user.getPassword(), HttpStatus.OK);
+    }
+
     @GetMapping("/all")
     public Iterable<User> getAllUsers()
     {
