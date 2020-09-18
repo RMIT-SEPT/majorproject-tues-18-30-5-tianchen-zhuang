@@ -31,16 +31,16 @@ public class Business {
     private Date lastModified;
 
     @NotBlank(message = "Country Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String country;
     @NotBlank(message = "City Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String city;
     @NotBlank(message = "Postal Code Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String postCode;
     @NotBlank(message = "Street Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String street;
 
     public Business() {
