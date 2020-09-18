@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Entity
 @Table(name="USER")
+@SecondaryTable(name = "USERBOOKING", pkJoinColumns = @PrimaryKeyJoinColumn(name = "userId"))
 public class User {
 
     @Id
@@ -30,18 +31,22 @@ public class User {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date lastModified;
 
+    @Column(table = "USERBOOKING")
+    private long businessId;
+    @Column(table = "USERBOOKING")
+    private long businessBookingId;
+
     public User() {
 
     }
 
-    public User(String username, String password, String email, long roleID) {
+    public User(String username, String password, String email, long roleID)
+    {
         super();
         this.username = username;
         this.password = password;
         this.email = email;
         this.roleID = roleID;
-        this.created = created;
-        this.lastModified = lastModified;
     }
 
     public long getUserId()
@@ -112,6 +117,22 @@ public class User {
     public void setLastModified(Date lastModified)
     {
         this.lastModified = lastModified;
+    }
+
+    public long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(long businessId) {
+        this.businessId = businessId;
+    }
+
+    public long getBusinessBookingId() {
+        return businessBookingId;
+    }
+
+    public void setBusinessBookingId(long businessBookingId) {
+        this.businessBookingId = businessBookingId;
     }
 
     @PrePersist
