@@ -34,6 +34,16 @@ public class UserService
         return user;
     }
 
+    public User findByEmail(String email)
+    {
+        User user = userRepository.findByEmail(email);
+
+        if(user == null)
+            throw new UserNotFoundException("Email '" + email + "' does not exist");
+
+        return user;
+    }
+
     public Iterable<User> findAllUsers()
     {
         return userRepository.findAll();
@@ -44,7 +54,7 @@ public class UserService
         User user = userRepository.findByUserId(id);
 
         if(user == null)
-            throw new UserNotFoundException("Cannot delete user with ID '" + id + "'. This business does not exist");
+            throw new UserNotFoundException("Cannot delete user with ID '" + id + "'. This user does not exist");
 
         userRepository.delete(user);
     }

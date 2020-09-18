@@ -31,7 +31,7 @@ public class UserController
             return errorMap;
 
         User newUser = userService.saveOrUpdateUser(user);
-        return new ResponseEntity<User>(newUser, HttpStatus.CREATED);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -39,7 +39,24 @@ public class UserController
     {
         User user = userService.findByUserId(id);
 
-        return new ResponseEntity<User>(user, HttpStatus.OK);
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getUserEmail(@PathVariable String email)
+    {
+        User user = userService.findByEmail(email);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    // Temporary solution to login
+    @GetMapping("/login/{email}")
+    public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
+    {
+        User user = userService.findByEmail(email);
+
+        return new ResponseEntity<>(user.getPassword(), HttpStatus.OK);
     }
 
     @GetMapping("/all")
@@ -53,6 +70,6 @@ public class UserController
     {
         userService.deleteByUserId(id);
 
-        return new ResponseEntity<String>("User with ID: '" + id + "' was deleted", HttpStatus.OK);
+        return new ResponseEntity<>("User with ID: '" + id + "' was deleted", HttpStatus.OK);
     }
 }
