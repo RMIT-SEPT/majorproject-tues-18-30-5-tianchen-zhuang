@@ -10,8 +10,8 @@ import java.util.Date;
 @Entity
 @Table(name = "BUSINESS")
 @SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
+@SecondaryTable(name = "BUSINESSBOKING", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
 public class Business {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long businessId;
@@ -43,19 +43,30 @@ public class Business {
     @Column(table = "ADDRESS")
     private String street;
 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(table = "BUSINESSBOKING")
+    private long businessBookingId;
+    @Column(table = "BUSINESSBOKING")
+    private String bookingName;
+    @Column(table = "BUSINESSBOKING")
+    private String bookingDesc;
+    @Column(table = "BUSINESSBOKING")
+    private Date bookingDate;
+    @Column(table = "BUSINESSBOKING")
+    private Date bookingTime;
+
     public Business() {
 
     }
 
-//    public Business(String email) {
-//        super();
-//        this.username = username;
-//        this.password = password;
-//        this.email = email;
-//        this.businessName = businessName;
-//        this.created = created;
-//        this.lastModified = lastModified;
-//    }
+    public Business(String email)
+    {
+        super();
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.businessName = businessName;
+    }
 
     public String getBusinessName() { return businessName; }
 
@@ -136,6 +147,46 @@ public class Business {
     public String getStreet() { return street; }
 
     public void setStreet(String street) { this.street = street; }
+
+    public long getBusinessBookingId() {
+        return businessBookingId;
+    }
+
+    public void setBusinessBookingId(long businessBookingId) {
+        this.businessBookingId = businessBookingId;
+    }
+
+    public String getBookingName() {
+        return bookingName;
+    }
+
+    public void setBookingName(String bookingName) {
+        this.bookingName = bookingName;
+    }
+
+    public String getBookingDesc() {
+        return bookingDesc;
+    }
+
+    public void setBookingDesc(String bookingDesc) {
+        this.bookingDesc = bookingDesc;
+    }
+
+    public Date getBookingDate() {
+        return bookingDate;
+    }
+
+    public void setBookingDate(Date bookingDate) {
+        this.bookingDate = bookingDate;
+    }
+
+    public Date getBookingTime() {
+        return bookingTime;
+    }
+
+    public void setBookingTime(Date bookingTime) {
+        this.bookingTime = bookingTime;
+    }
 
     @PrePersist
     protected void onCreate()
