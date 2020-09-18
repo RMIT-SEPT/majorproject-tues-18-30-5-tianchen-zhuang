@@ -3,6 +3,7 @@ package com.sept.springboot.services;
 import com.sept.springboot.exception.UserNotFoundException;
 import com.sept.springboot.model.Business;
 import com.sept.springboot.dao.BusinessRepository;
+import com.sept.springboot.model.Business;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,6 +31,16 @@ public class BusinessService {
 
         if(business == null)
             throw new UserNotFoundException("Business ID '" + id + "' does not exist");
+
+        return business;
+    }
+
+    public Business findByEmail(String email)
+    {
+        Business business = businessRepository.findByEmail(email);
+
+        if(business == null)
+            throw new UserNotFoundException("Email '" + email + "' does not exist");
 
         return business;
     }
