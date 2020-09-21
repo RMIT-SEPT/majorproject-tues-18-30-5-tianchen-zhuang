@@ -1,4 +1,8 @@
-version: 2
+version: 2.1
+
+orbs:
+  aws-code-deploy: circleci/aws-code-deploy@1.0
+
 jobs:
   build:
     working_directory: ~/majorproject-tues-18-30-5-tianchen-zhuang
@@ -34,3 +38,10 @@ jobs:
       - persist_to_workspace:
           root: ~/majorproject-tues-18-30-5-tianchen-zhuang
           paths: .
+
+deploy_application:
+  jobs:
+      - aws-code-deploy/deploy:
+          application-name: TUES-18-30-5
+          deployment-group: TUES-18-30-5-DeploymentGroup
+          service-role-arn: arn:aws:iam::475933409365:role/CodeDeployServiceRole
