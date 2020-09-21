@@ -1,5 +1,6 @@
 package com.sept.springboot.controller;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +12,11 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -118,6 +124,90 @@ public class UserControllerTests {
                 .andReturn();
     }
 
+    // Lockie's Test
+    @Test
+    public void getUserById() throws Exception
+    {
+        mockMvc.perform(
+                post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("{\"password\":\"testpassword\",\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
+                .andExpect(status().is(201))
+                .andReturn();
 
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        Date created = new Date();
+
+        mockMvc.perform(get("/api/user/1"))
+                .andExpect(status().is(200))
+                .andExpect(content().json("{\"userId\": 1,\n" +
+            "\"username\": \"testusername\",\n" +
+            "\"password\": \"testpassword\",\n" +
+            "\"email\": \"test@test.com\",\n" +
+            "\"roleID\": 0,\n" +
+            "\"created\": \""+ dateFormat.format(created) +"\",\n" +
+            "\"lastModified\": null}"));
+    }
+
+    // Lockie's Test
+    @Test
+    public void getUserByIdNotInDB() throws Exception
+    {
+        mockMvc.perform(get("/api/user/1"))
+                .andExpect(status().is(400))
+                .andExpect(content().string("User ID '1' does not exist"));
+    }
+
+    // Lockie's Test
+    @Test
+    public void getUserByIDInDBWrongID() throws Exception
+    {
+        mockMvc.perform(
+                post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("{\"password\":\"testpassword\",\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
+                .andExpect(status().is(201))
+                .andReturn();
+
+        mockMvc.perform(get("/api/user/2"))
+                .andExpect(status().is(400))
+                .andExpect(content().string("User ID '2' does not exist"));
+    }
+
+    // Lockie's Test
+    @Test
+    public void getAllUsersNoneInDB() throws Exception
+    {
+        mockMvc.perform(get("/api/user/all"))
+                .andExpect(status().is(200))
+                .andExpect(content().json("[]"))
+                .andReturn();
+    }
+
+    // Lockie's Test
+    @Test
+    public void getAllUsers() throws Exception
+    {
+        mockMvc.perform(
+                post("/api/user")
+                        .contentType(MediaType.APPLICATION_JSON_VALUE)
+                        .content("{\"password\":\"testpassword\",\"username\":\"testusername\",\"email\":\"test@test.com\"}"))
+                .andExpect(status().is(201))
+                .andReturn();
+
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        Date created = new Date();
+
+        mockMvc.perform(get("/api/user/all"))
+                .andExpect(status().is(200))
+                .andExpect(content().json("[{\"userId\": 1,\n" +
+                        "\"username\": \"testusername\",\n" +
+                        "\"password\": \"testpassword\",\n" +
+                        "\"email\": \"test@test.com\",\n" +
+                        "\"roleID\": 0,\n" +
+                        "\"created\": \""+ dateFormat.format(created) +"\",\n" +
+                        "\"lastModified\": null}]"))
+                .andReturn();
+    }
 
 }
