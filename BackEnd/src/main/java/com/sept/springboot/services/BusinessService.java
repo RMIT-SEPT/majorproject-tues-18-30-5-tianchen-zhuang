@@ -3,7 +3,6 @@ package com.sept.springboot.services;
 import com.sept.springboot.exception.UserNotFoundException;
 import com.sept.springboot.model.Business;
 import com.sept.springboot.dao.BusinessRepository;
-import com.sept.springboot.model.Business;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +20,7 @@ public class BusinessService {
         }
         catch (Exception e)
         {
-            throw new UserNotFoundException("User ID '" + business.getBusinessId() + "' already exists");
+            throw new UserNotFoundException("Business ID '" + business.getBusinessId() + "' already exists");
         }
     }
 
