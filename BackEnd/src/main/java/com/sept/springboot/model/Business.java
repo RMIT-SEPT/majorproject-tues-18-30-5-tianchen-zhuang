@@ -8,12 +8,12 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@SecondaryTable(name = "address", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessid"))
+@Table(name = "BUSINESS")
+@SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
 public class Business {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long businessid;
+    private long businessId;
     @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
     @NotBlank(message = "Username is required")
     private String username;
@@ -30,44 +30,43 @@ public class Business {
     private Date lastModified;
 
     @NotBlank(message = "Country Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String country;
     @NotBlank(message = "City Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String city;
     @NotBlank(message = "Postal Code Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String postCode;
     @NotBlank(message = "Street Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String street;
 
     public Business() {
 
     }
 
-//    public Business(String email) {
-//        super();
-//        this.username = username;
-//        this.password = password;
-//        this.email = email;
-//        this.businessName = businessName;
-//        this.created = created;
-//        this.lastModified = lastModified;
-//    }
+    public Business(String businessName, String username, String password, String email, long roleID)
+    {
+        super();
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.businessName = businessName;
+    }
 
     public String getBusinessName() { return businessName; }
 
     public void setBusinessName(String businessName) { this.businessName = businessName; }
 
-    public long getBusinessid()
+    public long getBusinessId()
     {
-        return businessid;
+        return businessId;
     }
 
-    public void setBusinessid(long businessid)
+    public void setBusinessId(long businessId)
     {
-        this.businessid = businessid;
+        this.businessId = businessId;
     }
 
     public String getUsername()

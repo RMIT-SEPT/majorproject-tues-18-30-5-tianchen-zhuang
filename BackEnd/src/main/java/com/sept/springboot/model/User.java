@@ -7,11 +7,13 @@ import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
+@Table(name="USER")
+@SecondaryTable(name = "USERBOOKING", pkJoinColumns = @PrimaryKeyJoinColumn(name = "userId"))
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userid;
+    private long userId;
     @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
     @NotBlank(message = "Username is required")
     private String username;
@@ -29,28 +31,32 @@ public class User {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date lastModified;
 
+    @Column(table = "USERBOOKING")
+    private long businessId;
+    @Column(table = "USERBOOKING")
+    private long businessBookingId;
+
     public User() {
 
     }
 
-    public User(String username, String password, String email, long roleID) {
+    public User(String username, String password, String email, long roleID)
+    {
         super();
         this.username = username;
         this.password = password;
         this.email = email;
         this.roleID = roleID;
-        this.created = created;
-        this.lastModified = lastModified;
     }
 
-    public long getUserid()
+    public long getUserId()
     {
-        return userid;
+        return userId;
     }
 
-    public void setUserid(long userid)
+    public void setUserId(long userId)
     {
-        this.userid = userid;
+        this.userId = userId;
     }
 
     public String getUsername()
@@ -111,6 +117,22 @@ public class User {
     public void setLastModified(Date lastModified)
     {
         this.lastModified = lastModified;
+    }
+
+    public long getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(long businessId) {
+        this.businessId = businessId;
+    }
+
+    public long getBusinessBookingId() {
+        return businessBookingId;
+    }
+
+    public void setBusinessBookingId(long businessBookingId) {
+        this.businessBookingId = businessBookingId;
     }
 
     @PrePersist

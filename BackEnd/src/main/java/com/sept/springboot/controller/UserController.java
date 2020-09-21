@@ -1,43 +1,75 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.services.MapValidationErrorService;
 import com.sept.springboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import com.sept.springboot.model.User;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-//@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin
 public class UserController
 {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private MapValidationErrorService mapValidationErrorService;
+
     @PostMapping("")
     public ResponseEntity<?> createNewUser(@Valid @RequestBody User user, BindingResult result)
     {
-        if(result.hasErrors())
-        {
-            Map<String,String> errorMap = new HashMap<>();
-            for(FieldError error: result.getFieldErrors())
-            {
-                return new ResponseEntity<List<FieldError>>(result.getFieldErrors(), HttpStatus.BAD_REQUEST);
-            }
-        }
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
 
-        User user1 = userService.saveOrUpdateUser(user);
-        return new ResponseEntity<User>(user, HttpStatus.CREATED);
+        if(errorMap != null)
+            return errorMap;
+
+        User newUser = userService.saveOrUpdateUser(user);
+        return new ResponseEntity<>(newUser, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getUserById(@PathVariable long id)
+    {
+        User user = userService.findByUserId(id);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getUserEmail(@PathVariable String email)
+    {
+        User user = userService.findByEmail(email);
+
+        return new ResponseEntity<>(user, HttpStatus.OK);
+    }
+
+    // Temporary solution to login
+    @GetMapping("/login/{email}")
+    public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
+    {
+        User user = userService.findByEmail(email);
+
+        return new ResponseEntity<>(user.getPassword(), HttpStatus.OK);
+    }
+
+    @GetMapping("/all")
+    public Iterable<User> getAllUsers()
+    {
+        return userService.findAllUsers();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable long id)
+    {
+        userService.deleteByUserId(id);
+
+        return new ResponseEntity<>("User with ID: '" + id + "' was deleted", HttpStatus.OK);
     }
 }
