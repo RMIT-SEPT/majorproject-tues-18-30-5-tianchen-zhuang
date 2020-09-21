@@ -1,4 +1,4 @@
-version: 2.1
+version: 2.0
 
 orbs:
   aws-code-deploy: circleci/aws-code-deploy@1.0
