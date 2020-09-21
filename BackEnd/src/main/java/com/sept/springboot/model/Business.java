@@ -10,7 +10,6 @@ import java.util.Date;
 @Entity
 @Table(name = "BUSINESS")
 @SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
-@SecondaryTable(name = "BUSINESSBOOKING", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
 public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,25 +42,11 @@ public class Business {
     @Column(table = "ADDRESS")
     private String street;
 
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(table = "BUSINESSBOOKING")
-    private long businessBookingId;
-    @Column(table = "BUSINESSBOOKING")
-    private String bookingName;
-    @Column(table = "BUSINESSBOOKING")
-    private String bookingDesc;
-    @Column(table = "BUSINESSBOOKING")
-    private Date bookingDate;
-    @Column(table = "BUSINESSBOOKING")
-    private String businessStatus;
-    @Column(table = "BUSINESSBOOKING")
-    private String userStatus;
-
     public Business() {
 
     }
 
-    public Business(String email)
+    public Business(String businessName, String username, String password, String email, long roleID)
     {
         super();
         this.username = username;
@@ -149,54 +134,6 @@ public class Business {
     public String getStreet() { return street; }
 
     public void setStreet(String street) { this.street = street; }
-
-    public long getBusinessBookingId() {
-        return businessBookingId;
-    }
-
-    public void setBusinessBookingId(long businessBookingId) {
-        this.businessBookingId = businessBookingId;
-    }
-
-    public String getBookingName() {
-        return bookingName;
-    }
-
-    public void setBookingName(String bookingName) {
-        this.bookingName = bookingName;
-    }
-
-    public String getBookingDesc() {
-        return bookingDesc;
-    }
-
-    public void setBookingDesc(String bookingDesc) {
-        this.bookingDesc = bookingDesc;
-    }
-
-    public Date getBookingDate() {
-        return bookingDate;
-    }
-
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public String getBusinessStatus() {
-        return businessStatus;
-    }
-
-    public void setBusinessStatus(String businessStatus) {
-        this.businessStatus = businessStatus;
-    }
-
-    public String getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
 
     @PrePersist
     protected void onCreate()
