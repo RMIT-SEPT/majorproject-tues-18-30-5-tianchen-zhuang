@@ -52,6 +52,10 @@ public class Business {
     private String bookingDesc;
     @Column(table = "BUSINESSBOOKING")
     private Date bookingDate;
+    @Column(table = "BUSINESSBOOKING")
+    private String businessStatus;
+    @Column(table = "BUSINESSBOOKING")
+    private String userStatus;
 
     public Business() {
 
@@ -176,6 +180,22 @@ public class Business {
 
     public void setBookingDate(Date bookingDate) {
         this.bookingDate = bookingDate;
+    }
+
+    public String getBusinessStatus() {
+        return businessStatus;
+    }
+
+    public void setBusinessStatus(String businessStatus) {
+        this.businessStatus = businessStatus;
+    }
+
+    public String getUserStatus() {
+        return userStatus;
+    }
+
+    public void setUserStatus(String userStatus) {
+        this.userStatus = userStatus;
     }
 
     @PrePersist
