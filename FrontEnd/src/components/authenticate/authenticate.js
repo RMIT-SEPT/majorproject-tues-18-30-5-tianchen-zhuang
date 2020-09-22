@@ -10,55 +10,30 @@ const userinfo = 'http://localhost:8080/api/user/email/';
             constructor(props){
                 super(props)
                 this.state = {
-                    users:[]
+                    users:[],
+                    pass:""
                 }
             }
        
+        async getApi(api){
+            return  axios.get(userinfo+api);
+            // let check = false;
+            // let password = "";
+            // await info.then((response) => { 
+            //     console.log(response.data.password)
+            //     this.setState({
+            //         pass: response.data.password
+            //       });
+            //       console.log("passss",this.state.pass)
+            // });
+        }
+
+    //      checkPwd(username, password){
+    //          this.getApi(username);
+    //          console.log('api ',this.state.pass);
 
 
-    checkPwd(username, password){
-        
-        // username = 'test@test.com';
-        // console.log('uname',username);
-        // console.log('uino',userinfo+username);
-        let info = axios.get(userinfo+username);
-        let globalinfo = this.state.users;
-        let check = false;
-
-        info.then((response) => {   
-            console.log(response.data.password)
-            if(response.data.password == password){
-                console.log("yes",check);
-                check = true;
-                return true;
-            }else{
-                console.log('no',check);
-                check = false;
-                return false;
-            }
-            // info = response.data;
-            // this.setState({ users: globalinfo})
-            // this.setState({ users: response.data})
-        });
-
-        setTimeout(() => {      
-        // if(check == true){
-        //     return true;
-        // }else{
-        //     return false;
-        // }
-        
-        console.log('home',check);
-        }, 2000);
-        // console.log('home',check);
-        // if(check == true){
-        //     return true;
-        // }else{
-        //     return false;
-        // }
-
-
-    }
+    // }
 
 }
 

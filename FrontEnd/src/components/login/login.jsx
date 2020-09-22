@@ -27,7 +27,7 @@ class Login extends React.Component{
         });
       }
         
-      handleSubmit(event) {
+      async handleSubmit(event) {
         // let history = useHistory();
       
         event.preventDefault();
@@ -39,13 +39,47 @@ class Login extends React.Component{
             input["password"] = "";
             input["email"] = "";
             this.setState({input:input});
-            if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==true){
-              localStorage.setItem('userInfo', this.state.input['email']);
-              this.props.history.push('/bookinglist');
-            }
-            else if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==false){
-              alert('login fail check password or email');
-            }
+          //define email and password
+            let e = this.state.input['email'];
+            let p = this.state.input['password'];
+            //get user api
+            let info =  authenticate.getApi(this.state.input['email']);
+            //set user info set = set, remove = remove , getItem ==get(name)
+            sessionStorage.setItem('user', info);
+            
+            // localStorage.setItem(user, info);
+            info.then((response) => {
+              sessionStorage.setItem('username', response.data.username);
+                    if(p==response.data.password){
+                    localStorage.setItem('userInfo', this.state.input['email']);
+                    this.props.history.push('/bookinglist');
+                  } else{
+                    alert('false login fail', this.state.input['password']);
+                  }
+                  
+                  
+              });
+
+            // let checkpassword = await authenticate.checkPwd(this.state.input['email'],this.state.input['password']);
+            // console.log('home',checkpassword);
+            // console.log('next', checkpassword);
+
+
+            // setTimeout(() => {      
+            //   if(checkpassword==true){
+            //     localStorage.setItem('userInfo', this.state.input['email']);
+            //     this.props.history.push('/bookinglist');
+            //   } else{
+            //     console.log('false login fail',checkpassword);
+            //   }
+
+            //   }, 2000);
+            // if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==true){
+            
+            // }
+            // else if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==false){
+            //   alert('login fail check password or email');
+            // }
             
           
         }
