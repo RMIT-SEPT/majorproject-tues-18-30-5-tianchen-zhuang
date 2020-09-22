@@ -6,27 +6,24 @@ import businessList from '../booking/businessList';
 
 class NavBar extends React.Component{
 
-    // changeToLogout()
-    // {
-    //     if(localStorage.getItem() != null)
-    //     {
-    //         document.getElementsByClassName("login")[0].getElementsByTagName('li')[0].innerHTML="Log out";
-    //     }
-    // }
     Logout = () =>
     {
         console.log(localStorage.getItem('userInfo'));
         localStorage.removeItem('userInfo');
     }
+    checkLocalStorage = () =>
+    {
+        console.log(localStorage.getItem('userInfo'));
+    }
     render() {
         let isLogin;
-        if(localStorage.getItem('userInfo') != null)
+        if(localStorage.getItem('userInfo') == 'sept@sept.com')
                     {
                         isLogin = <li onClick = {this.Logout}><Link className="nav-link" to="/login">Log out</Link></li>
                     }
                     else
                     {
-                        isLogin = <li><Link className="nav-link" to="/login">Login</Link></li>
+                        isLogin = <li onClick = {this.checkLocalStorage}><Link className="nav-link" to="/login">Login</Link></li>
                     }
         return (
             <header className = 'navBar'>
