@@ -41,7 +41,6 @@ class Login extends React.Component{
             this.setState({input:input});
             if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])){
               localStorage.setItem('userInfo', this.state.input['email']);
-              this.props.history.push('/bookinglist');
             }else{
               alert('login fail check password or email');
             }
@@ -116,7 +115,7 @@ class Login extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.password}</div>
-        <button className= "login_but"type="submit">Login</button>
+        <button className= "login_but" type="submit" onClick= {event =>  window.location.href='../bookinglist'}>Login</button>
         <button className="login_but" type="button" onClick= {event =>  window.location.href='/login'} >Back </button>
         
       </form>
