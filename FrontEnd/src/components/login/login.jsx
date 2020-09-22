@@ -39,10 +39,11 @@ class Login extends React.Component{
             input["password"] = "";
             input["email"] = "";
             this.setState({input:input});
-            if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])){
+            if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==true){
               localStorage.setItem('userInfo', this.state.input['email']);
               this.props.history.push('/bookinglist');
-            }else{
+            }
+            else if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==false){
               alert('login fail check password or email');
             }
             
