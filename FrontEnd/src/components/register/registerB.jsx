@@ -30,16 +30,18 @@ class RegisterB extends React.Component{
         event.preventDefault();
       
         if(this.validate()){
-            console.log(this.state);
+            
       
             let input = {};
             input["password"] = "";
             input["email"] = "";
-            input["bName"] = "";
+            input["business_name"] = "";
+            input["username"] = "";
             input["address"] = "";
-            input["cPassword"] = "";
+            // input["cPassword"] = "";
             this.setState({input:input});
-      
+            
+            console.log(this.state.input);
             alert('Thank you for register');
         }
       }
@@ -52,7 +54,7 @@ class RegisterB extends React.Component{
       
           if (!input["email"]) {
             isValid = false;
-            errors["email"] = "Please enter your email Address.";
+            errors["email"] = "Please enter your email address.";
           }
       
           if (typeof input["email"] !== "undefined") {
@@ -76,13 +78,13 @@ class RegisterB extends React.Component{
               errors["password"] = "Please enter password more than 6 characters";
             }
           }
-          if (!input["bName"]) {
+          if (!input["business_name"]) {
             isValid = false;
-            errors["bName"] = "Please enter your uername.";
+            errors["business_name"] = "Please enter your uername.";
           }
-          if (!input["address"]) {
+          if (!input["username"]) {
             isValid = false;
-            errors["address"] = "Please enter your address.";
+            errors["username"] = "Please enter your address.";
           }
           if (!input["cPassword"]) {
             isValid = false;
@@ -117,24 +119,24 @@ class RegisterB extends React.Component{
         <div className="text-danger">{this.state.errors.email}</div>
         <label htmlFor="email">business Name</label>
         <input
-          name="bName"
-          type="text"
-          id ="bName"
+          name="business_name"
+          type="inputtext"
+          id ="business_name"
           placeholder="Enter your business name"
+          value={this.state.input.business_name}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.business_name}</div>
+        <label >business address</label>
+        <input
+          name="username"
+          type="text"
+          id ="username"
+          placeholder="Enter your business address"
           value={this.state.input.username}
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.username}</div>
-        <label htmlFor="email">business address</label>
-        <input
-          name="address"
-          type="text"
-          id ="address"
-          placeholder="Enter your business address"
-          value={this.state.input.address}
-          onChange={this.handleChange}
-        />
-        <div className="text-danger">{this.state.errors.address}</div>
         <label htmlFor="password">Password</label>
         <input
           name="password"
