@@ -1,14 +1,14 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom";
+import { Menu } from 'antd';
+import { Card } from 'antd';
 import './login.css'
-import authenticate from '../authenticate/authenticate';
+import { Input } from 'antd';
 
 
-class Login extends React.Component{
-    constructor(probs) {
-        super(probs);
+class LoginB extends React.Component{
+
+    constructor() {
+        super();
         this.state = {
           input: {},
           errors: {}
@@ -27,61 +27,18 @@ class Login extends React.Component{
         });
       }
         
-      async handleSubmit(event) {
-        // let history = useHistory();
-      
+      handleSubmit(event) {
         event.preventDefault();
       
         if(this.validate()){
-          
             console.log(this.state);
+      
             let input = {};
             input["password"] = "";
             input["email"] = "";
             this.setState({input:input});
-          //define email and password
-            let e = this.state.input['email'];
-            let p = this.state.input['password'];
-            //get user api
-            let info =  authenticate.getApi(this.state.input['email']);
-            //set user info set = set, remove = remove , getItem ==get(name)
-            sessionStorage.setItem('user', info);
-            
-            // localStorage.setItem(user, info);
-            info.then((response) => {
-              sessionStorage.setItem('username', response.data.username);
-                    if(p==response.data.password){
-                    localStorage.setItem('userInfo', this.state.input['email']);
-                    this.props.history.push('/bookinglist');
-                  } else{
-                    alert('false login fail', this.state.input['password']);
-                  }
-                  
-                  
-              });
-
-            // let checkpassword = await authenticate.checkPwd(this.state.input['email'],this.state.input['password']);
-            // console.log('home',checkpassword);
-            // console.log('next', checkpassword);
-
-
-            // setTimeout(() => {      
-            //   if(checkpassword==true){
-            //     localStorage.setItem('userInfo', this.state.input['email']);
-            //     this.props.history.push('/bookinglist');
-            //   } else{
-            //     console.log('false login fail',checkpassword);
-            //   }
-
-            //   }, 2000);
-            // if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==true){
-            
-            // }
-            // else if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==false){
-            //   alert('login fail check password or email');
-            // }
-            
-          
+      
+            alert('Thank you for login');
         }
       }
       
@@ -129,7 +86,7 @@ class Login extends React.Component{
     return (
 
         <div>
-        <h2>Login User</h2>
+        <h2>Login as business</h2>
         <form onSubmit={this.handleSubmit}>
         <label htmlFor="email">Email</label>
         <input
@@ -151,9 +108,9 @@ class Login extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.password}</div>
-        <button className= "login_but"type="submit">Login</button>
+        <button className="login_but"type="submit">Login</button>
         <button className="login_but" type="button" onClick= {event =>  window.location.href='/login'} >Back </button>
-        
+
       </form>
       </div>
     );
@@ -161,5 +118,5 @@ class Login extends React.Component{
 
 }
 
-export default Login
+export default LoginB
 
