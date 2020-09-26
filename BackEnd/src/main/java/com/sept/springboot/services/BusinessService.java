@@ -20,7 +20,7 @@ public class BusinessService {
         }
         catch (Exception e)
         {
-            throw new UserNotFoundException("User ID '" + business.getBusinessId() + "' already exists");
+            throw new UserNotFoundException("Business ID '" + business.getBusinessId() + "' already exists");
         }
     }
 
@@ -30,6 +30,16 @@ public class BusinessService {
 
         if(business == null)
             throw new UserNotFoundException("Business ID '" + id + "' does not exist");
+
+        return business;
+    }
+
+    public Business findByEmail(String email)
+    {
+        Business business = businessRepository.findByEmail(email);
+
+        if(business == null)
+            throw new UserNotFoundException("Email '" + email + "' does not exist");
 
         return business;
     }

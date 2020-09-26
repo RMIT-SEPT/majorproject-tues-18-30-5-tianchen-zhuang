@@ -10,6 +10,8 @@ import SelectUser from './components/utils/selectUser.jsx';
 import SelectReg from './components/utils/selectReg.jsx';
 import Register from './components/register/register';
 import RegisterB from './components/register/registerB';
+import booking from './components/booking/booking';
+import bookingList from './components/booking/businessList';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import 'antd/dist/antd.css';
@@ -28,6 +30,8 @@ class App extends Component {
           <Route path="/"exact={true} component={UserComponent} />
           <Route path="/login" exact={true}component={SelectUser} />
           <Route path="/login/user" exact={true}component={Login} />
+          <Route path="/booking" component={booking} />
+          <Route path="/bookinglist" exact={true}component={bookingList} />
           <Route path="/login/business" exact={true}component={LoginB} />
           <Route path="/register" exact={true}component={SelectReg} />
           <Route path="/register/user" exact={true}component={Register} />

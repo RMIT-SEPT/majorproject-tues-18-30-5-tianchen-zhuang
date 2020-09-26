@@ -1,20 +1,15 @@
 package com.sept.springboot.controller;
 
 import com.sept.springboot.model.Business;
-import com.sept.springboot.model.User;
 import com.sept.springboot.services.BusinessService;
 import com.sept.springboot.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/api/business")
@@ -36,7 +31,7 @@ public class BusinessController {
             return errorMap;
 
         Business newBusiness = businessService.saveOrUpdateUser(business);
-        return new ResponseEntity<Business>(newBusiness, HttpStatus.CREATED);
+        return new ResponseEntity<>(newBusiness, HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
@@ -44,7 +39,24 @@ public class BusinessController {
     {
         Business business = businessService.findByBusinessId(id);
 
-        return new ResponseEntity<Business>(business, HttpStatus.OK);
+        return new ResponseEntity<>(business, HttpStatus.OK);
+    }
+
+    @GetMapping("/email/{email}")
+    public ResponseEntity<?> getBusinessEmail(@PathVariable String email)
+    {
+        Business business = businessService.findByEmail(email);
+
+        return new ResponseEntity<>(business, HttpStatus.OK);
+    }
+
+    // Temporary solution to login
+    @GetMapping("/login/{email}")
+    public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
+    {
+        Business business = businessService.findByEmail(email);
+
+        return new ResponseEntity<>(business.getPassword(), HttpStatus.OK);
     }
 
     @GetMapping("/all")
@@ -58,6 +70,6 @@ public class BusinessController {
     {
         businessService.deleteByBusinessId(id);
 
-        return new ResponseEntity<String>("Business with ID: '" + id + "' was deleted", HttpStatus.OK);
+        return new ResponseEntity<>("Business with ID: '" + id + "' was deleted", HttpStatus.OK);
     }
 }

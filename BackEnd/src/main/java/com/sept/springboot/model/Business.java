@@ -8,9 +8,9 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@SecondaryTable(name = "address", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
+@Table(name = "BUSINESS")
+@SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
 public class Business {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long businessId;
@@ -30,31 +30,30 @@ public class Business {
     private Date lastModified;
 
     @NotBlank(message = "Country Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String country;
     @NotBlank(message = "City Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String city;
     @NotBlank(message = "Postal Code Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String postCode;
     @NotBlank(message = "Street Field Required")
-    @Column(table = "address")
+    @Column(table = "ADDRESS")
     private String street;
 
     public Business() {
 
     }
 
-//    public Business(String email) {
-//        super();
-//        this.username = username;
-//        this.password = password;
-//        this.email = email;
-//        this.businessName = businessName;
-//        this.created = created;
-//        this.lastModified = lastModified;
-//    }
+    public Business(String businessName, String username, String password, String email, long roleID)
+    {
+        super();
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.businessName = businessName;
+    }
 
     public String getBusinessName() { return businessName; }
 
