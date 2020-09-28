@@ -27,7 +27,7 @@ class App extends Component {
         <div className="main">
 
           <Switch>
-          <Route path="/"exact={true} component={UserComponent} />
+          {/* <Route path="/"exact={true} component={UserComponent} /> */}
           <Route path="/login" exact={true}component={SelectUser} />
           <Route path="/login/user" exact={true}component={Login} />
           <Route path="/booking" component={booking} />

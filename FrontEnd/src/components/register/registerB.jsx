@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import { Card } from 'antd';
 import './register.css'
 import { Input } from 'antd';
+import authenticate from '../authenticate/authenticate';
 
 
 class RegisterB extends React.Component{
@@ -30,18 +31,20 @@ class RegisterB extends React.Component{
         event.preventDefault();
       
         if(this.validate()){
-            
-      
             let input = {};
             input["password"] = "";
             input["email"] = "";
             input["business_name"] = "";
             input["username"] = "";
             input["address"] = "";
+            input["country"] = "";
+            input["street"] = "";
+            input["postcode"] = "";
             // input["cPassword"] = "";
             this.setState({input:input});
-            
-            console.log(this.state.input);
+            let register = authenticate.registerAsBusiness(this.state.input);
+            console.log(this.state.input,"hello");
+            console.log(register,"register");
             alert('Thank you for register');
         }
       }
@@ -80,12 +83,29 @@ class RegisterB extends React.Component{
           }
           if (!input["business_name"]) {
             isValid = false;
-            errors["business_name"] = "Please enter your uername.";
+            errors["business_name"] = "Please enter business name.";
           }
           if (!input["username"]) {
             isValid = false;
-            errors["username"] = "Please enter your address.";
+            errors["username"] = "Please enter address.";
           }
+          if (!input["country"]) {
+            isValid = false;
+            errors["country"] = "Please enter country.";
+          }
+          if (!input["city"]) {
+            isValid = false;
+            errors["city"] = "Please enter city.";
+          }
+          if (!input["street"]) {
+            isValid = false;
+            errors["street"] = "Please enter street.";
+          }
+          if (!input["postcode"]) {
+            isValid = false;
+            errors["postcode"] = "Please enter postcode.";
+          }
+          
           if (!input["cPassword"]) {
             isValid = false;
             errors["cPassword"] = "Please enter confirm your password.";
@@ -137,6 +157,46 @@ class RegisterB extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.username}</div>
+        <label >street</label>
+        <input
+          name="street"
+          type="text"
+          id ="street"
+          placeholder="Enter business street"
+          value={this.state.input.street}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.street}</div>
+        <label >city</label>
+        <input
+          name="city"
+          type="text"
+          id ="city"
+          placeholder="Enter business city"
+          value={this.state.input.city}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.city}</div>
+        <label >country</label>
+        <input
+          name="country"
+          type="text"
+          id ="country"
+          placeholder="Enter business country"
+          value={this.state.input.country}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.country}</div>
+        <label >postcode</label>
+        <input
+          name="postcode"
+          type="text"
+          id ="postcode"
+          placeholder="Enter business postcode"
+          value={this.state.input.postcode}
+          onChange={this.handleChange}
+        />
+        <div className="text-danger">{this.state.errors.postcode}</div>
         <label htmlFor="password">Password</label>
         <input
           name="password"
