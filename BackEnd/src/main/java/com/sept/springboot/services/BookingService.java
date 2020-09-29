@@ -6,7 +6,6 @@ import com.sept.springboot.model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.awt.print.Book;
 import java.util.ArrayList;
 
 @Service
@@ -64,5 +63,22 @@ public class BookingService
             throw new UserNotFoundException("Cannot delete booking with ID '" + id + "'. This booking does not exist");
 
         bookingRepository.delete(booking);
+    }
+
+    //testing for getting bookings by users
+    public Iterable<Booking> findAllBookingsForUserId(long id) {
+
+        {
+            Iterable<Booking> allBooking = bookingRepository.findAll();
+            ArrayList<Long> ids = new ArrayList<>();
+
+            for(Booking t : allBooking)
+            {
+                if(t.getUserId() == id)
+                    ids.add(t.getBookingId());
+            }
+
+            return bookingRepository.findAllById(ids);
+        }
     }
 }

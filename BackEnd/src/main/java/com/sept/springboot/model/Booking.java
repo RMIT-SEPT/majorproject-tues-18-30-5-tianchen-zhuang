@@ -12,6 +12,7 @@ public class Booking
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookingId;
     private long businessId;
+    private long userId;
     private String bookingName;
     private String bookingDesc;
     private int currCapacity;
@@ -47,6 +48,10 @@ public class Booking
     public void setBusinessId(long businessId) {
         this.businessId = businessId;
     }
+
+    public long getUserId() { return userId; }
+
+    public void setUserId(long userId) { this.userId = userId; }
 
     public String getBookingName() {
         return bookingName;

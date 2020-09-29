@@ -1,12 +1,8 @@
 package com.sept.springboot.controller;
 
 import com.sept.springboot.model.Booking;
-import com.sept.springboot.model.Business;
-import com.sept.springboot.model.User;
 import com.sept.springboot.services.BookingService;
-import com.sept.springboot.services.BusinessService;
 import com.sept.springboot.services.MapValidationErrorService;
-import com.sept.springboot.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +57,12 @@ public class BookingController
     public Iterable<Booking> getAllBookingsForBusiness(@PathVariable long id)
     {
         return bookingService.findAllBookingsForBusinessId(id);
+    }
+
+    @GetMapping("/user/{id}")
+    public Iterable<Booking> getAllBookingsForUser(@PathVariable long id)
+    {
+        return bookingService.findAllBookingsForUserId(id);
     }
 
     @DeleteMapping("/{id}")
