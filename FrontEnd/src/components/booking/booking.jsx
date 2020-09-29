@@ -59,7 +59,7 @@ class booking extends React.Component{
     return (
        
         <div>
-             <h1>welcome {localStorage.getItem('userInfo')}</h1>
+             <h1>welcome {sessionStorage.getItem('username')}</h1>
              <DatePicker
                     showTimeSelect
                     selected={this.state.startDate}
