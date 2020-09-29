@@ -4,7 +4,7 @@ import React from 'react';
 const info = '';
 const userinfo = 'http://localhost:8080/api/user/email/';
 const loginRegApi = 'http://localhost:8080/api/business/';
-// const userinfo = 'http://localhost:8080/api/business/';
+const businessInfo = 'http://localhost:8080/api/business/email/';
 const businessList='http://localhost:8080/api/business/all/'
     class Authenticate extends React.Component {
      
@@ -30,16 +30,8 @@ const businessList='http://localhost:8080/api/business/all/'
             // });
         }
         async loginAsbusiness(api){
-            return  axios.get(userinfo+api);
-            // let check = false;
-            // let password = "";
-            // await info.then((response) => { 
-            //     console.log(response.data.password)
-            //     this.setState({
-            //         pass: response.data.password
-            //       });
-            //       console.log("passss",this.state.pass)
-            // });
+            return  axios.get(businessInfo+api);
+
         }
         async registerAsBusiness(businessInfo){
             console.log(businessInfo['city'], "city");
