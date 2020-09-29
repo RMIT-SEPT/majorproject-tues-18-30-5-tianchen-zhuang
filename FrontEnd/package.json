@@ -22,14 +22,19 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^3.4.3",
-    "transcript": "0.0.6",
-    "typescript": "^4.0.2"
+    "transcript": "0.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8080",
+      "ws": "true"
+    }
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -49,6 +54,8 @@
   "devDependencies": {
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.4",
-    "react-test-renderer": "^15.6.2"
+    "react-test-renderer": "^15.6.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
   }
 }
