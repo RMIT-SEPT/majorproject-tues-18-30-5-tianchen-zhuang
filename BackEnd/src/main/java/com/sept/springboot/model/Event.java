@@ -22,6 +22,10 @@ public class Event
     private Date eventTime;
     private String businessStatus;
     private String customerStatus;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date created;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date lastModified;
 
     public Event()
     {
@@ -110,5 +114,21 @@ public class Event
 
     public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 }

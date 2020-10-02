@@ -1,11 +1,14 @@
 package com.sept.springboot.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
+import java.util.Date;
 
 @Entity
 public class Booking
@@ -15,6 +18,10 @@ public class Booking
     private long bookingId;
     private long customerId;
     private long eventId;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date created;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date lastModified;
 
     public Booking()
     {
@@ -43,5 +50,21 @@ public class Booking
 
     public void setEventId(long eventId) {
         this.eventId = eventId;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 }
