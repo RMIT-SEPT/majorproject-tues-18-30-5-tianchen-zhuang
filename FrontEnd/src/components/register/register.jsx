@@ -3,6 +3,7 @@ import { Menu } from 'antd';
 import { Card } from 'antd';
 import './register.css'
 import { Input } from 'antd';
+import authenticate from '../authenticate/authenticate';
 
 
 class Register extends React.Component{
@@ -38,7 +39,9 @@ class Register extends React.Component{
             input["username"] = "";
             input["cPassword"] = "";
             this.setState({input:input});
-      
+            let register = authenticate.registerAsUser(this.state.input);
+            console.log(this.state.input,"hello");
+            console.log(register,"register");
             alert('Thank you for register');
         }
       }
