@@ -7,13 +7,12 @@ import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
-@Table(name="USER")
-@SecondaryTable(name = "USERBOOKING", pkJoinColumns = @PrimaryKeyJoinColumn(name = "userId"))
-public class User {
+@Table(name="CUSTOMER")
+public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private long customerId;
     @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
     @NotBlank(message = "Username is required")
     private String username;
@@ -31,16 +30,11 @@ public class User {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date lastModified;
 
-    @Column(table = "USERBOOKING")
-    private long businessId;
-    @Column(table = "USERBOOKING")
-    private long businessBookingId;
-
-    public User() {
+    public Customer() {
 
     }
 
-    public User(String username, String password, String email, long roleID)
+    public Customer(String username, String password, String email, long roleID)
     {
         super();
         this.username = username;
@@ -49,14 +43,14 @@ public class User {
         this.roleID = roleID;
     }
 
-    public long getUserId()
+    public long getCustomerId()
     {
-        return userId;
+        return customerId;
     }
 
-    public void setUserId(long userId)
+    public void setCustomerId(long customerId)
     {
-        this.userId = userId;
+        this.customerId = customerId;
     }
 
     public String getUsername()
@@ -117,22 +111,6 @@ public class User {
     public void setLastModified(Date lastModified)
     {
         this.lastModified = lastModified;
-    }
-
-    public long getBusinessId() {
-        return businessId;
-    }
-
-    public void setBusinessId(long businessId) {
-        this.businessId = businessId;
-    }
-
-    public long getBusinessBookingId() {
-        return businessBookingId;
-    }
-
-    public void setBusinessBookingId(long businessBookingId) {
-        this.businessBookingId = businessBookingId;
     }
 
     @PrePersist
