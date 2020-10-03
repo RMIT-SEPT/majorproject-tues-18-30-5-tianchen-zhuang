@@ -130,6 +130,18 @@ public class Event {
         this.lastModified = lastModified;
     }
 
+    @PrePersist
+    protected void onCreate()
+    {
+        this.created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate()
+    {
+        this.lastModified = new Date();
+    }
+
     public boolean incrementCurrCapacity() {
         if (currCapacity + 1 <= maxCapacity)
             currCapacity += 1;

@@ -2,10 +2,7 @@ package com.sept.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.Date;
 
@@ -67,5 +64,17 @@ public class Booking
 
     public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
+    }
+
+    @PrePersist
+    protected void onCreate()
+    {
+        this.created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate()
+    {
+        this.lastModified = new Date();
     }
 }
