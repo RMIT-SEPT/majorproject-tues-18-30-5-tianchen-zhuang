@@ -1,6 +1,7 @@
 package com.sept.springboot.services;
 
 import com.sept.springboot.dao.EventRepository;
+import com.sept.springboot.exception.OutOfBoundsException;
 import com.sept.springboot.exception.UserNotFoundException;
 import com.sept.springboot.model.Event;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,5 +62,21 @@ public class EventService
             throw new UserNotFoundException("Cannot delete event with ID '" + id + "'. This event does not exist");
 
         eventRepository.delete(event);
+    }
+
+    public void incrementEventById(long id)
+    {
+        Event event = eventRepository.findByEventId(id);
+
+        if(!event.incrementCurrCapacity())
+            throw new OutOfBoundsException("Capacity has been reached");
+    }
+
+    public void decrementEventById(long id)
+    {
+        Event event = eventRepository.findByEventId(id);
+
+        if(!event.decrementCurrCapacity())
+            throw new OutOfBoundsException("Capacity has reached zero");
     }
 }
