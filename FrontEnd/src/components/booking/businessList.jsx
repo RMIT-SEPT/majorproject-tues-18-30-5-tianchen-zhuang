@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import ClassCard from './ClassCard'
+
 // import {_getClassList} from '../../api/class'
 import authenticate from '../authenticate/authenticate';
 import './booking.css'
@@ -16,6 +17,7 @@ export default class businessList extends Component {
 
     showDetail(id) {
         console.log("show detail", id);
+        sessionStorage.setItem('businessId', id);
         this.props.history.push(`/booking/${id}`);
     }
 
@@ -33,8 +35,8 @@ export default class businessList extends Component {
                 })
                     
             });
-            console.log("oooo")
-            console.log("xxxx",this.state.list)
+            console.log(sessionStorage.getItem('user'));
+            
         }
     }
 
@@ -47,26 +49,6 @@ export default class businessList extends Component {
             
                 
         });
-        // if (res['status'] == 1){
-        //     this.setState({
-        //         list:res.classes
-        //     })
-        // }
-        // let items  = this.state.list;
-
-        // items[0] = {};
-        // items[0].businessname = "mrkitchen";
-        // items[0].bid = 1;
-        // items[0].desc = "its kitchen";
-        // items[1] = {};
-        // items[1].businessname = "gym";
-        // items[1].bid = 2;
-        // items[1].desc = "its gym";
-
-        // console.log(items);
-        // this.setState({
-        //     list:items
-        // })
         
     }
 
@@ -84,7 +66,8 @@ export default class businessList extends Component {
         }
         return (
             <div>
-                <label>Business list</label>
+                <h1>Business list</h1>
+        <label>Welcome {sessionStorage.getItem('username')}</label>
                 <div className="classList">
                     {classList}
                 </div>

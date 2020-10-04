@@ -51,7 +51,7 @@ class Login extends React.Component{
             info.then((response) => {
               sessionStorage.setItem('username', response.data.username);
                     if(p==response.data.password){
-                    localStorage.setItem('userInfo', this.state.input['email']);
+                    sessionStorage.setItem('userInfo', this.state.input['email']);
                     this.props.history.push('/bookinglist');
                   } else{
                     alert('false login fail', this.state.input['password']);
@@ -59,27 +59,6 @@ class Login extends React.Component{
                   
                   
               });
-
-            // let checkpassword = await authenticate.checkPwd(this.state.input['email'],this.state.input['password']);
-            // console.log('home',checkpassword);
-            // console.log('next', checkpassword);
-
-
-            // setTimeout(() => {      
-            //   if(checkpassword==true){
-            //     localStorage.setItem('userInfo', this.state.input['email']);
-            //     this.props.history.push('/bookinglist');
-            //   } else{
-            //     console.log('false login fail',checkpassword);
-            //   }
-
-            //   }, 2000);
-            // if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==true){
-            
-            // }
-            // else if(authenticate.checkPwd(this.state.input['email'],this.state.input['password'])==false){
-            //   alert('login fail check password or email');
-            // }
             
           
         }
