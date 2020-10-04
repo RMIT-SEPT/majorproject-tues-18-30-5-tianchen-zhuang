@@ -77,7 +77,7 @@ class Register extends React.Component{
           }
           if (!input["username"]) {
             isValid = false;
-            errors["username"] = "Please enter your uername.";
+            errors["username"] = "Please enter your username.";
           }
           if (!input["cPassword"]) {
             isValid = false;
