@@ -14,4 +14,10 @@ public class UserExceptionController
     {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = OutOfBoundsException.class)
+    public ResponseEntity<Object> handleOutOfBoundsException(OutOfBoundsException ex, WebRequest request)
+    {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }

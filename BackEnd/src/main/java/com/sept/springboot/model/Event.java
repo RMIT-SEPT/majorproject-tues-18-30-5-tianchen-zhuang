@@ -6,8 +6,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "EVENT")
-public class Event
-{
+public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long eventId;
@@ -27,8 +26,7 @@ public class Event
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date lastModified;
 
-    public Event()
-    {
+    public Event() {
         // Defaults
         currCapacity = 0;
         maxCapacity = 1;
@@ -130,5 +128,36 @@ public class Event
 
     public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
+    }
+
+    @PrePersist
+    protected void onCreate()
+    {
+        this.created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate()
+    {
+        this.lastModified = new Date();
+    }
+
+    public boolean incrementCurrCapacity() {
+        if (currCapacity + 1 <= maxCapacity)
+            currCapacity += 1;
+        else
+            return false;
+
+        return true;
+    }
+
+    public boolean decrementCurrCapacity()
+    {
+        if(currCapacity != 0)
+            currCapacity -= 1;
+        else
+            return false;
+
+        return true;
     }
 }
