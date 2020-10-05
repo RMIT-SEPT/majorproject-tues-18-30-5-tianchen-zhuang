@@ -19,7 +19,7 @@ class businessEvent extends React.Component{
 
     componentWillMount() {
         console.log(sessionStorage.getItem('businessId') + "business iD ")
-        let res = authenticate.getEventByBusinessId(sessionStorage.getItem('bid'));
+        let res = authenticate.getEventByBusinessId(sessionStorage.getItem('businessId'));
         res.then((response)=>{
           this.setState({
             list:response.data
