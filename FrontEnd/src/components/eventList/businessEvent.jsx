@@ -18,6 +18,7 @@ class businessEvent extends React.Component{
       }
 
     componentWillMount() {
+      
         console.log(sessionStorage.getItem('businessId') + "business iD ")
         let res = authenticate.getEventByBusinessId(sessionStorage.getItem('businessId'));
         res.then((response)=>{
@@ -78,17 +79,7 @@ class businessEvent extends React.Component{
     edit(binfo){
       console.log('This is id edit' + binfo)
     }
-    // setStartDate =  new Date();
 
-
-//     getData(){
-    
-//     let d = localStorage.getItem('userInfo');
-//     var str = String(this.state.startDate);
-//     var res = str.split(' ');
-//     console.log(res);
-//     alert("your booking time for XX is " + res[0]+res[1]+res[3]+res[4]);
-// }
 handleChange(event) {
   let input = this.state.input;
   input[event.target.name] = event.target.value;
