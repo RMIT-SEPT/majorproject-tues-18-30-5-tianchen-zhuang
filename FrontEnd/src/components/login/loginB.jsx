@@ -46,7 +46,7 @@ class LoginB extends React.Component{
               sessionStorage.setItem('bname', response.data.businessName);
                   if(p==response.data.password){
                    
-                    sessionStorage.setItem('bid', response.data.businessId);
+                    sessionStorage.setItem('businessId', response.data.businessId);
 
                     console.log("thank you for login   "+ response.data.businessId);
                     this.props.history.push('/bookingEvent');
