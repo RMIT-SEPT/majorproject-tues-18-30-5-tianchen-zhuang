@@ -5,8 +5,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import authenticate from '../authenticate/authenticate';
 import SchedleCard from './scheduleCard'
 class booking extends React.Component{
-    constructor(probs) {
-        super(probs);
+    constructor(props) {
+        super(props);
        
         this.state = {
             startDate : new Date(),
@@ -17,7 +17,7 @@ class booking extends React.Component{
       }
 
     componentWillMount() {
-        console.log(sessionStorage.getItem('businessId') + "business iD ")
+        console.log(sessionStorage.getItem('businessId') + "business iD ");
         let res = authenticate.getEventByBusinessId(sessionStorage.getItem('businessId'));
         res.then((response)=>{
           this.setState({
@@ -26,6 +26,7 @@ class booking extends React.Component{
         })
         console.log(response.data)
         })
+        console.log(sessionStorage.getItem('customerId'));
     }
 
      handleColor = time => {
@@ -44,6 +45,10 @@ class booking extends React.Component{
     }
     // setStartDate =  new Date();
 
+    createBooking(customerId, eventId)
+    {
+      authenticate.makeBooking(customerId, eventId);
+    }
 
     getData(){
     
@@ -66,6 +71,7 @@ class booking extends React.Component{
           currCapacity = {this.state.list[i].currCapacity}
           eventDate={this.state.list[i].eventDate}
           eventTime={this.state.list[i].eventTime}
+          reserve={this.createBooking.bind(this, sessionStorage.getItem('customerId'), this.state.list[i].eventId)}
            />)
            console.log(this.state.list[i].eventDate + "consolss")
       }

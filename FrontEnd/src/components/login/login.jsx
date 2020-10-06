@@ -50,6 +50,7 @@ class Login extends React.Component{
             // localStorage.setItem(user, info);
             info.then((response) => {
               sessionStorage.setItem('username', response.data.username);
+              sessionStorage.setItem('customerId',response.data.customerId);
                     if(p==response.data.password){
                     sessionStorage.setItem('userInfo', this.state.input['email']);
                     this.props.history.push('/bookinglist');

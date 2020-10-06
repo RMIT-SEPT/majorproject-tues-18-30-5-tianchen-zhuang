@@ -26,7 +26,7 @@ export default class schedulteCard extends Component {
         <td scope="col">{this.props.maxCapacity}</td>
           <td scope="col">{this.props.eventDate}</td>
           <td scope="col">{this.props.eventTime}</td>
-          <td scope="col"><input type ="submit" value="Reserve" name="reserve"></input></td>
+          <td scope="col"><input  onClick={this.props.reserve} type ="submit" value="Reserve" name="reserve"></input></td>
         </tr>
             </>
         )
