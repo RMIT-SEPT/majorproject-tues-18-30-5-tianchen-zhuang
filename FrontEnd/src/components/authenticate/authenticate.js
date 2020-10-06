@@ -3,6 +3,7 @@ import React from 'react';
 
 const info = '';
 const userinfo = 'http://localhost:8080/api/customer/email/';
+const userRegApi = 'http://localhost:8080/api/customer/';
 const loginRegApi = 'http://localhost:8080/api/business/';
 const businessInfo = 'http://localhost:8080/api/business/email/';
 const businessList='http://localhost:8080/api/business/all/'
@@ -54,7 +55,14 @@ const deleteBooking  = 'http://localhost:8080/api/booking';
                 "street": businessInfo['street'],
                 "postCode": businessInfo['postcode']
             });
-            
+        }
+        async registerAsUser(userinfo)
+        {
+            return await axios.post(userRegApi,{
+                "username": userinfo['username'],
+                "password": userinfo['password'],
+                "email": userinfo['email']
+            });
         }
         async getBusinessList(){
             return axios.get(businessList);
