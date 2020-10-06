@@ -15,14 +15,14 @@ class NavBar extends React.Component{
     // }
     Logout = () =>
     {
-        console.log(localStorage.getItem('userInfo'));
-        localStorage.removeItem('userInfo');
+        console.log(sessionStorage.getItem('username'));
+        sessionStorage.removeItem('username');
     }
     render() {
         let isLogin;
-        if(localStorage.getItem('userInfo') != null)
+        if(sessionStorage.getItem('username') != null)
                     {
-                        isLogin = <li onClick = {this.Logout}><Link className="nav-link" to="/login">Log out</Link></li>
+                        isLogin = <li onClick = {this.Logout}><Link className="nav-link" to="/">Log out</Link></li>
                     }
                     else
                     {
@@ -35,6 +35,8 @@ class NavBar extends React.Component{
                     <ul className="navbar-nav">
                     {isLogin}
                     <li><Link className="nav-link" to="/register">Register</Link></li>
+                    <li><Link className="nav-link" to="/bookinglist">Booking List</Link></li>
+                    <li><Link className="nav-link" to="/bookingEvent">Business Event List</Link></li>
                     </ul>
 
                 </nav>

@@ -2,10 +2,19 @@ import axios from 'axios'
 import React from 'react';
 
 const info = '';
-const userinfo = 'http://localhost:8080/api/user/email/';
+const userinfo = 'http://localhost:8080/api/customer/email/';
 const loginRegApi = 'http://localhost:8080/api/business/';
 const businessInfo = 'http://localhost:8080/api/business/email/';
 const businessList='http://localhost:8080/api/business/all/'
+const getEventById = 'http://localhost:8080/api/event/business/';
+const deleteEvent  = 'http://localhost:8080/api/event/';
+const addEvent  = 'http://localhost:8080/api/event/business';
+
+const makeBooking = 'http://localhost:8080/api/booking';
+const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer';
+const deleteBooking  = 'http://localhost:8080/api/booking';
+
+
     class Authenticate extends React.Component {
      
             
@@ -49,6 +58,35 @@ const businessList='http://localhost:8080/api/business/all/'
         }
         async getBusinessList(){
             return axios.get(businessList);
+        }
+        getEventByBusinessId(id){
+            return  axios.get(getEventById+id);
+        }
+        deleteEvent(id){
+            return axios.delete(deleteEvent+id);
+        }
+        addEvent(info,id,date){
+            return axios.post(addEvent,{
+                "businessId" :id,
+                "created" : date,
+                "eventDate":info['eventDate'],
+                "eventDesc":info['eventDesc'],
+                "eventName" : info['EventName'],
+                "eventTime":info['eventTime'],
+                "maxCapacity":info['maxCapacity']
+            })
+        }
+
+        makeBooking(customerid,eventId)
+        {
+            return axios.post(makeBooking,{
+                "customerId": customerid,
+                "eventId": eventId
+            })
+        }
+        
+        getBookingByCustomerId(customerId){
+            return axios.get(getBookingByCustomerId+customerId);
         }
 
 

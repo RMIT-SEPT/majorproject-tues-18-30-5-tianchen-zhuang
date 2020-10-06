@@ -38,15 +38,18 @@ class LoginB extends React.Component{
             input["email"] = "";
             this.setState({input:input});
             let p = this.state.input['password'];
-            let info =  authenticate.loginAsbusiness(this.state.input[' ']);
+            let info =  authenticate.loginAsbusiness(this.state.input['email']);
             sessionStorage.setItem('business', info);
             console.log("business",info)
             info.then((response) => {
               console.log(response,"rep")
-              sessionStorage.setItem('businessName', response.data.username);
+              sessionStorage.setItem('bname', response.data.businessName);
                   if(p==response.data.password){
-                    localStorage.setItem('business', this.state.input['email']);
-                    console.log("thank you for login");
+                   
+                    sessionStorage.setItem('businessId', response.data.businessId);
+
+                    console.log("thank you for login   "+ response.data.businessId);
+                    this.props.history.push('/bookingEvent');
                   } else{
                     alert('false login fail', this.state.input['password']);
                   }
