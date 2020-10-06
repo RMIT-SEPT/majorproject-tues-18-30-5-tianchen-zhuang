@@ -38,7 +38,7 @@ class App extends Component {
           <Route path="/register" exact={true}component={SelectReg} />
           <Route path="/register/user" exact={true}component={Register} />
           <Route path="/register/business" exact={true}component={RegisterB} />
-          <Route path="/bookingHisotryU" exact={true}component={bookinghistoryU} />
+          <Route path="/bookingHistoryU" exact={true}component={bookinghistoryU} />
           <Route path="/bookingEvent" exact={true}component={businessEvent} />
           </Switch>
 

@@ -2,6 +2,7 @@ package com.sept.springboot.controller;
 
 import com.sept.springboot.model.Booking;
 import com.sept.springboot.services.BookingService;
+import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,9 @@ public class BookingController
     private BookingService bookingService;
 
     @Autowired
+    private EventService eventService;
+
+    @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping
@@ -30,6 +34,7 @@ public class BookingController
         if(errorMap != null)
             return errorMap;
 
+        eventService.incrementEventById(booking.getEventId());
         return new ResponseEntity<>(bookingService.addBooking(booking), HttpStatus.CREATED);
     }
 
@@ -60,6 +65,9 @@ public class BookingController
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteByBookingId(@PathVariable("id") long id)
     {
+        Booking booking = bookingService.findByBookingId(id);
+
+        eventService.decrementEventById(booking.getEventId());
         bookingService.deleteByBookingId(id);
 
         return new ResponseEntity<>("Booking with ID: '" + id + "' was deleted", HttpStatus.OK);
