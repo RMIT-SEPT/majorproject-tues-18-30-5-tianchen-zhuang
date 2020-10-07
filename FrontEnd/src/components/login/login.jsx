@@ -58,7 +58,6 @@ class Login extends React.Component{
                     alert('false login fail', this.state.input['password']);
                   }
                   
-                  
               });
             
           

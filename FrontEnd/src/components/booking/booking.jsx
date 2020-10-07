@@ -24,7 +24,8 @@ class booking extends React.Component{
             list:response.data
             
         })
-        console.log(response.data)
+        
+        console.log(response.data,"xxx")
         })
         console.log(sessionStorage.getItem('customerId'));
     }

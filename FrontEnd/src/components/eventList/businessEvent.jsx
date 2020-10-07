@@ -26,7 +26,7 @@ class businessEvent extends React.Component{
             list:response.data
             
         })
-        
+        console.log(response.data,'xx')
         })
         
     }
