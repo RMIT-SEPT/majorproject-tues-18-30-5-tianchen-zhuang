@@ -10,6 +10,11 @@ const getEventById = 'http://localhost:8080/api/event/business/';
 const deleteEvent  = 'http://localhost:8080/api/event/';
 const addEvent  = 'http://localhost:8080/api/event/business';
 
+const makeBooking = 'http://localhost:8080/api/booking';
+const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer';
+const deleteBooking  = 'http://localhost:8080/api/booking';
+
+
     class Authenticate extends React.Component {
      
             
@@ -70,6 +75,18 @@ const addEvent  = 'http://localhost:8080/api/event/business';
                 "eventTime":info['eventTime'],
                 "maxCapacity":info['maxCapacity']
             })
+        }
+
+        makeBooking(customerid,eventId)
+        {
+            return axios.post(makeBooking,{
+                "customerId": customerid,
+                "eventId": eventId
+            })
+        }
+        
+        getBookingByCustomerId(customerId){
+            return axios.get(getBookingByCustomerId+customerId);
         }
 
 
