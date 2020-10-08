@@ -2,7 +2,6 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { Redirect } from "react-router-dom";
-<<<<<<< HEAD
 import "./login.css";
 import authenticate from "../authenticate/authenticate";
 
@@ -55,67 +54,6 @@ class Login extends React.Component {
           this.props.history.push("/bookinglist");
         } else {
           alert("false login fail", this.state.input["password"]);
-=======
-import './login.css'
-import authenticate from '../authenticate/authenticate';
-
-
-class Login extends React.Component{
-    constructor(probs) {
-        super(probs);
-        this.state = {
-          input: {},
-          errors: {}
-        };
-         
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-      }
-         
-      handleChange(event) {
-        let input = this.state.input;
-        input[event.target.name] = event.target.value;
-      
-        this.setState({
-          input
-        });
-      }
-        
-      async handleSubmit(event) {
-        // let history = useHistory();
-      
-        event.preventDefault();
-      
-        if(this.validate()){
-          
-            console.log(this.state);
-            let input = {};
-            input["password"] = "";
-            input["email"] = "";
-            this.setState({input:input});
-          //define email and password
-            let e = this.state.input['email'];
-            let p = this.state.input['password'];
-            //get user api
-            let info =  authenticate.getApi(this.state.input['email']);
-            //set user info set = set, remove = remove , getItem ==get(name)
-            sessionStorage.setItem('user', info);
-            
-            // localStorage.setItem(user, info);
-            info.then((response) => {
-              sessionStorage.setItem('username', response.data.username);
-              sessionStorage.setItem('customerId',response.data.customerId);
-                    if(p==response.data.password){
-                    sessionStorage.setItem('userInfo', this.state.input['email']);
-                    this.props.history.push('/bookinglist');
-                  } else{
-                    alert('false login fail', this.state.input['password']);
-                  }
-                  
-              });
-            
-          
->>>>>>> origin/dev
         }
       });
     }
