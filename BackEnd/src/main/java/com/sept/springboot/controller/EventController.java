@@ -23,7 +23,7 @@ public class EventController
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping()
-    public ResponseEntity<?> createNewBusinessEvent(@Valid @RequestBody Event event, BindingResult result)
+    public ResponseEntity<?> createNewEvent(@Valid @RequestBody Event event, BindingResult result)
     {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
 
