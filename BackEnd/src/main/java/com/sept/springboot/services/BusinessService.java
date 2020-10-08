@@ -12,7 +12,7 @@ public class BusinessService {
     @Autowired
     private BusinessRepository businessRepository;
 
-    public Business saveOrUpdateUser(Business business)
+    public Business addOrUpdateBusiness(Business business)
     {
         try
         {
