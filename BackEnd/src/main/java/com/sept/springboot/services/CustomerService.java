@@ -12,7 +12,7 @@ public class CustomerService
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer saveOrUpdateCustomer(Customer customer)
+    public Customer addOrUpdateCustomer(Customer customer)
     {
         try
         {
