@@ -30,7 +30,7 @@ public class CustomerController
         if(errorMap != null)
             return errorMap;
 
-        Customer newCustomer = customerService.saveOrUpdateCustomer(customer);
+        Customer newCustomer = customerService.addOrUpdateCustomer(customer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
@@ -71,5 +71,25 @@ public class CustomerController
         customerService.deleteByCustomerId(id);
 
         return new ResponseEntity<>("Customer with ID: '" + id + "' was deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateCutsomer(@PathVariable(value = "id") long id, @Valid @RequestBody Customer customerDetails, BindingResult result)
+    {
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+
+        if(errorMap != null)
+            return errorMap;
+
+        Customer customer = customerService.findByCustomerId(id);
+
+        customer.setUsername(customerDetails.getUsername());
+        customer.setPassword(customerDetails.getPassword());
+        customer.setEmail(customerDetails.getEmail());
+        customer.setRoleID(customerDetails.getRoleID());
+
+        customerService.addOrUpdateCustomer(customer);
+
+        return new ResponseEntity<>("Customer with ID: '" + id + "' has been updated", HttpStatus.OK);
     }
 }

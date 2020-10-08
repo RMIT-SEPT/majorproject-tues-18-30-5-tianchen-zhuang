@@ -15,7 +15,7 @@ public class EventService
     @Autowired
     private EventRepository eventRepository;
 
-    public Event addBusinessEvent(Event event)
+    public Event addOrUpdateEvent(Event event)
     {
         return eventRepository.save(event);
     }
