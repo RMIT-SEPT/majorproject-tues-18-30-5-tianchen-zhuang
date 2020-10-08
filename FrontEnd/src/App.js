@@ -14,6 +14,7 @@ import booking from './components/booking/booking';
 import bookingList from './components/booking/businessList';
 import bookinghistoryU from './components/booking/bookinghistoryU';
 import businessEvent from './components/eventList/businessEvent';
+import adminDashboard from './components/adminDashboard/adminDashboard';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import 'antd/dist/antd.css';
@@ -40,6 +41,7 @@ class App extends Component {
           <Route path="/register/business" exact={true}component={RegisterB} />
           <Route path="/bookingHistoryU" exact={true}component={bookinghistoryU} />
           <Route path="/bookingEvent" exact={true}component={businessEvent} />
+          <Route path="/adminDashboard" exact={true}component={adminDashboard} />
           </Switch>
 
           </div>

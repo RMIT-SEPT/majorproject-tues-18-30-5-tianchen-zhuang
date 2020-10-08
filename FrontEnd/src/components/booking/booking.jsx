@@ -48,6 +48,7 @@ class booking extends React.Component{
     createBooking(customerId, eventId)
     {
       authenticate.makeBooking(customerId, eventId);
+      window.location.reload();
     }
 
     getData(){
