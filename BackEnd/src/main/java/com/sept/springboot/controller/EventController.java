@@ -62,8 +62,13 @@ public class EventController
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateEvent(@PathVariable(value = "id") long id, @Valid @RequestBody Event eventDetails)
+    public ResponseEntity<?> updateEvent(@PathVariable(value = "id") long id, @Valid @RequestBody Event eventDetails, BindingResult result)
     {
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+
+        if(errorMap != null)
+            return errorMap;
+
         Event event = eventService.findByEventId(id);
 
         if(event.getCurrCapacity() > eventDetails.getMaxCapacity())
