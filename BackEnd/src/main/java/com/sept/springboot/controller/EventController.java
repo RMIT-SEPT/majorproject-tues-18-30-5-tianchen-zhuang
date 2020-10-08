@@ -30,7 +30,7 @@ public class EventController
         if(errorMap != null)
             return errorMap;
 
-        Event newEvent = eventService.addEvent(event);
+        Event newEvent = eventService.addOrUpdateEvent(event);
         return new ResponseEntity<>(newEvent, HttpStatus.CREATED);
     }
 
@@ -79,7 +79,7 @@ public class EventController
         event.setBusinessStatus(eventDetails.getBusinessStatus());
         event.setCustomerStatus(eventDetails.getCustomerStatus());
 
-        eventService.addEvent(event);
+        eventService.addOrUpdateEvent(event);
 
         return new ResponseEntity<>("Event with ID: '" + id + "' has been updated", HttpStatus.OK);
     }
