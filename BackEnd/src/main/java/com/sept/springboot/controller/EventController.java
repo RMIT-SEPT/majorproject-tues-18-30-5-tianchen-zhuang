@@ -1,5 +1,6 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.exception.OutOfBoundsException;
 import com.sept.springboot.model.Event;
 import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
@@ -8,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
 @RestController
@@ -30,7 +30,7 @@ public class EventController
         if(errorMap != null)
             return errorMap;
 
-        Event newEvent = eventService.addBusinessEvent(event);
+        Event newEvent = eventService.addEvent(event);
         return new ResponseEntity<>(newEvent, HttpStatus.CREATED);
     }
 
@@ -59,5 +59,28 @@ public class EventController
         eventService.deleteByEventId(id);
 
         return new ResponseEntity<>("Event with ID: '" + id + "' was deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateEvent(@PathVariable(value = "id") long id, @Valid @RequestBody Event eventDetails)
+    {
+        Event event = eventService.findByEventId(id);
+
+        if(event.getCurrCapacity() > eventDetails.getMaxCapacity())
+            throw new OutOfBoundsException("Max capacity is less than the current capacity of customers");
+
+        event.setBusinessId(eventDetails.getBusinessId());
+        event.setEventName(eventDetails.getEventName());
+        event.setEventDesc(eventDetails.getEventDesc());
+        //event.setCurrCapacity(eventDetails.getCurrCapacity());
+        event.setMaxCapacity(eventDetails.getMaxCapacity());
+        event.setEventDate(eventDetails.getEventDate());
+        event.setEventTime(eventDetails.getEventTime());
+        event.setBusinessStatus(eventDetails.getBusinessStatus());
+        event.setCustomerStatus(eventDetails.getCustomerStatus());
+
+        eventService.addEvent(event);
+
+        return new ResponseEntity<>("Event with ID: '" + id + "' has been updated", HttpStatus.OK);
     }
 }
