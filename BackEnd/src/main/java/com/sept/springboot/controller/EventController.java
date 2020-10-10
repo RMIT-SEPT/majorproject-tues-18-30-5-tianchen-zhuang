@@ -2,6 +2,7 @@ package com.sept.springboot.controller;
 
 import com.sept.springboot.exception.OutOfBoundsException;
 import com.sept.springboot.model.Event;
+import com.sept.springboot.services.BusinessService;
 import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class EventController
     private EventService eventService;
 
     @Autowired
+    private BusinessService businessService;
+
+    @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping()
@@ -30,14 +34,16 @@ public class EventController
         if(errorMap != null)
             return errorMap;
 
-        Event newEvent = eventService.addOrUpdateEvent(event);
-        return new ResponseEntity<>(newEvent, HttpStatus.CREATED);
+        businessService.findByBusinessId(event.getBusinessId());
+
+        return new ResponseEntity<>(eventService.addOrUpdateEvent(event), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getEventById(@PathVariable long id)
     {
         Event event = eventService.findByEventId(id);
+
         return new ResponseEntity<>(event, HttpStatus.OK);
     }
 
@@ -77,7 +83,6 @@ public class EventController
         event.setBusinessId(eventDetails.getBusinessId());
         event.setEventName(eventDetails.getEventName());
         event.setEventDesc(eventDetails.getEventDesc());
-        //event.setCurrCapacity(eventDetails.getCurrCapacity());
         event.setMaxCapacity(eventDetails.getMaxCapacity());
         event.setEventDate(eventDetails.getEventDate());
         event.setEventTime(eventDetails.getEventTime());
