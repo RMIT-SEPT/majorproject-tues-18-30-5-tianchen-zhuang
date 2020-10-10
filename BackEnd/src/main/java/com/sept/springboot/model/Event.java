@@ -22,7 +22,7 @@ public class Event {
     @Min(value = 1, message = "Max capacity must be greater than 0")
     private int maxCapacity;
     @NotNull(message = "Event date is required")
-    @JsonFormat(pattern = "dd-mm-yyyy")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date eventDate;
     @NotNull(message = "Event time is required")
     @JsonFormat(pattern = "hh:mm:ss")

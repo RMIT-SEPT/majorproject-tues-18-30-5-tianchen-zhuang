@@ -1,6 +1,6 @@
 package com.sept.springboot.controller;
 
-import com.sept.springboot.exception.DoubleBookingException;
+import com.sept.springboot.exception.DuplicateException;
 import com.sept.springboot.model.Booking;
 import com.sept.springboot.services.BookingService;
 import com.sept.springboot.services.CustomerService;
@@ -46,7 +46,7 @@ public class BookingController
 
         for(Booking t : bookingsForEvent)
             if(t.getCustomerId() == booking.getCustomerId())
-                throw new DoubleBookingException("Customer ID: '" + booking.getCustomerId() + "' has already booked for event ID: '" + booking.getEventId() + "'");
+                throw new DuplicateException("Customer ID: '" + booking.getCustomerId() + "' has already booked for event ID: '" + booking.getEventId() + "'");
 
         eventService.incrementEventById(booking.getEventId());
 
