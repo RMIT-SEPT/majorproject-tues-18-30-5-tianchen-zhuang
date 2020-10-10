@@ -1,6 +1,7 @@
 package com.sept.springboot.services;
 
 import com.sept.springboot.dao.EventRepository;
+import com.sept.springboot.exception.EventNotFoundException;
 import com.sept.springboot.exception.OutOfBoundsException;
 import com.sept.springboot.exception.UserNotFoundException;
 import com.sept.springboot.model.Event;
@@ -25,7 +26,7 @@ public class EventService
         Event event = eventRepository.findByEventId(id);
 
         if(event == null)
-            throw new UserNotFoundException("Event ID '" + id + "' does not exist");
+            throw new EventNotFoundException("Event ID '" + id + "' does not exist");
 
         return event;
     }
@@ -59,7 +60,7 @@ public class EventService
         Event event = eventRepository.findByEventId(id);
 
         if(event == null)
-            throw new UserNotFoundException("Cannot delete event with ID '" + id + "'. This event does not exist");
+            throw new EventNotFoundException("Cannot delete event with ID '" + id + "'. This event does not exist");
 
         eventRepository.delete(event);
     }
