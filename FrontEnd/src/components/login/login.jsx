@@ -26,6 +26,11 @@ class Login extends React.Component{
           input
         });
       }
+
+      // handleChangePage = () =>
+      // {
+      //   window.location.reload(false);
+      // }
         
       async handleSubmit(event) {
         // let history = useHistory();
@@ -33,7 +38,6 @@ class Login extends React.Component{
         event.preventDefault();
       
         if(this.validate()){
-          
             console.log(this.state);
             let input = {};
             input["password"] = "";
@@ -54,6 +58,7 @@ class Login extends React.Component{
                     if(p==response.data.password){
                     sessionStorage.setItem('userInfo', this.state.input['email']);
                     this.props.history.push('/bookinglist');
+                    window.location.reload(false);
                   } else{
                     alert('false login fail', this.state.input['password']);
                   }
@@ -131,7 +136,7 @@ class Login extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.password}</div>
-        <button className= "login_but"type="submit">Login</button>
+        <button className= "login_but" type="submit">Login</button>
         <button className="login_but" type="button" onClick= {event =>  window.location.href='/login'} >Back </button>
         
       </form>
