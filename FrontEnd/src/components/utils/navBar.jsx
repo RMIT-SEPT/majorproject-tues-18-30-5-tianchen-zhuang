@@ -37,6 +37,7 @@ class NavBar extends React.Component{
                     <li><Link className="nav-link" to="/register">Register</Link></li>
                     <li><Link className="nav-link" to="/bookinglist">Booking List</Link></li>
                     <li><Link className="nav-link" to="/bookingEvent">Business Event List</Link></li>
+                    <li><Link className="nav-link" to="/myEventList">My Booking List</Link></li>
                     </ul>
 
                 </nav>
