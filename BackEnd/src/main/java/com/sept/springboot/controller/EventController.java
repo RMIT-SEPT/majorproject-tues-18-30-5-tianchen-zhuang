@@ -86,8 +86,6 @@ public class EventController
         event.setMaxCapacity(eventDetails.getMaxCapacity());
         event.setEventDate(eventDetails.getEventDate());
         event.setEventTime(eventDetails.getEventTime());
-        event.setBusinessStatus(eventDetails.getBusinessStatus());
-        event.setCustomerStatus(eventDetails.getCustomerStatus());
 
         eventService.addOrUpdateEvent(event);
 
