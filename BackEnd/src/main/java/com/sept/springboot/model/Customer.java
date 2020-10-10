@@ -25,9 +25,9 @@ public class Customer {
     @Max(value = 2, message = "RoleID is not valid")
     @Min(value = 0, message = "RoleID is not valid")
     private long roleID;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date lastModified;
 
     public Customer() {

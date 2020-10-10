@@ -21,9 +21,9 @@ public class Event {
     private Date eventTime;
     private String businessStatus;
     private String customerStatus;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date lastModified;
 
     public Event() {
