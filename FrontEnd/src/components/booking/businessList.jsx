@@ -21,7 +21,7 @@ export default class businessList extends Component {
         this.props.history.push(`/booking/${id}`);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         if(this.state.checkstatus == 1){
         this.getClassList();
         }else{

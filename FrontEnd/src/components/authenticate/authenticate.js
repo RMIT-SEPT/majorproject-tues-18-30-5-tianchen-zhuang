@@ -3,16 +3,19 @@ import React from 'react';
 
 const info = '';
 const userinfo = 'http://localhost:8080/api/customer/email/';
+const userRegApi = 'http://localhost:8080/api/customer/';
 const loginRegApi = 'http://localhost:8080/api/business/';
 const businessInfo = 'http://localhost:8080/api/business/email/';
 const businessList='http://localhost:8080/api/business/all/'
 const getEventById = 'http://localhost:8080/api/event/business/';
 const deleteEvent  = 'http://localhost:8080/api/event/';
 const addEvent  = 'http://localhost:8080/api/event';
+const checkEvent  = 'http://localhost:8080/api/event/';
 
-const makeBooking = 'http://localhost:8080/api/booking';
-const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer';
-const deleteBooking  = 'http://localhost:8080/api/booking';
+const makeBooking = 'http://localhost:8080/api/booking/';
+const allBooking = 'http://localhost:8080/api/booking/all/';
+const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer/';
+const deleteBooking  = 'http://localhost:8080/api/booking/';
 
 
     class Authenticate extends React.Component {
@@ -42,6 +45,14 @@ const deleteBooking  = 'http://localhost:8080/api/booking';
             return  axios.get(businessInfo+api);
 
         }
+        async registerAsUser(userinfo)
+        {
+            return await axios.post(userRegApi,{
+                "username": userinfo['username'],
+                "password": userinfo['password'],
+                "email": userinfo['email']
+            });
+        }
         async registerAsBusiness(businessInfo){
             console.log(businessInfo['city'], "city");
             return await axios.post(loginRegApi,{
@@ -59,6 +70,12 @@ const deleteBooking  = 'http://localhost:8080/api/booking';
         async getBusinessList(){
             return axios.get(businessList);
         }
+
+        async deleteBooking(id)
+        {
+            return axios.delete(deleteBooking+id);
+        }
+
         getEventByBusinessId(id){
             return  axios.get(getEventById+id);
         }
@@ -87,6 +104,11 @@ const deleteBooking  = 'http://localhost:8080/api/booking';
         
         getBookingByCustomerId(customerId){
             return axios.get(getBookingByCustomerId+customerId);
+        }
+
+        getEventById(id)
+        {
+            return axios.get(checkEvent+id);
         }
 
 

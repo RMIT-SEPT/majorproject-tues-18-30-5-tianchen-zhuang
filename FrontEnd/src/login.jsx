@@ -48,6 +48,13 @@ class Login extends React.Component{
           
         }
       }
+
+      handleChangePage = () =>
+      {
+        window.location.href='/Login';
+        window.location.reload(false);
+        alert("You can now choose the booking list to book");
+      }
       
       validate(){
           let input = this.state.input;
@@ -115,7 +122,7 @@ class Login extends React.Component{
           onChange={this.handleChange}
         />
         <div className="text-danger">{this.state.errors.password}</div>
-        <button className= "login_but" type="submit" onClick= {event =>  window.location.href='../bookinglist'}>Login</button>
+        <button className= "login_but" type="submit" onClick= {this.handleChangePage}>Login</button>
         <button className="login_but" type="button" onClick= {event =>  window.location.href='/login'} >Back </button>
         
       </form>
