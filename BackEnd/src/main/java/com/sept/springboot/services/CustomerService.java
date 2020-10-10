@@ -39,7 +39,7 @@ public class CustomerService
         Customer customer = customerRepository.findByEmail(email);
 
         if(customer == null)
-            throw new UserNotFoundException("Email '" + email + "' does not exist");
+            throw new UserNotFoundException("User with email '" + email + "' does not exist");
 
         return customer;
     }

@@ -31,6 +31,7 @@ public class BusinessController {
             return errorMap;
 
         Business newBusiness = businessService.addOrUpdateBusiness(business);
+
         return new ResponseEntity<>(newBusiness, HttpStatus.CREATED);
     }
 
