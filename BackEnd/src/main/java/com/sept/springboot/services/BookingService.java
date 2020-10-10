@@ -1,6 +1,7 @@
 package com.sept.springboot.services;
 
 import com.sept.springboot.dao.BookingRepository;
+import com.sept.springboot.exception.BookingNotFoundException;
 import com.sept.springboot.exception.UserNotFoundException;
 import com.sept.springboot.model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class BookingService
         Booking booking = bookingRepository.findByBookingId(bookingId);
 
         if(booking == null)
-            throw new UserNotFoundException("Booking ID '" + bookingId + "' does not exist");
+            throw new BookingNotFoundException("Booking ID '" + bookingId + "' does not exist");
 
         return booking;
     }
@@ -62,7 +63,7 @@ public class BookingService
         Booking booking = bookingRepository.findByBookingId(bookingId);
 
         if(booking == null)
-            throw new UserNotFoundException("Cannot delete booking with ID '" + bookingId + "'. This booking does not exist");
+            throw new BookingNotFoundException("Cannot delete booking with ID '" + bookingId + "'. This booking does not exist");
 
         bookingRepository.delete(booking);
     }
