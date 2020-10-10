@@ -1,5 +1,6 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.exception.DuplicateException;
 import com.sept.springboot.exception.OutOfBoundsException;
 import com.sept.springboot.model.Event;
 import com.sept.springboot.services.BusinessService;
@@ -11,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 
 @RestController
 @RequestMapping("/api/event")
@@ -35,6 +37,13 @@ public class EventController
             return errorMap;
 
         businessService.findByBusinessId(event.getBusinessId());
+
+        Iterable<Event> eventsForBusiness = eventService.findAllEventsForBusinessId(event.getBusinessId());
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
+
+        for(Event t : eventsForBusiness)
+            if(formatter.format(t.getEventDateTime()).equals(formatter.format(event.getEventDateTime())))
+                throw new DuplicateException("Business ID: '" + event.getBusinessId() + "' has event at " + formatter.format(event.getEventDateTime()) + " already");
 
         return new ResponseEntity<>(eventService.addOrUpdateEvent(event), HttpStatus.CREATED);
     }
@@ -84,8 +93,7 @@ public class EventController
         event.setEventName(eventDetails.getEventName());
         event.setEventDesc(eventDetails.getEventDesc());
         event.setMaxCapacity(eventDetails.getMaxCapacity());
-        event.setEventDate(eventDetails.getEventDate());
-        event.setEventTime(eventDetails.getEventTime());
+        event.setEventDateTime(eventDetails.getEventDateTime());
 
         eventService.addOrUpdateEvent(event);
 
