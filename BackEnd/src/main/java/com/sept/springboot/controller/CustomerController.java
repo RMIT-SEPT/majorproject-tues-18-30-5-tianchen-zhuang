@@ -31,6 +31,7 @@ public class CustomerController
             return errorMap;
 
         Customer newCustomer = customerService.addOrUpdateCustomer(customer);
+
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
