@@ -39,11 +39,12 @@ public class EventController
         businessService.findByBusinessId(event.getBusinessId());
 
         Iterable<Event> eventsForBusiness = eventService.findAllEventsForBusinessId(event.getBusinessId());
-        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm:ss dd-MM-yyyy");
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm:ss");
 
         for(Event t : eventsForBusiness)
-            if(formatter.format(t.getEventDateTime()).equals(formatter.format(event.getEventDateTime())))
-                throw new DuplicateException("Business ID: '" + event.getBusinessId() + "' has event at " + formatter.format(event.getEventDateTime()) + " already");
+            if(dateFormatter.format(t.getEventDate()).equals(dateFormatter.format(event.getEventDate())) && timeFormatter.format(t.getEventTime()).equals(timeFormatter.format(event.getEventTime())))
+                throw new DuplicateException("Business ID: '" + event.getBusinessId() + "' has event at " + timeFormatter.format(event.getEventTime()) + " " + dateFormatter.format(event.getEventDate()) + " already");
 
         return new ResponseEntity<>(eventService.addOrUpdateEvent(event), HttpStatus.CREATED);
     }
@@ -93,7 +94,8 @@ public class EventController
         event.setEventName(eventDetails.getEventName());
         event.setEventDesc(eventDetails.getEventDesc());
         event.setMaxCapacity(eventDetails.getMaxCapacity());
-        event.setEventDateTime(eventDetails.getEventDateTime());
+        event.setEventDate(eventDetails.getEventDate());
+        event.setEventTime(eventDetails.getEventTime());
 
         eventService.addOrUpdateEvent(event);
 

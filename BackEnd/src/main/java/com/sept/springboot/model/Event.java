@@ -21,9 +21,12 @@ public class Event {
     private int currCapacity;
     @Min(value = 1, message = "Max capacity must be greater than 0")
     private int maxCapacity;
-    @NotNull(message = "Event date and time is required")
-    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
-    private Date eventDateTime;
+    @NotNull(message = "Event date is required")
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private Date eventDate;
+    @NotNull(message = "Event time is required")
+    @JsonFormat(pattern = "hh:mm:ss")
+    private Date eventTime;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
@@ -66,6 +69,22 @@ public class Event {
         this.eventDesc = eventDesc;
     }
 
+    public Date getEventTime() {
+        return eventTime;
+    }
+
+    public void setEventTime(Date eventTime) {
+        this.eventTime = eventTime;
+    }
+
+    public Date getEventDate() {
+        return eventDate;
+    }
+
+    public void setEventDate(Date eventDate) {
+        this.eventDate = eventDate;
+    }
+
     public int getCurrCapacity() {
         return currCapacity;
     }
@@ -80,14 +99,6 @@ public class Event {
 
     public void setMaxCapacity(int maxCapacity) {
         this.maxCapacity = maxCapacity;
-    }
-
-    public Date getEventDateTime() {
-        return eventDateTime;
-    }
-
-    public void setEventDateTime(Date eventDateTime) {
-        this.eventDateTime = eventDateTime;
     }
 
     public Date getCreated() {
