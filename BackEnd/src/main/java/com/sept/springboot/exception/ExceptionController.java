@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
 @ControllerAdvice
-public class UserExceptionController
+public class ExceptionController
 {
     @ExceptionHandler(value = UserNotFoundException.class)
     public ResponseEntity<Object> handleUserIdException(UserNotFoundException ex, WebRequest request)
@@ -29,6 +29,12 @@ public class UserExceptionController
 
     @ExceptionHandler(value = EventNotFoundException.class)
     public ResponseEntity<Object> handleEventException(EventNotFoundException ex, WebRequest request)
+    {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = DoubleBookingException.class)
+    public ResponseEntity<Object> handleDoubleBookingException(DoubleBookingException ex, WebRequest request)
     {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
