@@ -20,4 +20,16 @@ public class UserExceptionController
     {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = BookingNotFoundException.class)
+    public ResponseEntity<Object> handleBookingException(BookingNotFoundException ex, WebRequest request)
+    {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = EventNotFoundException.class)
+    public ResponseEntity<Object> handleEventException(EventNotFoundException ex, WebRequest request)
+    {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+    }
 }
