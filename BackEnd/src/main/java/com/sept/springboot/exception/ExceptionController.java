@@ -33,8 +33,8 @@ public class ExceptionController
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(value = DoubleBookingException.class)
-    public ResponseEntity<Object> handleDoubleBookingException(DoubleBookingException ex, WebRequest request)
+    @ExceptionHandler(value = DuplicateException.class)
+    public ResponseEntity<Object> handleDoubleBookingException(DuplicateException ex, WebRequest request)
     {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
