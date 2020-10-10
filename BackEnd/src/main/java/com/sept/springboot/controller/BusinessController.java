@@ -30,7 +30,7 @@ public class BusinessController {
         if(errorMap != null)
             return errorMap;
 
-        Business newBusiness = businessService.saveOrUpdateUser(business);
+        Business newBusiness = businessService.addOrUpdateBusiness(business);
         return new ResponseEntity<>(newBusiness, HttpStatus.CREATED);
     }
 
@@ -71,5 +71,29 @@ public class BusinessController {
         businessService.deleteByBusinessId(id);
 
         return new ResponseEntity<>("Business with ID: '" + id + "' was deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateBusiness(@PathVariable(value = "id") long id, @Valid @RequestBody Business businessDetails, BindingResult result)
+    {
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+
+        if(errorMap != null)
+            return errorMap;
+
+        Business business = businessService.findByBusinessId(id);
+
+        business.setBusinessName(businessDetails.getBusinessName());
+        business.setUsername(businessDetails.getUsername());
+        business.setPassword(businessDetails.getPassword());
+        business.setEmail(businessDetails.getEmail());
+        business.setStreet(businessDetails.getStreet());
+        business.setCity(businessDetails.getCity());
+        business.setCountry(businessDetails.getCountry());
+        business.setPostCode(businessDetails.getPostCode());
+
+        businessService.addOrUpdateBusiness(business);
+
+        return new ResponseEntity<>("Business with ID: '" + id + "' has been updated", HttpStatus.OK);
     }
 }

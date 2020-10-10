@@ -26,9 +26,11 @@ class businessEvent extends React.Component{
             list:response.data
             
         })
+
         console.log(response.data,'xx');
         console.log(this.state.list);
         console.log(this.state.list.eventId);
+
         })
         
     }
