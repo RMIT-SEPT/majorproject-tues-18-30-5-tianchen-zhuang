@@ -18,16 +18,18 @@ public class Business implements UserDetails
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long businessId;
+    @NotBlank(message = "Business Email is required")
+    private String email;
+    @NotBlank(message = "Business Name is required")
+    private String businessName;
     @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
     @NotBlank(message = "Username is required")
     private String username;
     @Size(min = 6, message = "Enter a minimum of length 6")
     @NotBlank(message = "Password is required")
     private String password;
-    @NotBlank(message = "Business Email is required")
-    private String email;
-    @NotBlank(message = "Business Name is required")
-    private String businessName;
+    @Transient
+    private String confirmPassword;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
@@ -50,10 +52,6 @@ public class Business implements UserDetails
 
     }
 
-    public String getBusinessName() { return businessName; }
-
-    public void setBusinessName(String businessName) { this.businessName = businessName; }
-
     public long getBusinessId()
     {
         return businessId;
@@ -62,6 +60,20 @@ public class Business implements UserDetails
     public void setBusinessId(long businessId)
     {
         this.businessId = businessId;
+    }
+
+    public String getBusinessName() { return businessName; }
+
+    public void setBusinessName(String businessName) { this.businessName = businessName; }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 
     public String getUsername()
@@ -84,14 +96,12 @@ public class Business implements UserDetails
         this.password = password;
     }
 
-    public String getEmail()
-    {
-        return email;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Date getCreated()
@@ -114,21 +124,21 @@ public class Business implements UserDetails
         this.lastModified = lastModified;
     }
 
-    public String getPostCode() { return postCode; }
+    public String getStreet() { return street; }
 
-    public void setPostCode(String postCode) { this.postCode = postCode; }
-
-    public String getCountry() { return country; }
-
-    public void setCountry(String country) { this.country = country; }
+    public void setStreet(String street) { this.street = street; }
 
     public String getCity() { return city; }
 
     public void setCity(String city) { this.city = city; }
 
-    public String getStreet() { return street; }
+    public String getCountry() { return country; }
 
-    public void setStreet(String street) { this.street = street; }
+    public void setCountry(String country) { this.country = country; }
+
+    public String getPostCode() { return postCode; }
+
+    public void setPostCode(String postCode) { this.postCode = postCode; }
 
     @PrePersist
     protected void onCreate()

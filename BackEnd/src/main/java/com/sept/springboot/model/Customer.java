@@ -16,15 +16,19 @@ public class Customer implements UserDetails
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long customerId;
+    @NotBlank(message = "Full Name is required")
+    private String fullName;
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    private String email;
     @Size(min = 3, max = 20, message = "Enter 3 to 20 characters")
     @NotBlank(message = "Username is required")
     private String username;
     @Size(min = 6, message = "Enter a minimum of length 6")
     @NotBlank(message = "Password is required")
     private String password;
-    @NotBlank(message = "Email is required")
-    @Email(message = "Email should be valid")
-    private String email;
+    @Transient
+    private String confirmPassword;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
@@ -42,6 +46,24 @@ public class Customer implements UserDetails
     public void setCustomerId(long customerId)
     {
         this.customerId = customerId;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
     }
 
     public String getUsername()
@@ -64,14 +86,12 @@ public class Customer implements UserDetails
         this.password = password;
     }
 
-    public String getEmail()
-    {
-        return email;
+    public String getConfirmPassword() {
+        return confirmPassword;
     }
 
-    public void setEmail(String email)
-    {
-        this.email = email;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public Date getCreated()
