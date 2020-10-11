@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 public interface BusinessRepository extends CrudRepository<Business, Long>
 {
     Business findByBusinessId(long businessId);
+    Business findByUsername(String username);
     Business findByEmail(String email);
 
     @Override
