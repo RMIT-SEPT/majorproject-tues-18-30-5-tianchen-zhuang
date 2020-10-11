@@ -24,23 +24,24 @@ public class Business {
     private String email;
     @NotBlank(message = "Business Name is required")
     private String businessName;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date lastModified;
 
-    @NotBlank(message = "Country Field Required")
-    @Column(table = "ADDRESS")
-    private String country;
-    @NotBlank(message = "City Field Required")
-    @Column(table = "ADDRESS")
-    private String city;
-    @NotBlank(message = "Postal Code Required")
-    @Column(table = "ADDRESS")
-    private String postCode;
     @NotBlank(message = "Street Field Required")
     @Column(table = "ADDRESS")
     private String street;
+    @NotBlank(message = "City Field Required")
+    @Column(table = "ADDRESS")
+    private String city;
+    @NotBlank(message = "Country Field Required")
+    @Column(table = "ADDRESS")
+    private String country;
+    @NotBlank(message = "Postal Code Required")
+    @Column(table = "ADDRESS")
+    private String postCode;
+
 
     public Business() {
 

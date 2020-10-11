@@ -1,7 +1,9 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.exception.DuplicateException;
 import com.sept.springboot.exception.OutOfBoundsException;
 import com.sept.springboot.model.Event;
+import com.sept.springboot.services.BusinessService;
 import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
+import java.text.SimpleDateFormat;
 
 @RestController
 @RequestMapping("/api/event")
@@ -18,6 +21,9 @@ public class EventController
 {
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private BusinessService businessService;
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
@@ -30,14 +36,24 @@ public class EventController
         if(errorMap != null)
             return errorMap;
 
-        Event newEvent = eventService.addOrUpdateEvent(event);
-        return new ResponseEntity<>(newEvent, HttpStatus.CREATED);
+        businessService.findByBusinessId(event.getBusinessId());
+
+        Iterable<Event> eventsForBusiness = eventService.findAllEventsForBusinessId(event.getBusinessId());
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat timeFormatter = new SimpleDateFormat("hh:mm:ss");
+
+        for(Event t : eventsForBusiness)
+            if(dateFormatter.format(t.getEventDate()).equals(dateFormatter.format(event.getEventDate())) && timeFormatter.format(t.getEventTime()).equals(timeFormatter.format(event.getEventTime())))
+                throw new DuplicateException("Business ID: '" + event.getBusinessId() + "' has event at " + timeFormatter.format(event.getEventTime()) + " " + dateFormatter.format(event.getEventDate()) + " already");
+
+        return new ResponseEntity<>(eventService.addOrUpdateEvent(event), HttpStatus.CREATED);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getEventById(@PathVariable long id)
     {
         Event event = eventService.findByEventId(id);
+
         return new ResponseEntity<>(event, HttpStatus.OK);
     }
 
@@ -77,12 +93,9 @@ public class EventController
         event.setBusinessId(eventDetails.getBusinessId());
         event.setEventName(eventDetails.getEventName());
         event.setEventDesc(eventDetails.getEventDesc());
-        //event.setCurrCapacity(eventDetails.getCurrCapacity());
         event.setMaxCapacity(eventDetails.getMaxCapacity());
         event.setEventDate(eventDetails.getEventDate());
         event.setEventTime(eventDetails.getEventTime());
-        event.setBusinessStatus(eventDetails.getBusinessStatus());
-        event.setCustomerStatus(eventDetails.getCustomerStatus());
 
         eventService.addOrUpdateEvent(event);
 

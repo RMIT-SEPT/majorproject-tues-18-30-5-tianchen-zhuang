@@ -22,12 +22,9 @@ public class Customer {
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     private String email;
-    @Max(value = 2, message = "RoleID is not valid")
-    @Min(value = 0, message = "RoleID is not valid")
-    private long roleID;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date lastModified;
 
     public Customer() {
@@ -40,7 +37,6 @@ public class Customer {
         this.username = username;
         this.password = password;
         this.email = email;
-        this.roleID = roleID;
     }
 
     public long getCustomerId()
@@ -81,16 +77,6 @@ public class Customer {
     public void setEmail(String email)
     {
         this.email = email;
-    }
-
-    public long getRoleID()
-    {
-        return roleID;
-    }
-
-    public void setRoleID(long roleID)
-    {
-        this.roleID = roleID;
     }
 
     public Date getCreated()

@@ -1,7 +1,9 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.exception.DuplicateException;
 import com.sept.springboot.model.Booking;
 import com.sept.springboot.services.BookingService;
+import com.sept.springboot.services.CustomerService;
 import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,9 @@ public class BookingController
     private EventService eventService;
 
     @Autowired
+    private CustomerService customerService;
+
+    @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping
@@ -34,7 +39,17 @@ public class BookingController
         if(errorMap != null)
             return errorMap;
 
+        customerService.findByCustomerId(booking.getCustomerId());
+        eventService.findByEventId(booking.getEventId());
+
+        Iterable<Booking> bookingsForEvent = bookingService.findByEventId(booking.getEventId());
+
+        for(Booking t : bookingsForEvent)
+            if(t.getCustomerId() == booking.getCustomerId())
+                throw new DuplicateException("Customer ID: '" + booking.getCustomerId() + "' has already booked for event ID: '" + booking.getEventId() + "'");
+
         eventService.incrementEventById(booking.getEventId());
+
         return new ResponseEntity<>(bookingService.addBooking(booking), HttpStatus.CREATED);
     }
 

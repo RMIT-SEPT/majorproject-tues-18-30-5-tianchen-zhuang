@@ -31,6 +31,7 @@ public class CustomerController
             return errorMap;
 
         Customer newCustomer = customerService.addOrUpdateCustomer(customer);
+
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
@@ -86,7 +87,6 @@ public class CustomerController
         customer.setUsername(customerDetails.getUsername());
         customer.setPassword(customerDetails.getPassword());
         customer.setEmail(customerDetails.getEmail());
-        customer.setRoleID(customerDetails.getRoleID());
 
         customerService.addOrUpdateCustomer(customer);
 

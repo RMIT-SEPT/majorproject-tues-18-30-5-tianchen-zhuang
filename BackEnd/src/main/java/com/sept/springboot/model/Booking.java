@@ -16,9 +16,9 @@ public class Booking
     private long customerId;
     @Min(value = 1, message = "Customer ID is required and must be greater than 0")
     private long eventId;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date lastModified;
 
     public Booking()

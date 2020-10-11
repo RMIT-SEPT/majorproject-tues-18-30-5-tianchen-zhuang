@@ -3,7 +3,7 @@ import { Card } from 'antd';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import authenticate from '../authenticate/authenticate';
-import SchedleCard from './scheduleCard'
+import SchedleCard from './scheduleCard';
 class businessEvent extends React.Component{
     constructor(probs) {
         super(probs);
@@ -17,7 +17,7 @@ class businessEvent extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
       }
 
-    componentWillMount() {
+    componentDidMount() {
       
         console.log(sessionStorage.getItem('businessId') + "business iD ")
         let res = authenticate.getEventByBusinessId(sessionStorage.getItem('businessId'));
@@ -26,7 +26,11 @@ class businessEvent extends React.Component{
             list:response.data
             
         })
-        console.log(response.data,'xx')
+
+        console.log(response.data,'xx');
+        console.log(this.state.list);
+        console.log(this.state.list.eventId);
+
         })
         
     }
@@ -92,9 +96,10 @@ handleChange(event) {
     
     const scheduleList = [];
     for (let i = 0; i<this.state.list.length; i++) {
+      console.log(i);
       if(this.state.list[i].currCapacity <this.state.list[i].maxCapacity ){
-          
-        scheduleList.push(<SchedleCard 
+          console.log(i);
+        scheduleList.push(<SchedleCard
           eventId ={this.state.list[i].eventId}
           eventName ={this.state.list[i].eventName}
           maxCapacity={this.state.list[i].maxCapacity}

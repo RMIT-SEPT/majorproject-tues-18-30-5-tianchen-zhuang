@@ -2,6 +2,9 @@ package com.sept.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
@@ -10,28 +13,28 @@ public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long eventId;
+    @Min(value = 1, message = "Business ID is required and must be greater than 0")
     private long businessId;
+    @NotBlank(message = "Event name is required")
     private String eventName;
     private String eventDesc;
     private int currCapacity;
+    @Min(value = 1, message = "Max capacity must be greater than 0")
     private int maxCapacity;
-    @JsonFormat(pattern = "dd-mm-yyyy")
+    @NotNull(message = "Event date is required")
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date eventDate;
+    @NotNull(message = "Event time is required")
     @JsonFormat(pattern = "hh:mm:ss")
     private Date eventTime;
-    private String businessStatus;
-    private String customerStatus;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
-    @JsonFormat(pattern = "yyyy-mm-dd")
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date lastModified;
 
     public Event() {
         // Defaults
         currCapacity = 0;
-        maxCapacity = 1;
-        businessStatus = "Not confirmed";
-        customerStatus = "Not confirmed";
     }
 
     public long getEventId() {
@@ -80,22 +83,6 @@ public class Event {
 
     public void setEventDate(Date eventDate) {
         this.eventDate = eventDate;
-    }
-
-    public String getBusinessStatus() {
-        return businessStatus;
-    }
-
-    public void setBusinessStatus(String businessStatus) {
-        this.businessStatus = businessStatus;
-    }
-
-    public String getCustomerStatus() {
-        return customerStatus;
-    }
-
-    public void setCustomerStatus(String customerStatus) {
-        this.customerStatus = customerStatus;
     }
 
     public int getCurrCapacity() {

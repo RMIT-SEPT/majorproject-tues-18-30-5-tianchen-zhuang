@@ -50,6 +50,7 @@ class LoginB extends React.Component{
 
                     console.log("thank you for login   "+ response.data.businessId);
                     this.props.history.push('/bookingEvent');
+                    window.location.reload(false);
                   } else{
                     alert('false login fail', this.state.input['password']);
                   }
