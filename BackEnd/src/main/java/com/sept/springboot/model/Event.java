@@ -8,7 +8,6 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "EVENT")
 public class Event {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

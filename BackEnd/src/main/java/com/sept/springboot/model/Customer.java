@@ -7,7 +7,6 @@ import javax.validation.constraints.*;
 import java.util.Date;
 
 @Entity
-@Table(name="CUSTOMER")
 public class Customer {
 
     @Id
