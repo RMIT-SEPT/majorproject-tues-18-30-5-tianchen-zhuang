@@ -2,6 +2,7 @@ package com.sept.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,6 +19,7 @@ public class Customer implements UserDetails
     private long customerId;
     @NotBlank(message = "Full Name is required")
     private String fullName;
+    @NaturalId
     @NotBlank(message = "Email is required")
     @Email(message = "Email should be valid")
     private String email;

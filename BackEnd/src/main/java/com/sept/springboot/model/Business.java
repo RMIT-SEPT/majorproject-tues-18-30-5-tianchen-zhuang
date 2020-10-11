@@ -2,6 +2,7 @@ package com.sept.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,6 +19,7 @@ public class Business implements UserDetails
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long businessId;
+    @NaturalId
     @NotBlank(message = "Business Email is required")
     private String email;
     @NotBlank(message = "Business Name is required")
