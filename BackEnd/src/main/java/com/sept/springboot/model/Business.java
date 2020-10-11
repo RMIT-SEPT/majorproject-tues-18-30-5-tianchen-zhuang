@@ -1,15 +1,20 @@
 package com.sept.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
 @SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
-public class Business {
+public class Business implements UserDetails
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long businessId;
@@ -41,18 +46,8 @@ public class Business {
     @Column(table = "ADDRESS")
     private String postCode;
 
-
     public Business() {
 
-    }
-
-    public Business(String businessName, String username, String password, String email, long roleID)
-    {
-        super();
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.businessName = businessName;
     }
 
     public String getBusinessName() { return businessName; }
@@ -147,4 +142,38 @@ public class Business {
         this.lastModified = new Date();
     }
 
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        return null;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked()
+    {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled()
+    {
+        return true;
+    }
 }

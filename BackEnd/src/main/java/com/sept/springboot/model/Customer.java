@@ -1,14 +1,18 @@
 package com.sept.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
-public class Customer {
-
+public class Customer implements UserDetails
+{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long customerId;
@@ -28,14 +32,6 @@ public class Customer {
 
     public Customer() {
 
-    }
-
-    public Customer(String username, String password, String email, long roleID)
-    {
-        super();
-        this.username = username;
-        this.password = password;
-        this.email = email;
     }
 
     public long getCustomerId()
@@ -108,5 +104,40 @@ public class Customer {
     protected void onUpdate()
     {
         this.lastModified = new Date();
+    }
+
+    @Override
+    @JsonIgnore
+    public Collection<? extends GrantedAuthority> getAuthorities()
+    {
+        return null;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isAccountNonLocked()
+    {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    @Override
+    @JsonIgnore
+    public boolean isEnabled()
+    {
+        return true;
     }
 }
