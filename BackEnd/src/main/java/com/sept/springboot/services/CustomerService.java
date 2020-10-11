@@ -1,9 +1,11 @@
 package com.sept.springboot.services;
 
 import com.sept.springboot.exception.UserNotFoundException;
+import com.sept.springboot.exception.UsernameAlreadyExistsException;
 import com.sept.springboot.model.Customer;
 import com.sept.springboot.dao.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,15 +14,22 @@ public class CustomerService
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer addOrUpdateCustomer(Customer customer)
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public Customer addOrUpdateCustomer(Customer newCustomer)
     {
         try
         {
-            return customerRepository.save(customer);
+            newCustomer.setPassword(passwordEncoder.encode(newCustomer.getUsername()));
+            newCustomer.setUsername(newCustomer.getUsername());
+            newCustomer.setConfirmPassword("");
+
+            return customerRepository.save(newCustomer);
         }
-        catch (Exception e)
+        catch(Exception e)
         {
-            throw new UserNotFoundException("Customer ID '" + customer.getCustomerId() + "' already exists");
+            throw new UsernameAlreadyExistsException("Username " + newCustomer.getUsername() + " already exists");
         }
     }
 

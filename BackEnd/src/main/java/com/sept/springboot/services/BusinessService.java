@@ -1,9 +1,11 @@
 package com.sept.springboot.services;
 
 import com.sept.springboot.exception.UserNotFoundException;
+import com.sept.springboot.exception.UsernameAlreadyExistsException;
 import com.sept.springboot.model.Business;
 import com.sept.springboot.dao.BusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,15 +14,22 @@ public class BusinessService {
     @Autowired
     private BusinessRepository businessRepository;
 
-    public Business addOrUpdateBusiness(Business business)
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public Business addOrUpdateBusiness(Business newBusiness)
     {
         try
         {
-            return businessRepository.save(business);
+            newBusiness.setPassword(passwordEncoder.encode(newBusiness.getUsername()));
+            newBusiness.setUsername(newBusiness.getUsername());
+            newBusiness.setConfirmPassword("");
+
+            return businessRepository.save(newBusiness);
         }
         catch (Exception e)
         {
-            throw new UserNotFoundException("Business ID '" + business.getBusinessId() + "' already exists");
+            throw new UsernameAlreadyExistsException("Username " + newBusiness.getUsername() + " already exists");
         }
     }
 
