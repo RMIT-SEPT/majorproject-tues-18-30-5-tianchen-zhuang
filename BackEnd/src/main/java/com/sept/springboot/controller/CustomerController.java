@@ -84,9 +84,10 @@ public class CustomerController
 
         Customer customer = customerService.findByCustomerId(id);
 
+        customer.setFullName(customerDetails.getFullName());
+        customer.setEmail(customerDetails.getEmail());
         customer.setUsername(customerDetails.getUsername());
         customer.setPassword(customerDetails.getPassword());
-        customer.setEmail(customerDetails.getEmail());
 
         customerService.addOrUpdateCustomer(customer);
 
