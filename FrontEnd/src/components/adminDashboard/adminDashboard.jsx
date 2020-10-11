@@ -36,10 +36,18 @@ class adminDashboard extends React.Component {
     authenticate.getBusinessList();
   }
 
-  deleteBusiness(businessId)
+  deleteBusiness(event)
   {
-      console.log(businessId +" delete business")
-      authenticate.deleteBusiness(businessId);
+      const deleteId = event.target.getAttribute("id");
+      console.log(deleteId +" delete business")
+      authenticate.deleteBusiness(deleteId);
+  }
+
+  deleteCustomer(event)
+  {
+      const deleteId = event.target.getAttribute("id");
+      console.log(deleteId +" delete customer")
+      authenticate.deleteCustomer(deleteId);
   }
   testButton()
   {
@@ -61,7 +69,7 @@ class adminDashboard extends React.Component {
           postCode={this.state.businessInfo[i].postCode}
           street={this.state.businessInfo[i].street}
           edit={this.testButton.bind()}
-          delete={this.deleteBusiness.bind(this, BusinessScheduleCard.businessId)} 
+          delete={this.deleteBusiness.bind(this)} 
         />
       );
     }
@@ -74,7 +82,7 @@ class adminDashboard extends React.Component {
           email={this.state.customerInfo[i].email}
           created={this.state.customerInfo[i].created}
           edit={this.testButton.bind()}
-          delete={this.testButton.bind()} 
+          delete={this.deleteCustomer.bind(this)} 
         />
       );
     }

@@ -18,6 +18,7 @@ const allBooking = 'http://localhost:8080/api/booking/all/';
 const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer/';
 const deleteBooking  = 'http://localhost:8080/api/booking/';
 const customerList = 'http://localhost:8080/api/customer/all/';
+const deleteCustomer = 'http://localhost:8080/api/customer/';
 
 
     class Authenticate extends React.Component {
@@ -119,7 +120,9 @@ const customerList = 'http://localhost:8080/api/customer/all/';
             return axios.get(checkEvent+id);
         }
 
-
+        deleteCustomer(id){
+            return axios.delete(deleteCustomer+id);
+        }
 }
 
 

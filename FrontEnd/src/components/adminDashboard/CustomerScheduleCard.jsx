@@ -26,6 +26,7 @@ export default class CustomerScheduleCard extends Component {
             <input
               class="btn btn-danger"
               type="submit"
+              id={this.props.customerId}
               onClick={this.props.delete}
               value="Delete"
               name="delete"
