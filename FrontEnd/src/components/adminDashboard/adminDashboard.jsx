@@ -1,12 +1,15 @@
 import React from "react";
 import authenticate from "../authenticate/authenticate";
-import SchedleCard from "./scheduleCard";
+import BusinessScheduleCard from "./BusinessScheduleCard";
+import CustomerScheduleCard from "./CustomerScheduleCard";
+
 class adminDashboard extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      list: [],
+      businessInfo: [],
+      customerInfo: [],
     };
   }
 
@@ -15,41 +18,74 @@ class adminDashboard extends React.Component {
     let res = authenticate.getBusinessList();
     res.then((response) => {
       this.setState({
-        list: response.data,
+        businessInfo: response.data,
+      });
+    });
+
+    let customerRes = authenticate.getCustomerList();
+    customerRes.then((response) => {
+      this.setState({
+        customerInfo: response.data,
       });
     });
 
     console.log(sessionStorage.getItem("customerId"));
   }
 
-
   getAllBusinesses() {
     authenticate.getBusinessList();
   }
 
+  deleteBusiness(businessId)
+  {
+      console.log(businessId +" delete business")
+      authenticate.deleteBusiness(businessId);
+  }
+  testButton()
+  {
+      console.log("Button Pressed")
+  }
+
   render() {
-    const scheduleList = [];
-    for (let i = 0; i < this.state.list.length; i++) {
-      scheduleList.push(
-        <SchedleCard
-          businessId={this.state.list[i].businessId}
-          username={this.state.list[i].username}
-          email={this.state.list[i].email}
-          businessName={this.state.list[i].businessName}
-          created={this.state.list[i].created}
-          country={this.state.list[i].country}
-          city={this.state.list[i].city}
-          postCode={this.state.list[i].postCode}
-          street={this.state.list[i].street}
+    const businessScheduleList = [];
+    for (let i = 0; i < this.state.businessInfo.length; i++) {
+        businessScheduleList.push(
+        <BusinessScheduleCard
+          businessId={this.state.businessInfo[i].businessId}
+          username={this.state.businessInfo[i].username}
+          email={this.state.businessInfo[i].email}
+          businessName={this.state.businessInfo[i].businessName}
+          created={this.state.businessInfo[i].created}
+          country={this.state.businessInfo[i].country}
+          city={this.state.businessInfo[i].city}
+          postCode={this.state.businessInfo[i].postCode}
+          street={this.state.businessInfo[i].street}
+          edit={this.testButton.bind()}
+          delete={this.deleteBusiness.bind(this, BusinessScheduleCard.businessId)} 
+        />
+      );
+    }
+    const customerScheduleList = [];
+    for (let i = 0; i < this.state.customerInfo.length; i++) {
+        customerScheduleList.push(
+        <CustomerScheduleCard
+          customerId={this.state.customerInfo[i].customerId}
+          username={this.state.customerInfo[i].username}
+          email={this.state.customerInfo[i].email}
+          created={this.state.customerInfo[i].created}
+          edit={this.testButton.bind()}
+          delete={this.testButton.bind()} 
         />
       );
     }
 
     return (
       <div>
-        <h1>Welcome to the Admin Dashboard{sessionStorage.getItem("username")}</h1>
+        <h1>
+          Welcome to the Admin Dashboard{sessionStorage.getItem("username")}
+        </h1>
         <div>
-            <h2>Business List</h2>
+          <h2>Business List</h2>
           <table class="table table-bordered">
             <thead>
               <tr>
@@ -64,7 +100,19 @@ class adminDashboard extends React.Component {
                 <th scope="col">Street</th>
               </tr>
             </thead>
-            <tbody>{scheduleList}</tbody>
+            <tbody>{businessScheduleList}</tbody>
+          </table>
+          <h2>Customer List</h2>
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">Customer ID</th>
+                <th scope="col">Customer Username</th>
+                <th scope="col">Customer Email</th>
+                <th scope="col">Created Date</th>
+              </tr>
+            </thead>
+            <tbody>{customerScheduleList}</tbody>
           </table>
         </div>
       </div>
