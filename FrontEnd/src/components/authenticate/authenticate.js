@@ -5,11 +5,12 @@ const info = '';
 const userinfo = 'http://localhost:8080/api/customer/email/';
 const loginRegApi = 'http://localhost:8080/api/business/';
 const businessInfo = 'http://localhost:8080/api/business/email/';
-const businessList='http://localhost:8080/api/business/all/'
+const businessList='http://localhost:8080/api/business/all/';
+const deleteBusiness = 'http://localhost:8080/api/business/';
 const getEventById = 'http://localhost:8080/api/event/business/';
 const deleteEvent  = 'http://localhost:8080/api/event/';
 const addEvent  = 'http://localhost:8080/api/event';
-
+const customerList = 'http://localhost:8080/api/customer/all/';
 const makeBooking = 'http://localhost:8080/api/booking';
 const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer';
 const deleteBooking  = 'http://localhost:8080/api/booking';
@@ -88,7 +89,13 @@ const deleteBooking  = 'http://localhost:8080/api/booking';
         getBookingByCustomerId(customerId){
             return axios.get(getBookingByCustomerId+customerId);
         }
+        async getCustomerList(){
+            return axios.get(customerList);
+        }
 
+        deleteBusiness(id){
+            return axios.delete(deleteBusiness+id);
+        }
 
 }
 
