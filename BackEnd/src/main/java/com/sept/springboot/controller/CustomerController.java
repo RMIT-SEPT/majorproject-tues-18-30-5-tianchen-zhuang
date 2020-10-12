@@ -1,5 +1,7 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.model.Booking;
+import com.sept.springboot.services.BookingService;
 import com.sept.springboot.services.MapValidationErrorService;
 import com.sept.springboot.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class CustomerController
 {
     @Autowired
     private CustomerService customerService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
@@ -69,6 +74,11 @@ public class CustomerController
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable long id)
     {
+        Iterable<Booking> bookings = bookingService.findByCustomerId(id);
+
+        for(Booking t : bookings)
+            bookingService.deleteByBookingId(t.getBookingId());
+
         customerService.deleteByCustomerId(id);
 
         return new ResponseEntity<>("Customer with ID: '" + id + "' was deleted", HttpStatus.OK);

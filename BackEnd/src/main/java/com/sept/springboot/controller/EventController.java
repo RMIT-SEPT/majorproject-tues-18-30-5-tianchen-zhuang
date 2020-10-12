@@ -2,7 +2,9 @@ package com.sept.springboot.controller;
 
 import com.sept.springboot.exception.DuplicateException;
 import com.sept.springboot.exception.OutOfBoundsException;
+import com.sept.springboot.model.Booking;
 import com.sept.springboot.model.Event;
+import com.sept.springboot.services.BookingService;
 import com.sept.springboot.services.BusinessService;
 import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
@@ -21,6 +23,9 @@ public class EventController
 {
     @Autowired
     private EventService eventService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @Autowired
     private BusinessService businessService;
@@ -72,6 +77,11 @@ public class EventController
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteEvent(@PathVariable long id)
     {
+        Iterable<Booking> bookings = bookingService.findByEventId(id);
+
+        for(Booking t : bookings)
+            bookingService.deleteByBookingId(t.getBookingId());
+
         eventService.deleteByEventId(id);
 
         return new ResponseEntity<>("Event with ID: '" + id + "' was deleted", HttpStatus.OK);
