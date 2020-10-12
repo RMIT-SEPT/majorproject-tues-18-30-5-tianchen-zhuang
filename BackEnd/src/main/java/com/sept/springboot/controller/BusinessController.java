@@ -1,7 +1,11 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.model.Booking;
 import com.sept.springboot.model.Business;
+import com.sept.springboot.model.Event;
+import com.sept.springboot.services.BookingService;
 import com.sept.springboot.services.BusinessService;
+import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +22,12 @@ public class BusinessController {
 
     @Autowired
     private BusinessService businessService;
+
+    @Autowired
+    private EventService eventService;
+
+    @Autowired
+    private BookingService bookingService;
 
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
@@ -69,6 +79,18 @@ public class BusinessController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBusiness(@PathVariable long id)
     {
+        Iterable<Event> events = eventService.findAllEventsForBusinessId(id);
+
+        for(Event t : events)
+        {
+            Iterable<Booking> bookings = bookingService.findByEventId(t.getEventId());
+
+            for(Booking t2 : bookings)
+                bookingService.deleteByBookingId(t2.getBookingId());
+
+            eventService.deleteByEventId(t.getEventId());
+        }
+
         businessService.deleteByBusinessId(id);
 
         return new ResponseEntity<>("Business with ID: '" + id + "' was deleted", HttpStatus.OK);
