@@ -23,7 +23,6 @@ public class BusinessService {
         {
             newBusiness.setPassword(passwordEncoder.encode(newBusiness.getUsername()));
             newBusiness.setUsername(newBusiness.getUsername());
-            newBusiness.setConfirmPassword("");
 
             return businessRepository.save(newBusiness);
         }

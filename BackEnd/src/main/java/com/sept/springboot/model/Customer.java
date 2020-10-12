@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Entity
-public class Customer implements UserDetails
+public class Customer extends User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,15 +29,14 @@ public class Customer implements UserDetails
     @Size(min = 6, message = "Enter a minimum of length 6")
     @NotBlank(message = "Password is required")
     private String password;
-    @Transient
-    private String confirmPassword;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date lastModified;
 
-    public Customer() {
-
+    public Customer()
+    {
+        super('c');
     }
 
     public long getCustomerId()
@@ -88,14 +87,6 @@ public class Customer implements UserDetails
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
     public Date getCreated()
     {
         return created;
@@ -126,40 +117,5 @@ public class Customer implements UserDetails
     protected void onUpdate()
     {
         this.lastModified = new Date();
-    }
-
-    @Override
-    @JsonIgnore
-    public Collection<? extends GrantedAuthority> getAuthorities()
-    {
-        return null;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonLocked()
-    {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isEnabled()
-    {
-        return true;
     }
 }

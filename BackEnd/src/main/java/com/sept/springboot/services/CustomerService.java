@@ -23,7 +23,6 @@ public class CustomerService
         {
             newCustomer.setPassword(passwordEncoder.encode(newCustomer.getUsername()));
             newCustomer.setUsername(newCustomer.getUsername());
-            newCustomer.setConfirmPassword("");
 
             return customerRepository.save(newCustomer);
         }

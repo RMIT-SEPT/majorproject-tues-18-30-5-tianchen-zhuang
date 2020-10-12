@@ -14,7 +14,7 @@ import java.util.Date;
 
 @Entity
 @SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))
-public class Business implements UserDetails
+public class Business extends User
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,8 +30,6 @@ public class Business implements UserDetails
     @Size(min = 6, message = "Enter a minimum of length 6")
     @NotBlank(message = "Password is required")
     private String password;
-    @Transient
-    private String confirmPassword;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
     private Date created;
     @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
@@ -50,8 +48,9 @@ public class Business implements UserDetails
     @Column(table = "ADDRESS")
     private String postCode;
 
-    public Business() {
-
+    public Business()
+    {
+        super('c');
     }
 
     public long getBusinessId()
@@ -96,14 +95,6 @@ public class Business implements UserDetails
     public void setPassword(String password)
     {
         this.password = password;
-    }
-
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
     }
 
     public Date getCreated()
@@ -152,40 +143,5 @@ public class Business implements UserDetails
     protected void onUpdate()
     {
         this.lastModified = new Date();
-    }
-
-    @Override
-    @JsonIgnore
-    public Collection<? extends GrantedAuthority> getAuthorities()
-    {
-        return null;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isAccountNonLocked()
-    {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    @Override
-    @JsonIgnore
-    public boolean isEnabled()
-    {
-        return true;
     }
 }
