@@ -1,16 +1,13 @@
 import React from "react";
-import { withRouter } from "react-router-dom";
-import { useHistory } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-import "./login.css";
+import "../register/register.css";
 import authenticate from "../authenticate/authenticate";
 
-class Login extends React.Component {
-  constructor(probs) {
-    super(probs);
+class EditCustomer extends React.Component {
+  constructor() {
+    super();
     this.state = {
       input: {},
-      errors: {},
+      errors: {}
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -26,36 +23,19 @@ class Login extends React.Component {
     });
   }
 
-  async handleSubmit(event) {
-    // let history = useHistory();
-
+  handleSubmit(event) {
     event.preventDefault();
 
     if (this.validate()) {
       console.log(this.state);
+
       let input = {};
       input["password"] = "";
       input["email"] = "";
+      input["username"] = "";
+      input["cPassword"] = "";
       this.setState({ input: input });
-      //define email and password
-      let e = this.state.input["email"];
-      let p = this.state.input["password"];
-      //get user api
-      let info = authenticate.getApi(this.state.input["email"]);
-      //set user info set = set, remove = remove , getItem ==get(name)
-      sessionStorage.setItem("user", info);
-
-      // localStorage.setItem(user, info);
-      info.then((response) => {
-        sessionStorage.setItem("username", response.data.username);
-        sessionStorage.setItem("customerId", response.data.customerId);
-        if (p == response.data.password) {
-          sessionStorage.setItem("userInfo", this.state.input["email"]);
-          this.props.history.push("/bookinglist");
-        } else {
-          alert("false login fail", this.state.input["password"]);
-        }
-      });
+      authenticate.editCustomer(1,this.state.input);
     }
   }
 
@@ -90,6 +70,18 @@ class Login extends React.Component {
         errors["password"] = "Please enter password more than 6 characters";
       }
     }
+    if (!input["username"]) {
+      isValid = false;
+      errors["username"] = "Please enter your username.";
+    }
+    if (!input["cPassword"]) {
+      isValid = false;
+      errors["cPassword"] = "Please enter confirm your password.";
+    }
+    if (input["cPassword"] != input["password"]) {
+      isValid = false;
+      errors["password"] = "password and confirm password doesnt match";
+    }
 
     this.setState({
       errors: errors,
@@ -97,11 +89,10 @@ class Login extends React.Component {
 
     return isValid;
   }
-
   render() {
     return (
       <div>
-        <h2>Login User</h2>
+        <h2>Edit existing customer</h2>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="email">Email</label>
           <input
@@ -113,7 +104,17 @@ class Login extends React.Component {
             onChange={this.handleChange}
           />
           <div className="text-danger">{this.state.errors.email}</div>
-          <label htmlFor="email">Password</label>
+          <label htmlFor="email">User Name</label>
+          <input
+            name="username"
+            type="username"
+            id="username"
+            placeholder="Enter your username"
+            value={this.state.input.username}
+            onChange={this.handleChange}
+          />
+          <div className="text-danger">{this.state.errors.username}</div>
+          <label htmlFor="password">Password</label>
           <input
             name="password"
             type="password"
@@ -123,13 +124,27 @@ class Login extends React.Component {
             onChange={this.handleChange}
           />
           <div className="text-danger">{this.state.errors.password}</div>
-          <button className="login_but" type="submit">
-            Login
+          <label htmlFor="email">confirm password</label>
+          <input
+            name="cPassword"
+            type="password"
+            id="cPassword"
+            placeholder="Please confirm your password"
+            value={this.state.input.cPassword}
+            onChange={this.handleChange}
+          />
+          <div className="text-danger">{this.state.errors.cPassword}</div>
+          <button
+            className="reg_but"
+            type="submit"
+            onClick={(event) => (window.location.href = "/adminDashboard")}
+          >
+            Edit
           </button>
           <button
-            className="login_but"
+            className="reg_but"
             type="button"
-            onClick={(event) => (window.location.href = "/login")}
+            onClick={(event) => (window.location.href = "/adminDashboard")}
           >
             Back{" "}
           </button>
@@ -139,4 +154,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default EditCustomer;

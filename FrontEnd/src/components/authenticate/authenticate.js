@@ -6,7 +6,8 @@ const userinfo = 'http://localhost:8080/api/customer/email/';
 const userRegApi = 'http://localhost:8080/api/customer/';
 const loginRegApi = 'http://localhost:8080/api/business/';
 const businessInfo = 'http://localhost:8080/api/business/email/';
-const businessList='http://localhost:8080/api/business/all/'
+const businessList='http://localhost:8080/api/business/all/';
+const deleteBusiness = 'http://localhost:8080/api/business/';
 const getEventById = 'http://localhost:8080/api/event/business/';
 const deleteEvent  = 'http://localhost:8080/api/event/';
 const addEvent  = 'http://localhost:8080/api/event';
@@ -16,6 +17,9 @@ const makeBooking = 'http://localhost:8080/api/booking/';
 const allBooking = 'http://localhost:8080/api/booking/all/';
 const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer/';
 const deleteBooking  = 'http://localhost:8080/api/booking/';
+const customerList = 'http://localhost:8080/api/customer/all/';
+const deleteCustomer = 'http://localhost:8080/api/customer/';
+
 
 
     class Authenticate extends React.Component {
@@ -105,13 +109,46 @@ const deleteBooking  = 'http://localhost:8080/api/booking/';
         getBookingByCustomerId(customerId){
             return axios.get(getBookingByCustomerId+customerId);
         }
+        async getCustomerList(){
+            return axios.get(customerList);
+        }
 
+        deleteBusiness(id){
+            return axios.delete(deleteBusiness+id);
+        }
         getEventById(id)
         {
             return axios.get(checkEvent+id);
         }
 
+        deleteCustomer(id){
+            return axios.delete(deleteCustomer+id);
+        }
 
+        async editCustomer(customerId, userinfo){
+            
+            return await axios.put(userRegApi+customerId,{
+                "username": userinfo['username'],
+                "password": userinfo['password'],
+                "email": userinfo['email']
+            });
+            
+        }
+
+        async editBusiness(businessId, businessInfo){
+            
+            return await axios.put(loginRegApi+businessId,{
+                "username": businessInfo['username'],
+                "password": businessInfo['password'],
+                "email": businessInfo['email'],
+                "businessName": businessInfo['business_name'],
+                "country": businessInfo['country'],
+                "city": businessInfo['city'],
+                "street": businessInfo['street'],
+                "postCode": businessInfo['postcode']
+            });
+            
+        }
 }
 
 
