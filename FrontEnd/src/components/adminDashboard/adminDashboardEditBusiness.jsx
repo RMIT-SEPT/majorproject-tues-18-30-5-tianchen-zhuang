@@ -37,7 +37,7 @@ class EditBusiness extends React.Component {
       input["street"] = "";
       input["postcode"] = "";
       this.setState({ input: input });
-      authenticate.editBusiness(this.state.editId, this.state.input);
+      authenticate.editBusiness(1, this.state.input);
     }
   }
 

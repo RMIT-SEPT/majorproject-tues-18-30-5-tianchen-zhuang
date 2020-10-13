@@ -2,7 +2,6 @@ import React from "react";
 import authenticate from "../authenticate/authenticate";
 import BusinessScheduleCard from "./BusinessScheduleCard";
 import CustomerScheduleCard from "./CustomerScheduleCard";
-import EditBusiness from "./adminDashboardEditBusiness";
 
 class adminDashboard extends React.Component {
   constructor(props) {

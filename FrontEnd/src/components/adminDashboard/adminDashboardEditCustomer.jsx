@@ -7,7 +7,7 @@ class EditCustomer extends React.Component {
     super();
     this.state = {
       input: {},
-      errors: {},
+      errors: {}
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -35,8 +35,7 @@ class EditCustomer extends React.Component {
       input["username"] = "";
       input["cPassword"] = "";
       this.setState({ input: input });
-      authenticate.editCustomer(this.state.input);
-      alert("Thank you for register");
+      authenticate.editCustomer(1,this.state.input);
     }
   }
 
