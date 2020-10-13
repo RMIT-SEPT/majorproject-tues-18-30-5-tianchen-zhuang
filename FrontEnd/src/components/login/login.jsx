@@ -52,6 +52,7 @@ class Login extends React.Component {
         if (p == response.data.password) {
           sessionStorage.setItem("userInfo", this.state.input["email"]);
           this.props.history.push("/bookinglist");
+          window.location.reload(false);
         } else {
           alert("false login fail", this.state.input["password"]);
         }
