@@ -2,6 +2,7 @@ import React from "react";
 import authenticate from "../authenticate/authenticate";
 import BusinessScheduleCard from "./BusinessScheduleCard";
 import CustomerScheduleCard from "./CustomerScheduleCard";
+import EditBusiness from "./adminDashboardEditBusiness";
 
 class adminDashboard extends React.Component {
   constructor(props) {
@@ -10,6 +11,7 @@ class adminDashboard extends React.Component {
     this.state = {
       businessInfo: [],
       customerInfo: [],
+      editId: [],
     };
   }
 
@@ -28,36 +30,40 @@ class adminDashboard extends React.Component {
         customerInfo: response.data,
       });
     });
-
-    console.log(sessionStorage.getItem("customerId"));
   }
 
   getAllBusinesses() {
     authenticate.getBusinessList();
   }
 
-  deleteBusiness(event)
-  {
-      const deleteId = event.target.getAttribute("id");
-      console.log(deleteId +" delete business")
-      authenticate.deleteBusiness(deleteId);
+  deleteBusiness(event) {
+    const deleteId = event.target.getAttribute("id");
+    console.log(deleteId + " delete business");
+    authenticate.deleteBusiness(deleteId);
   }
 
-  deleteCustomer(event)
-  {
-      const deleteId = event.target.getAttribute("id");
-      console.log(deleteId +" delete customer")
-      authenticate.deleteCustomer(deleteId);
+  deleteCustomer(event) {
+    const deleteId = event.target.getAttribute("id");
+    console.log(deleteId + " delete customer");
+    authenticate.deleteCustomer(deleteId);
   }
-  testButton()
-  {
-      console.log("Button Pressed")
+
+  editBusinessPageRedirect(event) {
+    this.state.editId = event.target.getAttribute("id");
+    console.log(this.state.editId + " edit id");
+    window.location.href = "./adminDashboard/editBusiness";
+  }
+
+  editCustomerPageRedirect(event) {
+    this.state.editId = event.target.getAttribute("id");
+    console.log(this.state.editId + " edit id");
+    window.location.href = "./adminDashboard/editCustomer";
   }
 
   render() {
     const businessScheduleList = [];
     for (let i = 0; i < this.state.businessInfo.length; i++) {
-        businessScheduleList.push(
+      businessScheduleList.push(
         <BusinessScheduleCard
           businessId={this.state.businessInfo[i].businessId}
           username={this.state.businessInfo[i].username}
@@ -68,21 +74,21 @@ class adminDashboard extends React.Component {
           city={this.state.businessInfo[i].city}
           postCode={this.state.businessInfo[i].postCode}
           street={this.state.businessInfo[i].street}
-          edit={this.testButton.bind()}
-          delete={this.deleteBusiness.bind(this)} 
+          edit={this.editBusinessPageRedirect.bind(this)}
+          delete={this.deleteBusiness.bind(this)}
         />
       );
     }
     const customerScheduleList = [];
     for (let i = 0; i < this.state.customerInfo.length; i++) {
-        customerScheduleList.push(
+      customerScheduleList.push(
         <CustomerScheduleCard
           customerId={this.state.customerInfo[i].customerId}
           username={this.state.customerInfo[i].username}
           email={this.state.customerInfo[i].email}
           created={this.state.customerInfo[i].created}
-          edit={this.testButton.bind()}
-          delete={this.deleteCustomer.bind(this)} 
+          edit={this.editCustomerPageRedirect.bind(this)}
+          delete={this.deleteCustomer.bind(this)}
         />
       );
     }

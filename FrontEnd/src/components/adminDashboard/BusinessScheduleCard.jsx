@@ -23,6 +23,7 @@ export default class BusinessScheduleCard extends Component {
           <td scope="col">
             <input
               class="btn btn-success"
+              id={this.props.businessId}
               onClick={this.props.edit}
               type="submit"
               value="Edit"

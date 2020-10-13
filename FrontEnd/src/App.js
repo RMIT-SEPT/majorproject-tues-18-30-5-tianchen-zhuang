@@ -17,9 +17,12 @@ import businessEvent from './components/eventList/businessEvent';
 import adminDashboard from './components/adminDashboard/adminDashboard';
 import customerEventList from './components/eventList/customerEventList';
 import customerBookingList from './components/eventList/customerBookingList';
+import EditBusiness from './components/adminDashboard/adminDashboardEditBusiness';
+
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import 'antd/dist/antd.css';
+import EditCustomer from './components/adminDashboard/adminDashboardEditCustomer';
 
 
 class App extends Component {
@@ -46,6 +49,8 @@ class App extends Component {
           <Route path="/adminDashboard" exact={true}component={adminDashboard} />
           <Route path="/myEventList" exact={true}component={customerEventList} />
           <Route path="/customerBookingList" exact={true}component={customerBookingList} />
+          <Route path="/adminDashboard/editBusiness" exact={true}component={EditBusiness} />
+          <Route path="/adminDashboard/editCustomer" exact={true}component={EditCustomer} />
           </Switch>
 
           </div>

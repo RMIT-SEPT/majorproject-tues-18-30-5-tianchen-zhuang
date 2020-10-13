@@ -21,6 +21,7 @@ const customerList = 'http://localhost:8080/api/customer/all/';
 const deleteCustomer = 'http://localhost:8080/api/customer/';
 
 
+
     class Authenticate extends React.Component {
      
             
@@ -122,6 +123,31 @@ const deleteCustomer = 'http://localhost:8080/api/customer/';
 
         deleteCustomer(id){
             return axios.delete(deleteCustomer+id);
+        }
+
+        async editCustomer(customerId, userinfo){
+            
+            return await axios.put(userRegApi+customerId,{
+                "username": userinfo['username'],
+                "password": userinfo['password'],
+                "email": userinfo['email']
+            });
+            
+        }
+
+        async editBusiness(businessId, businessInfo){
+            
+            return await axios.put(loginRegApi+businessId,{
+                "username": businessInfo['username'],
+                "password": businessInfo['password'],
+                "email": businessInfo['email'],
+                "businessName": businessInfo['business_name'],
+                "country": businessInfo['country'],
+                "city": businessInfo['city'],
+                "street": businessInfo['street'],
+                "postCode": businessInfo['postcode']
+            });
+            
         }
 }
 

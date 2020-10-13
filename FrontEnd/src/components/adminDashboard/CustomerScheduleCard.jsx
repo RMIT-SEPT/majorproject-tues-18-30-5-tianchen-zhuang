@@ -18,6 +18,7 @@ export default class CustomerScheduleCard extends Component {
           <td scope="col">
             <input
               class="btn btn-success"
+              id={this.props.customerId}
               onClick={this.props.edit}
               type="submit"
               value="Edit"
