@@ -1,12 +1,11 @@
 package com.sept.springboot.services;
 
 import com.sept.springboot.dao.BookingRepository;
+import com.sept.springboot.exception.BookingNotFoundException;
 import com.sept.springboot.exception.UserNotFoundException;
 import com.sept.springboot.model.Booking;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.awt.print.Book;
 import java.util.ArrayList;
 
 @Service
@@ -15,53 +14,56 @@ public class BookingService
     @Autowired
     private BookingRepository bookingRepository;
 
-    public Booking addBusinessBooking(Booking booking)
+    public Booking addBooking(Booking booking)
     {
         return bookingRepository.save(booking);
     }
 
-    public Booking findByBookingId(long id)
+    public Booking findByBookingId(long bookingId)
     {
-        Booking booking = bookingRepository.findByBookingId(id);
+        Booking booking = bookingRepository.findByBookingId(bookingId);
 
         if(booking == null)
-            throw new UserNotFoundException("Booking ID '" + id + "' does not exist");
+            throw new BookingNotFoundException("Booking ID '" + bookingId + "' does not exist");
 
         return booking;
     }
 
-    public Booking findByBusinessId(long id)
+    public Iterable<Booking> findByEventId(long eventId)
     {
-        Booking booking = bookingRepository.findByBusinessId(id);
-
-        return booking;
-    }
-
-    public Iterable<Booking> findAllBookingsForBusinessId(long id)
-    {
-        Iterable<Booking> allBooking = bookingRepository.findAll();
+        Iterable<Booking> allBookings = bookingRepository.findAll();
         ArrayList<Long> ids = new ArrayList<>();
 
-        for(Booking t : allBooking)
-        {
-            if(t.getBusinessId() == id)
+        for(Booking t : allBookings)
+            if(t.getEventId() == eventId)
                 ids.add(t.getBookingId());
-        }
 
         return bookingRepository.findAllById(ids);
     }
 
-    public Iterable<Booking> findAllBooking()
+    public Iterable<Booking> findByCustomerId(long customerId)
+    {
+        Iterable<Booking> allBookings = bookingRepository.findAll();
+        ArrayList<Long> ids = new ArrayList<>();
+
+        for(Booking t : allBookings)
+            if(t.getCustomerId() == customerId)
+                ids.add(t.getBookingId());
+
+        return bookingRepository.findAllById(ids);
+    }
+
+    public Iterable<Booking> findAllBookings()
     {
         return bookingRepository.findAll();
     }
 
-    public void deleteByBookingId(long id)
+    public void deleteByBookingId(long bookingId)
     {
-        Booking booking = bookingRepository.findByBookingId(id);
+        Booking booking = bookingRepository.findByBookingId(bookingId);
 
         if(booking == null)
-            throw new UserNotFoundException("Cannot delete booking with ID '" + id + "'. This booking does not exist");
+            throw new BookingNotFoundException("Cannot delete booking with ID '" + bookingId + "'. This booking does not exist");
 
         bookingRepository.delete(booking);
     }

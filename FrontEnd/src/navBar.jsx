@@ -32,6 +32,7 @@ class NavBar extends React.Component{
                     <ul className="navbar-nav">
                     {isLogin}
                     <li><Link className="nav-link" to="/register">Register</Link></li>
+                    
                     </ul>
 
                 </nav>

@@ -77,6 +77,16 @@
 			<version>3.0.0-M5</version>
 			<type>maven-plugin</type>
 		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.mojo</groupId>
+			<artifactId>exec-maven-plugin</artifactId>
+			<version>3.0.0</version>
+		</dependency>
     </dependencies>
 
 	<build>
@@ -99,4 +109,86 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<profiles>
+	<profile>
+		<!-- Production mode is activated using -Pproduction -->
+		<id>production</id>
+
+		<build>
+			<plugins>
+				<plugin>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-maven-plugin</artifactId>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>3.0.0-M5</version>
+					<dependencies>
+						<dependency>
+							<groupId>org.junit.vintage</groupId>
+							<artifactId>junit-vintage-engine</artifactId>
+							<version>5.4.0</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>exec-maven-plugin</artifactId>
+					<version>3.0.0</version>
+					<executions>
+						<execution>
+							<id>exec-npm-install</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<workingDirectory>C:/Users/Caspar/IdeaProjects/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd</workingDirectory>
+								<executable>npm</executable>
+								<arguments>
+									<argument>install</argument>
+								</arguments>
+							</configuration>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+						</execution>
+						<execution>
+							<id>exec-npm-run-build</id>
+							<phase>generate-sources</phase>
+							<configuration>
+								<workingDirectory>C:/Users/Caspar/IdeaProjects/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd</workingDirectory>
+								<executable>npm</executable>
+								<arguments>
+									<argument>run</argument>
+									<argument>build</argument>
+								</arguments>
+							</configuration>
+							<goals>
+								<goal>exec</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+				<plugin>
+					<artifactId>maven-antrun-plugin</artifactId>
+					<executions>
+						<execution>
+							<phase>generate-resources</phase>
+							<configuration>
+								<target>
+									<copy todir="C:/Users/Caspar/IdeaProjects/majorproject-tues-18-30-5-tianchen-zhuang/BackEnd/target/classes/public">
+										<fileset dir="C:/Users/Caspar/IdeaProjects/majorproject-tues-18-30-5-tianchen-zhuang/FrontEnd/build"/>
+									</copy>
+								</target>
+							</configuration>
+							<goals>
+								<goal>run</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</build>
+	</profile>
+	</profiles>
 </project>

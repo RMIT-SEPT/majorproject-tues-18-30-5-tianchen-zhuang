@@ -1,7 +1,11 @@
 package com.sept.springboot.controller;
 
+import com.sept.springboot.model.Booking;
 import com.sept.springboot.model.Business;
+import com.sept.springboot.model.Event;
+import com.sept.springboot.services.BookingService;
 import com.sept.springboot.services.BusinessService;
+import com.sept.springboot.services.EventService;
 import com.sept.springboot.services.MapValidationErrorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +24,12 @@ public class BusinessController {
     private BusinessService businessService;
 
     @Autowired
+    private EventService eventService;
+
+    @Autowired
+    private BookingService bookingService;
+
+    @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
     @PostMapping("")
@@ -30,7 +40,8 @@ public class BusinessController {
         if(errorMap != null)
             return errorMap;
 
-        Business newBusiness = businessService.saveOrUpdateUser(business);
+        Business newBusiness = businessService.addOrUpdateBusiness(business);
+
         return new ResponseEntity<>(newBusiness, HttpStatus.CREATED);
     }
 
@@ -68,8 +79,44 @@ public class BusinessController {
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBusiness(@PathVariable long id)
     {
+        Iterable<Event> events = eventService.findAllEventsForBusinessId(id);
+
+        for(Event t : events)
+        {
+            Iterable<Booking> bookings = bookingService.findByEventId(t.getEventId());
+
+            for(Booking t2 : bookings)
+                bookingService.deleteByBookingId(t2.getBookingId());
+
+            eventService.deleteByEventId(t.getEventId());
+        }
+
         businessService.deleteByBusinessId(id);
 
         return new ResponseEntity<>("Business with ID: '" + id + "' was deleted", HttpStatus.OK);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateBusiness(@PathVariable(value = "id") long id, @Valid @RequestBody Business businessDetails, BindingResult result)
+    {
+        ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
+
+        if(errorMap != null)
+            return errorMap;
+
+        Business business = businessService.findByBusinessId(id);
+
+        business.setBusinessName(businessDetails.getBusinessName());
+        business.setUsername(businessDetails.getUsername());
+        business.setPassword(businessDetails.getPassword());
+        business.setEmail(businessDetails.getEmail());
+        business.setStreet(businessDetails.getStreet());
+        business.setCity(businessDetails.getCity());
+        business.setCountry(businessDetails.getCountry());
+        business.setPostCode(businessDetails.getPostCode());
+
+        businessService.addOrUpdateBusiness(business);
+
+        return new ResponseEntity<>("Business with ID: '" + id + "' has been updated", HttpStatus.OK);
     }
 }

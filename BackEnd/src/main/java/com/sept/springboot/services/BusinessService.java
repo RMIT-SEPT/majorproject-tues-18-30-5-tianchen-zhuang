@@ -12,7 +12,7 @@ public class BusinessService {
     @Autowired
     private BusinessRepository businessRepository;
 
-    public Business saveOrUpdateUser(Business business)
+    public Business addOrUpdateBusiness(Business business)
     {
         try
         {
@@ -39,7 +39,7 @@ public class BusinessService {
         Business business = businessRepository.findByEmail(email);
 
         if(business == null)
-            throw new UserNotFoundException("Email '" + email + "' does not exist");
+            throw new UserNotFoundException("User with email '" + email + "' does not exist");
 
         return business;
     }

@@ -3,7 +3,7 @@ import { Menu } from 'antd';
 import { Card } from 'antd';
 import './login.css'
 import { Input } from 'antd';
-
+import authenticate from '../authenticate/authenticate';
 
 class LoginB extends React.Component{
 
@@ -37,8 +37,27 @@ class LoginB extends React.Component{
             input["password"] = "";
             input["email"] = "";
             this.setState({input:input});
-      
-            alert('Thank you for login');
+            let p = this.state.input['password'];
+            let info =  authenticate.loginAsbusiness(this.state.input['email']);
+            sessionStorage.setItem('business', info);
+            console.log("business",info)
+            info.then((response) => {
+              console.log(response,"rep")
+              sessionStorage.setItem('bname', response.data.businessName);
+                  if(p==response.data.password){
+                   
+                    sessionStorage.setItem('businessId', response.data.businessId);
+
+                    console.log("thank you for login   "+ response.data.businessId);
+                    this.props.history.push('/bookingEvent');
+                    window.location.reload(false);
+                  } else{
+                    alert('false login fail', this.state.input['password']);
+                  }
+                  
+                  
+              });
+        
         }
       }
       

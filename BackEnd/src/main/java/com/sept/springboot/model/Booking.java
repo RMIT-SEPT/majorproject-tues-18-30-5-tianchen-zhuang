@@ -1,35 +1,29 @@
 package com.sept.springboot.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 @Entity
-@Table(name = "BOOKING")
 public class Booking
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long bookingId;
-    private long businessId;
-    private String bookingName;
-    private String bookingDesc;
-    private int currCapacity;
-    private int maxCapacity;
-    @JsonFormat(pattern = "dd-mm-yyyy")
-    private Date bookingDate;
-    @JsonFormat(pattern = "hh:mm:ss")
-    private Date bookingTime;
-    private String businessStatus;
-    private String userStatus;
+    @Min(value = 1, message = "Booking ID is required and must be greater than 0")
+    private long customerId;
+    @Min(value = 1, message = "Customer ID is required and must be greater than 0")
+    private long eventId;
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
+    private Date created;
+    @JsonFormat(pattern = "hh:mm:ss dd-MM-yyyy")
+    private Date lastModified;
 
     public Booking()
     {
-        // Defaults
-        currCapacity = 0;
-        maxCapacity = 1;
-        businessStatus = "Not confirmed";
-        userStatus = "Not confirmed";
+
     }
 
     public long getBookingId() {
@@ -40,75 +34,47 @@ public class Booking
         this.bookingId = bookingId;
     }
 
-    public long getBusinessId() {
-        return businessId;
+    public long getCustomerId() {
+        return customerId;
     }
 
-    public void setBusinessId(long businessId) {
-        this.businessId = businessId;
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
-    public String getBookingName() {
-        return bookingName;
+    public long getEventId() {
+        return eventId;
     }
 
-    public void setBookingName(String bookingName) {
-        this.bookingName = bookingName;
+    public void setEventId(long eventId) {
+        this.eventId = eventId;
     }
 
-    public String getBookingDesc() {
-        return bookingDesc;
+    public Date getCreated() {
+        return created;
     }
 
-    public void setBookingDesc(String bookingDesc) {
-        this.bookingDesc = bookingDesc;
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public Date getBookingTime() {
-        return bookingTime;
+    public Date getLastModified() {
+        return lastModified;
     }
 
-    public void setBookingTime(Date bookingTime) {
-        this.bookingTime = bookingTime;
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
     }
 
-    public Date getBookingDate() {
-        return bookingDate;
+    @PrePersist
+    protected void onCreate()
+    {
+        this.created = new Date();
     }
 
-    public void setBookingDate(Date bookingDate) {
-        this.bookingDate = bookingDate;
-    }
-
-    public String getBusinessStatus() {
-        return businessStatus;
-    }
-
-    public void setBusinessStatus(String businessStatus) {
-        this.businessStatus = businessStatus;
-    }
-
-    public String getUserStatus() {
-        return userStatus;
-    }
-
-    public void setUserStatus(String userStatus) {
-        this.userStatus = userStatus;
-    }
-
-    public int getCurrCapacity() {
-        return currCapacity;
-    }
-
-    public void setCurrCapacity(int currCapacity) {
-        this.currCapacity = currCapacity;
-    }
-
-    public int getMaxCapacity() {
-        return maxCapacity;
-    }
-
-    public void setMaxCapacity(int maxCapacity) {
-        this.maxCapacity = maxCapacity;
+    @PreUpdate
+    protected void onUpdate()
+    {
+        this.lastModified = new Date();
     }
 }
