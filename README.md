@@ -17,14 +17,14 @@
 
 ## Code documentation
 
-[Quick Start](/docs/README.md) in `docs` folder
-Backend written in Java 8 using MVC design model and Springboot - build using maven
+[Quick Start](/docs/README.md) in `docs` folder  
+Backend written in Java 8 using MVC design model and Springboot - build using maven  
 Frontend written in React using CSS styling - build using Node.js
 
 ## Running Application Locally
 1. Navigate to project folder using terminal
 2. ".\majorproject-tues-18-30-5-tianchen-zhuang\Backend"
-3. run command 'mvn clean install -Pproduction'
+3. Run command 'mvn clean install -Pproduction'
 4. This will generate an executable jar file in ".\majorproject-tues-18-30-5-tianchen-zhuang\Backend\target"
 5. Double click springboot-backend-0.0.1-SNAPSHOT.jar.original and navigate to "http://localhost:8080/"
 6. To close the application open resource monitor and navigate to the network tab
