@@ -6,6 +6,9 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
+/*
+    This controls all of the exceptions found within the exception package
+ */
 @ControllerAdvice
 public class ExceptionController
 {
