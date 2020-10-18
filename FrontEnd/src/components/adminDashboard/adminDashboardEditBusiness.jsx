@@ -198,7 +198,7 @@ class EditBusiness extends React.Component {
           <button
             className="reg_but"
             type="submit"
-            onClick={(event) => (window.location.href = "/adminDashboard")}
+            onClick={(event) => (window.location.href = "#/adminDashboard")}
           >
             {" "}
             Edit{" "}
@@ -206,7 +206,7 @@ class EditBusiness extends React.Component {
           <button
             className="reg_but"
             type="button"
-            onClick={(event) => (window.location.href = "/adminDashboard")}
+            onClick={(event) => (window.location.href = "#/adminDashboard")}
           >
             Back{" "}
           </button>

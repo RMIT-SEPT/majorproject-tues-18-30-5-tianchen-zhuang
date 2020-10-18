@@ -9,8 +9,8 @@ class SelectReg extends React.Component{
             <div className="select_user">
             <h2>Select register type</h2> 
             <div>
-                <button className ="select_button"  onClick= {event =>  window.location.href='/register/user'} >Register as User</button>
-                <button className ="select_button"onClick= {event =>  window.location.href='/register/business'}>Register as Business</button>
+                <button className ="select_button"  onClick= {event =>  window.location.href='#/register/user'} >Register as User</button>
+                <button className ="select_button"onClick= {event =>  window.location.href='#/register/business'}>Register as Business</button>
             </div>
             </div>
 

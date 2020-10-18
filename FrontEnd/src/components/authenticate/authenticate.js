@@ -1,24 +1,27 @@
 import axios from 'axios'
 import React from 'react';
 
-const info = '';
-const userinfo = 'http://localhost:8080/api/customer/email/';
-const userRegApi = 'http://localhost:8080/api/customer/';
-const loginRegApi = 'http://localhost:8080/api/business/';
-const businessInfo = 'http://localhost:8080/api/business/email/';
-const businessList='http://localhost:8080/api/business/all/';
-const deleteBusiness = 'http://localhost:8080/api/business/';
-const getEventById = 'http://localhost:8080/api/event/business/';
-const deleteEvent  = 'http://localhost:8080/api/event/';
-const addEvent  = 'http://localhost:8080/api/event';
-const checkEvent  = 'http://localhost:8080/api/event/';
+//if running locally please change awsUrl references to local
+const awsUrl = 'http://tues18305live-env.eba-hsi7bj9f.us-east-1.elasticbeanstalk.com';
+const local = 'http://localhost:5000'
 
-const makeBooking = 'http://localhost:8080/api/booking/';
-const allBooking = 'http://localhost:8080/api/booking/all/';
-const getBookingByCustomerId  = 'http://localhost:8080/api/booking/customer/';
-const deleteBooking  = 'http://localhost:8080/api/booking/';
-const customerList = 'http://localhost:8080/api/customer/all/';
-const deleteCustomer = 'http://localhost:8080/api/customer/';
+const userinfo = awsUrl+'/api/customer/email/';
+const userRegApi = awsUrl +'/api/customer/';
+const loginRegApi = awsUrl + '/api/business/';
+const businessInfo = awsUrl+ '/api/business/email/';
+const businessList= awsUrl + '/api/business/all/';
+const deleteBusiness = awsUrl+ '/api/business/';
+const getEventById = awsUrl+ '/api/event/business/';
+const deleteEvent  = awsUrl + '/api/event/';
+const addEvent  = awsUrl + '/api/event';
+const checkEvent  = awsUrl + '/api/event/';
+
+const makeBooking = awsUrl + '/api/booking/';
+const allBooking = awsUrl + '/api/booking/all/';
+const getBookingByCustomerId  = awsUrl + '/api/booking/customer/';
+const deleteBooking  = awsUrl + '/api/booking/';
+const customerList = awsUrl + '/api/customer/all/';
+const deleteCustomer = awsUrl + '/api/customer/';
 
 
 

@@ -19,7 +19,7 @@ import customerEventList from './components/eventList/customerEventList';
 import customerBookingList from './components/eventList/customerBookingList';
 import EditBusiness from './components/adminDashboard/adminDashboardEditBusiness';
 
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 
 import 'antd/dist/antd.css';
 import EditCustomer from './components/adminDashboard/adminDashboardEditCustomer';

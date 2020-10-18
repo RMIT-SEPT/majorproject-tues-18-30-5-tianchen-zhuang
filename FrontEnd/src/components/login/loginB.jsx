@@ -128,7 +128,7 @@ class LoginB extends React.Component{
         />
         <div className="text-danger">{this.state.errors.password}</div>
         <button className="login_but"type="submit">Login</button>
-        <button className="login_but" type="button" onClick= {event =>  window.location.href='/login'} >Back </button>
+        <button className="login_but" type="button" onClick= {event =>  window.location.href='#/login'} >Back </button>
 
       </form>
       </div>

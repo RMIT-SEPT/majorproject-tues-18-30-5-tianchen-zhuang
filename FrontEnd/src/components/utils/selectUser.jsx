@@ -8,7 +8,7 @@ class SelectUser extends React.Component{
       }
     
       routeChange() {
-        let path = '/login/user';
+        let path = '#/login/user';
         this.props.history.push(path);
       }
     render() {
@@ -16,8 +16,8 @@ class SelectUser extends React.Component{
             <div className="select_user">
             <h2>Select login type</h2> 
             <div>
-                <button className ="select_button"  onClick= {event =>  window.location.href='/login/user'} >Login as User</button>
-                <button className ="select_button"onClick= {event =>  window.location.href='/login/business'}>Login as Business</button>
+                <button className ="select_button"  onClick= {event =>  window.location.href='#/login/user'} >Login as User</button>
+                <button className ="select_button"onClick= {event =>  window.location.href='#/login/business'}>Login as Business</button>
             </div>
             </div>
 
