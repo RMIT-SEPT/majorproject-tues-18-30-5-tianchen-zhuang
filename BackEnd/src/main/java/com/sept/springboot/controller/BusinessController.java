@@ -74,7 +74,7 @@ public class BusinessController {
     /*
         Returns the password of the business with the email that is passed through.
         This is an unsecure way to allow logging in a business in the frontend.
-        Is here is a temporary loose solution.
+        Is here as a temporary loose solution.
      */
     @GetMapping("/login/{email}")
     public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
