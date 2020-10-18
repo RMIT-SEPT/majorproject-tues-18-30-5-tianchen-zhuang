@@ -12,9 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
+/*
+    API that controls all functionality for the business.
+ */
 @RestController
 @RequestMapping("/api/business")
 @CrossOrigin
@@ -32,6 +34,9 @@ public class BusinessController {
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
+    /*
+        This adds a new business to the database.
+     */
     @PostMapping("")
     public ResponseEntity<?> createNewBusiness(@Valid @RequestBody Business business, BindingResult result)
     {
@@ -45,14 +50,19 @@ public class BusinessController {
         return new ResponseEntity<>(newBusiness, HttpStatus.CREATED);
     }
 
+    /*
+        This returns the business with the id (businessId) passed through.
+        Returns an iterable list.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getBusinessById(@PathVariable long id)
     {
-        Business business = businessService.findByBusinessId(id);
-
-        return new ResponseEntity<>(business, HttpStatus.OK);
+        return new ResponseEntity<>(businessService.findByBusinessId(id), HttpStatus.OK);
     }
 
+    /*
+        Returns the email of the business by the id (businessId) passed through.
+     */
     @GetMapping("/email/{email}")
     public ResponseEntity<?> getBusinessEmail(@PathVariable String email)
     {
@@ -61,7 +71,11 @@ public class BusinessController {
         return new ResponseEntity<>(business, HttpStatus.OK);
     }
 
-    // Temporary solution to login
+    /*
+        Returns the password of the business with the email that is passed through.
+        This is an unsecure way to allow logging in a business in the frontend.
+        Is here is a temporary loose solution.
+     */
     @GetMapping("/login/{email}")
     public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
     {
@@ -70,12 +84,21 @@ public class BusinessController {
         return new ResponseEntity<>(business.getPassword(), HttpStatus.OK);
     }
 
+    /*
+        Returns all of the businesses in the database.
+        Returns an iterable list.
+     */
     @GetMapping("/all")
     public Iterable<Business> getAllBusinesses()
     {
         return businessService.findAllBusinesses();
     }
 
+    /*
+        Deletes the business with the id (businessId) that is passed through.
+        When a business is deleted, all the events for that business are deleted, and all the
+        bookings for those events are also deleted.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteBusiness(@PathVariable long id)
     {
@@ -96,6 +119,9 @@ public class BusinessController {
         return new ResponseEntity<>("Business with ID: '" + id + "' was deleted", HttpStatus.OK);
     }
 
+    /*
+        Updates the business with the id (businessId) passed through.
+     */
     @PutMapping("/{id}")
     public ResponseEntity<?> updateBusiness(@PathVariable(value = "id") long id, @Valid @RequestBody Business businessDetails, BindingResult result)
     {

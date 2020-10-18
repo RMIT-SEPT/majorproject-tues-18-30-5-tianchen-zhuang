@@ -74,6 +74,10 @@ public class CustomerController
         return new ResponseEntity<>(customerService.findByEmail(email).getPassword(), HttpStatus.OK);
     }
 
+    /*
+        Returns all the customers in the database.
+        Returns an iterable list.
+     */
     @GetMapping("/all")
     public Iterable<Customer> getAllCustomers()
     {
