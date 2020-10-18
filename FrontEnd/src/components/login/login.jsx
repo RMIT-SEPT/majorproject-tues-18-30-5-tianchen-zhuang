@@ -130,7 +130,7 @@ class Login extends React.Component {
           <button
             className="login_but"
             type="button"
-            onClick={(event) => (window.location.href = "/login")}
+            onClick={(event) => (window.location.href = "#/login")}
           >
             Back{" "}
           </button>

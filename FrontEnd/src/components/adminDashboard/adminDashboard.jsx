@@ -50,13 +50,13 @@ class adminDashboard extends React.Component {
   editBusinessPageRedirect(event) {
     this.state.editId = event.target.getAttribute("id");
     console.log(this.state.editId + " edit id");
-    window.location.href = "./adminDashboard/editBusiness";
+    window.location.href = "#/adminDashboard/editBusiness";
   }
 
   editCustomerPageRedirect(event) {
     this.state.editId = event.target.getAttribute("id");
     console.log(this.state.editId + " edit id");
-    window.location.href = "./adminDashboard/editCustomer";
+    window.location.href = "#/adminDashboard/editCustomer";
   }
 
   render() {

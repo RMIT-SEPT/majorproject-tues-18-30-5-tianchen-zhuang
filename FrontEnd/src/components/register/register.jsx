@@ -142,7 +142,7 @@ class Register extends React.Component{
         />
         <div className="text-danger">{this.state.errors.cPassword}</div>
         <button className= "reg_but"type="submit">Register</button>
-        <button className="reg_but" type="button" onClick= {event =>  window.location.href='/register'} >Back </button>
+        <button className="reg_but" type="button" onClick= {event =>  window.location.href='#/register'} >Back </button>
         
       </form>
       </div>
