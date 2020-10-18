@@ -89,7 +89,6 @@ const deleteCustomer = 'http://localhost:8080/api/customer/';
         addEvent(info,id,date){
             return axios.post(addEvent,{
                 "businessId" :id,
-                "created" : date,
                 "eventDate":info['eventDate'],
                 "eventDesc":info['eventDesc'],
                 "eventName" : info['EventName'],
