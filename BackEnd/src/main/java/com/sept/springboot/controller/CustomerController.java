@@ -10,9 +10,11 @@ import org.springframework.http.ResponseEntity;
 import com.sept.springboot.model.Customer;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 
+/*
+    API that controls all functionality for the customers.
+ */
 @RestController
 @RequestMapping("/api/customer")
 @CrossOrigin
@@ -27,6 +29,9 @@ public class CustomerController
     @Autowired
     private MapValidationErrorService mapValidationErrorService;
 
+    /*
+        Creates a new customer into the database.
+     */
     @PostMapping("")
     public ResponseEntity<?> createNewCustomer(@Valid @RequestBody Customer customer, BindingResult result)
     {
@@ -40,37 +45,49 @@ public class CustomerController
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
+    /*
+        Returns customer by the id (customerId) passed through.
+     */
     @GetMapping("/{id}")
     public ResponseEntity<?> getCustomerById(@PathVariable long id)
     {
-        Customer customer = customerService.findByCustomerId(id);
-
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+        return new ResponseEntity<>(customerService.findByCustomerId(id), HttpStatus.OK);
     }
 
+    /*
+        Returns the customer by the email that is passed through.
+     */
     @GetMapping("/email/{email}")
     public ResponseEntity<?> getCustomerEmail(@PathVariable String email)
     {
-        Customer customer = customerService.findByEmail(email);
-
-        return new ResponseEntity<>(customer, HttpStatus.OK);
+        return new ResponseEntity<>(customerService.findByEmail(email), HttpStatus.OK);
     }
 
-    // Temporary solution to login
+    /*
+        Returns the password of the customer with the email that is passed through.
+        This is an unsecure way to allow logging in a customer in the frontend.
+        Is here as a temporary loose solution.
+     */
     @GetMapping("/login/{email}")
     public ResponseEntity<?> getPasswordByEmail(@PathVariable String email)
     {
-        Customer customer = customerService.findByEmail(email);
-
-        return new ResponseEntity<>(customer.getPassword(), HttpStatus.OK);
+        return new ResponseEntity<>(customerService.findByEmail(email).getPassword(), HttpStatus.OK);
     }
 
+    /*
+        Returns all the customers in the database.
+        Returns an iterable list.
+     */
     @GetMapping("/all")
     public Iterable<Customer> getAllCustomers()
     {
         return customerService.findAllCustomers();
     }
 
+    /*
+        Deletes the customer with the id (customerId) passed through.
+        When a customer is deleted. All the bookings the customer made are also deleted.
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteCustomer(@PathVariable long id)
     {
@@ -84,8 +101,11 @@ public class CustomerController
         return new ResponseEntity<>("Customer with ID: '" + id + "' was deleted", HttpStatus.OK);
     }
 
+    /*
+        This updates the customer with the id (customerId) passed through.
+     */
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateCutsomer(@PathVariable(value = "id") long id, @Valid @RequestBody Customer customerDetails, BindingResult result)
+    public ResponseEntity<?> updateCustomer(@PathVariable(value = "id") long id, @Valid @RequestBody Customer customerDetails, BindingResult result)
     {
         ResponseEntity<?> errorMap = mapValidationErrorService.MapValidationService(result);
 

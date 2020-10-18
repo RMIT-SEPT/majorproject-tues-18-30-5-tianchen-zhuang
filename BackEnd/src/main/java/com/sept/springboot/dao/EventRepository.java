@@ -4,6 +4,9 @@ import com.sept.springboot.model.Event;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+/*
+    Repository for the admin event
+ */
 @Repository
 public interface EventRepository extends CrudRepository<Event, Long>
 {

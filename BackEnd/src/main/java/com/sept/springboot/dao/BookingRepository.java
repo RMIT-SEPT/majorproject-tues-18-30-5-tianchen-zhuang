@@ -4,6 +4,9 @@ import com.sept.springboot.model.Booking;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+/*
+    Repository for the admin booking
+ */
 @Repository
 public interface BookingRepository extends CrudRepository<Booking, Long>
 {

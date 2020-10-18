@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
+/*
+    Service for the event model
+ */
 @Service
 public class EventService
 {

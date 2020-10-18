@@ -6,6 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.Date;
 
+/*
+    Model for the booking.
+    Includes error checking for values passed through to the variables.
+ */
 @Entity
 public class Booking
 {

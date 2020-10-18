@@ -6,7 +6,11 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
-
+/*
+    Model for the business.
+    Includes error checking for values passed through to the variables.
+    Also includes a secondary table for the address of the business.
+ */
 @Entity
 @Table(name = "BUSINESS")
 @SecondaryTable(name = "ADDRESS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "businessId"))

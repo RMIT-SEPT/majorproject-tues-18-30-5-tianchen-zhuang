@@ -7,6 +7,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+/*
+    Model for the event.
+    Includes error checking for values passed through to the variables.
+    Also includes methods incrementCurrCapacity and decrementCurrCapacity to allow adjusting
+    of the currCapacity variable when a booking of the event is made or cancelled.
+ */
 @Entity
 @Table(name = "EVENT")
 public class Event {

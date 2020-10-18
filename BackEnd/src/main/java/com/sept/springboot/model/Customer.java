@@ -6,6 +6,10 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 import java.util.Date;
 
+/*
+    Model for the customer.
+    Includes error checking for values passed through to the variables.
+ */
 @Entity
 @Table(name="CUSTOMER")
 public class Customer {
