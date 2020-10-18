@@ -4,6 +4,9 @@ import com.sept.springboot.model.Business;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+/*
+    Repository for the admin business
+ */
 @Repository
 public interface BusinessRepository extends CrudRepository<Business, Long>
 {
