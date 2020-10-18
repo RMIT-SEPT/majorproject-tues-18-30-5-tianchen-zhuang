@@ -6,6 +6,9 @@ import com.sept.springboot.dao.BusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/*
+    Service for the business model
+ */
 @Service
 public class BusinessService {
 

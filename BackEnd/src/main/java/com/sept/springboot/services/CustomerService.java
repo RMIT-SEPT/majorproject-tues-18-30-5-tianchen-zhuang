@@ -6,6 +6,9 @@ import com.sept.springboot.dao.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/*
+    Service for the customer model
+ */
 @Service
 public class CustomerService
 {
