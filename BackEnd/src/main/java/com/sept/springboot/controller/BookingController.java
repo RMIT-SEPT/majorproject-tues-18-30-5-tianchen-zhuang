@@ -101,7 +101,8 @@ public class BookingController
     }
 
     /*
-        Deletes the booking by the id (bookingId) passed through
+        Deletes the booking by the id (bookingId) passed through.
+        When a booking is deleted, the currCapacity variable in the event model is decremented.
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteByBookingId(@PathVariable("id") long id)
